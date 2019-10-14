@@ -17,7 +17,7 @@ class UsersTableSeeder extends Seeder
                 'name' => $faker->name,
                 'email' => $faker->email,
                 'password' => Hash::make(Str::random()),
-                'api_token' => Str::random(60),
+                'api_token' => $count == 1 ? 'Oa8cduFPjvzG4LYcWAVCHhlB8gfDlWZvROQ10qoODq0eTLEkFq518rDwCc5R' :Str::random(60),
             ]);
         }
     }

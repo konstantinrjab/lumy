@@ -14,10 +14,10 @@ use Illuminate\Http\Request;
 */
 
 Route::middleware('auth:api')->group(function () {
-    Route::resources([
+    Route::apiResources([
         'clients' => 'ClientController'
     ]);
 });
 
-Route::post('login', 'Auth\LoginController@login');
+Route::post('authenticate/password', 'Auth\LoginController@login');
 Route::post('register', 'Auth\RegisterController@register');
