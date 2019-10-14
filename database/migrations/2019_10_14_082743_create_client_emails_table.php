@@ -15,9 +15,11 @@ class CreateClientEmailsTable extends Migration
     {
         Schema::create('client_emails', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('client_id')->unsigned()->nullable(false);
-            $table->string('email', 100)->nullable(false);
+            $table->integer('client_id')->unsigned();
+            $table->string('email', 100);
             $table->timestamps();
+
+            $table->foreign('client_id')->references('id')->on('clients');
         });
     }
 

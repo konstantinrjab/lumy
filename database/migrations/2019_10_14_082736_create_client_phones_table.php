@@ -15,9 +15,11 @@ class CreateClientPhonesTable extends Migration
     {
         Schema::create('client_phones', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('client_id')->unsigned()->nullable(false);
-            $table->string('phone', 20)->nullable(false);
+            $table->integer('client_id')->unsigned();
+            $table->string('phone', 20);
             $table->timestamps();
+
+            $table->foreign('client_id')->references('id')->on('clients');
         });
     }
 

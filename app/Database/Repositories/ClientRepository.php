@@ -22,13 +22,24 @@ class ClientRepository
         return Client::where('user_id', $userId)->get();
     }
 
-    public function delete(int $clientId): int
+    public function create(array $data): ?Client
     {
-        return Client::destroy($clientId);
+        $client = new Client($data);
+
+        if ($client->save()) {
+            return $client;
+        }
+
+        return null;
     }
 
     public function update(int $clientId, array $data)
     {
         Client::find($clientId)->update($data);
+    }
+
+    public function delete(int $clientId): int
+    {
+        return Client::destroy($clientId);
     }
 }

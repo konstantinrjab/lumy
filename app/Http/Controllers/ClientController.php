@@ -6,7 +6,6 @@ use App\Database\Models\Client;
 use App\Database\Repositories\ClientRepository;
 use App\Http\Requests\ClientStoreRequest;
 use Illuminate\Support\Facades\Auth;
-use Symfony\Component\HttpFoundation\Response;
 
 class ClientController extends Controller
 {
@@ -24,36 +23,36 @@ class ClientController extends Controller
 
     public function store(ClientStoreRequest $request): Client
     {
-        $client = new Client([
-            'user_id' => Auth::id(),
-            'name' => $request->get('name'),
-            'surname' => $request->get('surname'),
+        $data = [
+            'user_id'    => Auth::id(),
+            'name'       => $request->get('name'),
+            'surname'    => $request->get('surname'),
             'patronymic' => $request->get('patronymic'),
-            'comment' => $request->get('comment'),
-        ]);
+            'comment'    => $request->get('comment'),
+        ];
+        $client = $this->clientRepository->create($data);
 
-        if ($client->save()) {
-            return $client;
+        if (!$client) {
+            throw new \Exception('Cannot save client');
         }
 
-        throw new \Exception('Cannot save client');
-    }
-
-    public function show(Client $client)
-    {
         return $client;
     }
 
-    public function update(ClientStoreRequest $request, Client $client)
+    public function show(int $clientId)
     {
-        $client->fill($request->toArray());
-        $client->save();
-
-        return $client;
+        return $this->clientRepository->get($clientId);
     }
 
-    public function destroy(Client $client)
+    public function update(ClientStoreRequest $request, int $clientId)
     {
-        $client->delete();
+        $this->clientRepository->update($clientId, $request->toArray());
+
+        return $this->clientRepository->get($clientId);
+    }
+
+    public function destroy(int $clientId)
+    {
+        $this->clientRepository->delete($clientId);
     }
 }
