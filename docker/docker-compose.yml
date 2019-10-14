@@ -1,0 +1,37 @@
+version: '3'
+
+services:
+  php-fpm:
+    container_name: lum_php
+    build:
+      context: ./php-fpm
+    environment:
+      XDEBUG_CONFIG: "remote_host=host.docker.internal"
+      PHP_IDE_CONFIG: "serverName=Docker"
+    volumes:
+      - ../:/var/www
+  nginx:
+    container_name: lum_nginx
+    build:
+      context: ./nginx
+    volumes:
+      - ../:/var/www
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./nginx/sites/:/etc/nginx/sites-available
+      - ./nginx/conf.d/:/etc/nginx/conf.d
+    depends_on:
+      - php-fpm
+    ports:
+      - "80:80"
+      - "443:443"
+  mysql:
+    container_name: lum_mysql
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: 'root'
+    ports:
+      - '3306:3306'
+    volumes:
+      - lum_mysql:/var/lib/mysql
+volumes:
+  lum_mysql:
