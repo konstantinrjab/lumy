@@ -17,7 +17,7 @@ class DealsTableSeeder extends Seeder
         for ($clientsCount = 1; $clientsCount <= self::COUNT; $clientsCount++) {
             Deal::create([
                 'user_id'  => rand(1, UsersTableSeeder::COUNT),
-                'title'     => $faker->title,
+                'title'     => $faker->words(3, true),
                 'address'  => $faker->address,
                 'price'  => $faker->randomFloat(2, 10, 100),
                 'currency'  => $faker->randomElement($currencies),

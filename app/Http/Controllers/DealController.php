@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Database\Repositories\DealRepository;
+use App\Http\Resources\DealResource;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -17,7 +18,7 @@ class DealController extends Controller
 
     public function index()
     {
-        return $this->dealRepository->getByUserId(Auth::id());
+        return DealResource::collection($this->dealRepository->getByUserId(Auth::id()));
     }
 
     public function store(Request $request)
@@ -25,9 +26,14 @@ class DealController extends Controller
         //
     }
 
-    public function show(int $dealId)
+    public function show(int $dealId): ?DealResource
     {
-        return $this->dealRepository->get($dealId);
+        $deal = $this->dealRepository->get($dealId);
+        if (!$deal) {
+            return null;
+        }
+
+        return new DealResource($deal);
     }
 
     public function update(Request $request, $id)
