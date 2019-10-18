@@ -13,7 +13,7 @@ class FacilitiesTableSeeder extends Seeder
         $faker = Faker\Factory::create();
         $currencies = CurrencyEnum::getValues();
 
-        for ($clientsCount = 1; $clientsCount <= self::COUNT; $clientsCount++) {
+        for ($count = 1; $count <= self::COUNT; $count++) {
             Facility::create([
                 'user_id'  => rand(1, UsersTableSeeder::COUNT),
                 'title'     => $faker->words(3, true),

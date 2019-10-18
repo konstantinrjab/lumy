@@ -13,7 +13,7 @@ class ClientPhonesTableSeeder extends Seeder
     {
         $faker = Faker\Factory::create();
 
-        for ($clientsCount = 1; $clientsCount <= self::COUNT; $clientsCount++) {
+        for ($count = 1; $count <= self::COUNT; $count++) {
             ClientPhone::create([
                 'client_id'  => rand(1, ClientsTableSeeder::COUNT),
                 'phone'     => $faker->phoneNumber,

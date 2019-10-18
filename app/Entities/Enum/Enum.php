@@ -5,17 +5,19 @@ use ReflectionClass;
 
 abstract class Enum
 {
-    protected static $values;
+    private $values;
 
     public static function getValues(): array
     {
-        if (static::$values) {
-            return static::$values;
+        $class = new static();
+
+        if ($class->values) {
+            return $class->values;
         }
         $reflectionClass = new ReflectionClass(static::class);
-        static::$values = $reflectionClass->getConstants();
+        $class->values = $reflectionClass->getConstants();
 
-        return static::$values;
+        return $class->values;
     }
 
     public static function isValid(string $currency): bool

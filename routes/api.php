@@ -17,7 +17,8 @@ Route::middleware('auth:api')->group(function () {
     Route::apiResources([
         'clients' => 'ClientController',
         'deals' => 'DealController',
-        'facilities' => 'FacilityController'
+        'facilities' => 'FacilityController',
+        'expenses' => 'ExpenseController'
     ]);
 });
 
