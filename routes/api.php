@@ -20,5 +20,5 @@ Route::middleware('auth:api')->group(function () {
     ]);
 });
 
-Route::post('authenticate/password', 'Auth\LoginController@login');
-Route::post('register', 'Auth\RegisterController@register');
+Route::post('users/authenticate/password', 'Auth\LoginController@login');
+Route::post('users/register', 'Auth\RegisterController@register');

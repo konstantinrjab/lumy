@@ -26,11 +26,17 @@ class ClientRepository
     {
         $client = new Client($data);
 
-        if ($client->save()) {
-            return $client;
+        if (!$client->save()) {
+            return null;
+        }
+        foreach ($data['emails'] as $email) {
+            $related[]['email'] = $email;
+        }
+        if (isset($related)) {
+            $client->emails()->createMany($related);
         }
 
-        return null;
+        return $client;
     }
 
     public function update(int $clientId, array $data)

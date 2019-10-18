@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Database\Models\Client;
 use App\Database\Repositories\ClientRepository;
 use App\Http\Requests\ClientStoreRequest;
+use App\Http\Resources\ClientResource;
 use Illuminate\Support\Facades\Auth;
 
 class ClientController extends Controller
@@ -29,6 +30,7 @@ class ClientController extends Controller
             'surname'    => $request->get('surname'),
             'patronymic' => $request->get('patronymic'),
             'comment'    => $request->get('comment'),
+            'emails'    => $request->get('emails'),
         ];
         $client = $this->clientRepository->create($data);
 
@@ -41,7 +43,7 @@ class ClientController extends Controller
 
     public function show(int $clientId)
     {
-        return $this->clientRepository->get($clientId);
+        return new ClientResource($this->clientRepository->get($clientId));
     }
 
     public function update(ClientStoreRequest $request, int $clientId)

@@ -22,6 +22,7 @@ class ClientStoreRequest extends FormRequest
             'name' => 'required|string|max:100',
             'surname' => 'string|max:100',
             'patronymic' => 'string|max:100',
+            'emails.*' => 'string|email',
             'comment' => 'string|max:100',
         ];
     }
