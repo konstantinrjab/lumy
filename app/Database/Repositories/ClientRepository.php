@@ -30,10 +30,16 @@ class ClientRepository
             return null;
         }
         foreach ($data['emails'] as $email) {
-            $related[]['email'] = $email;
+            $related['emails'][]['email'] = $email;
         }
-        if (isset($related)) {
-            $client->emails()->createMany($related);
+        foreach ($data['phones'] as $phone) {
+            $related['phones'][]['phone'] = $phone;
+        }
+        if (isset($related['emails'])) {
+            $client->emails()->createMany($related['emails']);
+        }
+        if (isset($related['phones'])) {
+            $client->phones()->createMany($related['phones']);
         }
 
         return $client;

@@ -22,7 +22,7 @@ class ClientController extends Controller
         return $this->clientRepository->getByUserId(Auth::id());
     }
 
-    public function store(ClientStoreRequest $request): Client
+    public function store(ClientStoreRequest $request): ClientResource
     {
         $data = [
             'user_id'    => Auth::id(),
@@ -31,6 +31,7 @@ class ClientController extends Controller
             'patronymic' => $request->get('patronymic'),
             'comment'    => $request->get('comment'),
             'emails'    => $request->get('emails'),
+            'phones'    => $request->get('phones'),
         ];
         $client = $this->clientRepository->create($data);
 
@@ -38,19 +39,19 @@ class ClientController extends Controller
             throw new \Exception('Cannot save client');
         }
 
-        return $client;
+        return new ClientResource($this->clientRepository->get($client->id));
     }
 
-    public function show(int $clientId)
+    public function show(int $clientId): ClientResource
     {
         return new ClientResource($this->clientRepository->get($clientId));
     }
 
-    public function update(ClientStoreRequest $request, int $clientId)
+    public function update(ClientStoreRequest $request, int $clientId): ClientResource
     {
         $this->clientRepository->update($clientId, $request->toArray());
 
-        return $this->clientRepository->get($clientId);
+        return new ClientResource($this->clientRepository->get($clientId));
     }
 
     public function destroy(int $clientId)
