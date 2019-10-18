@@ -6,6 +6,7 @@ use App\Database\Repositories\DealRepository;
 use App\Http\Requests\DealStoreRequest;
 use App\Http\Resources\DealResource;
 use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Support\Facades\Auth;
 
 class DealController extends Controller
@@ -17,7 +18,7 @@ class DealController extends Controller
         $this->dealRepository = $dealRepository;
     }
 
-    public function index()
+    public function index(): AnonymousResourceCollection
     {
         return DealResource::collection($this->dealRepository->getByUserId(Auth::id()));
     }

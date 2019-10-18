@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Database\Repositories\FacilityRepository;
 use App\Http\Requests\FacilityStoreRequest;
 use App\Http\Resources\FacilityResource;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Support\Facades\Auth;
 
 class FacilityController extends Controller
@@ -16,9 +17,9 @@ class FacilityController extends Controller
         $this->facilityRepository = $facilityRepository;
     }
 
-    public function index()
+    public function index(): AnonymousResourceCollection
     {
-        return $this->facilityRepository->getByUserId(Auth::id());
+        return FacilityResource::collection($this->facilityRepository->getByUserId(Auth::id()));
     }
 
     public function store(FacilityStoreRequest $request): FacilityResource

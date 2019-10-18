@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Database\Repositories\ClientRepository;
 use App\Http\Requests\ClientStoreRequest;
 use App\Http\Resources\ClientResource;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Support\Facades\Auth;
 
 class ClientController extends Controller
@@ -16,9 +17,9 @@ class ClientController extends Controller
         $this->clientRepository = $clientRepository;
     }
 
-    public function index()
+    public function index(): AnonymousResourceCollection
     {
-        return $this->clientRepository->getByUserId(Auth::id());
+        return ClientResource::collection($this->clientRepository->getByUserId(Auth::id()));
     }
 
     public function store(ClientStoreRequest $request): ClientResource
