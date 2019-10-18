@@ -30,9 +30,9 @@ class FacilityController extends Controller
             'price'         => $request->input('price.nominal'),
             'currency'      => $request->input('price.currency'),
             'expenses'      => $request->get('expenses'),
-            'workingTime'   => $request->get('workingTime'),
-            'transportTime' => $request->get('transportTime'),
-            'deadlineTime'  => $request->get('deadlineTime'),
+            'working_time'   => $request->get('workingTime'),
+            'transport_time' => $request->get('transportTime'),
+            'deadline_time'  => $request->get('deadlineTime'),
         ];
         $facility = $this->facilityRepository->create($data);
 
