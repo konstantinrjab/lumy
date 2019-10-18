@@ -4,6 +4,7 @@ namespace App\Exceptions;
 
 use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Validation\ValidationException;
 
 class Handler extends ExceptionHandler
 {
@@ -29,7 +30,7 @@ class Handler extends ExceptionHandler
     /**
      * Report or log an exception.
      *
-     * @param  \Exception  $exception
+     * @param \Exception $exception
      * @return void
      */
     public function report(Exception $exception)
@@ -40,32 +41,34 @@ class Handler extends ExceptionHandler
     /**
      * Render an exception into an HTTP response.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Exception  $exception
+     * @param \Illuminate\Http\Request $request
+     * @param \Exception $exception
      * @return \Illuminate\Http\Response
      */
     public function render($request, Exception $exception)
     {
-        if ($request->wantsJson() || 1) {
-            $response = [
-                'errors' => 'Unexpected error'
+        $response['data'] = [
+            'message' => 'Unexpected error'
+        ];
+        if (isset($exception->validator) && $exception instanceof ValidationException) {
+            $response['data'] = [
+                'message' => $exception->getMessage(),
+                'errors'  => $exception->validator->errors()->toArray()
             ];
-
-            if (config('app.debug')) {
-                $response['exception'] = get_class($exception);
-                $response['message'] = $exception->getMessage();
-                $response['trace'] = $exception->getTrace();
-            }
-
-            $status = 400;
-
-            if ($this->isHttpException($exception)) {
-                $status = $exception->getStatusCode();
-            }
-
-            return response()->json($response, $status);
         }
 
-        return parent::render($request, $exception);
+        if (config('app.debug')) {
+            $response['exception'] = get_class($exception);
+            $response['message'] = $exception->getMessage();
+            $response['trace'] = $exception->getTrace();
+        }
+
+        $status = 400;
+
+        if ($this->isHttpException($exception)) {
+            $status = $exception->getStatusCode();
+        }
+
+        return response()->json($response, $status);
     }
 }
