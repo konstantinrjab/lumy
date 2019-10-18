@@ -19,7 +19,8 @@ class CreateClientEmailsTable extends Migration
             $table->string('email', 100);
             $table->timestamps();
 
-            $table->foreign('client_id')->references('id')->on('clients');
+            $table->foreign('client_id')->references('id')->on('clients')
+                ->onDelete('cascade');
         });
     }
 
