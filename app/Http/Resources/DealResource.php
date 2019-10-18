@@ -12,10 +12,10 @@ class DealResource extends JsonResource
             'id' => $this->id,
             'title' => $this->title,
             'price' => [
-                'nominal' => $this->nominal,
+                'nominal' => $this->price,
                 'currency' => $this->currency
             ],
-            'datetime' => $this->datetime,
+            'datetime' => $this->dateTime,
             'address' => $this->address,
             'deadline' => $this->deadline,
             'created_at' => $this->created_at,

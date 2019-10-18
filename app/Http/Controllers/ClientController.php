@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Database\Models\Client;
 use App\Database\Repositories\ClientRepository;
 use App\Http\Requests\ClientStoreRequest;
 use App\Http\Resources\ClientResource;
@@ -35,11 +34,7 @@ class ClientController extends Controller
         ];
         $client = $this->clientRepository->create($data);
 
-        if (!$client) {
-            throw new \Exception('Cannot save client');
-        }
-
-        return new ClientResource($this->clientRepository->get($client->id));
+        return new ClientResource($client);
     }
 
     public function show(int $clientId): ClientResource

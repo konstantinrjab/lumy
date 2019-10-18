@@ -22,6 +22,17 @@ class DealRepository
         return Deal::where('user_id', $userId)->get();
     }
 
+    public function create(array $data): ?Deal
+    {
+        $deal = new Deal($data);
+
+        if (!$deal->save()) {
+            return null;
+        }
+
+        return $deal;
+    }
+
     public function delete(int $dealId): int
     {
         return Deal::destroy($dealId);

@@ -20,7 +20,7 @@ class CreateDealsTable extends Migration
             $table->string('address', 100);
             $table->decimal('price', 11, 2);
             $table->char('currency', 5);
-            $table->dateTime('datetime');
+            $table->dateTime('dateTime');
             $table->dateTime('deadline');
             $table->timestamps();
 

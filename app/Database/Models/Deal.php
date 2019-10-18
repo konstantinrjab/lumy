@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class Deal extends Model
 {
-    protected $fillable = ['user_id', 'title', 'address', 'price', 'currency', 'datetime', 'deadline'];
+    protected $fillable = ['user_id', 'title', 'address', 'price', 'currency', 'dateTime', 'deadline'];
 }

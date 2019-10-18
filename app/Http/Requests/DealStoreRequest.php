@@ -24,7 +24,7 @@ class DealStoreRequest extends FormRequest
             'price.currency' => 'required|string|max:3',
             'datetime' => 'required|date_format:Y-m-d\TH:i:s',
             'address' => 'required|string|max:100',
-            'deadline' => 'srequired|date_format:Y-m-d\TH:i:s',
+            'deadline' => 'required|date_format:Y-m-d\TH:i:s',
         ];
     }
 }

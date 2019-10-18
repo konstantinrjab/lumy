@@ -22,7 +22,7 @@ class DealsTableSeeder extends Seeder
                 'price'  => $faker->randomFloat(2, 10, 100),
                 'currency'  => $faker->randomElement($currencies),
                 'deadline'  => $faker->dateTime(),
-                'datetime'  => $faker->dateTime(),
+                'dateTime'  => $faker->dateTime(),
             ]);
         }
     }

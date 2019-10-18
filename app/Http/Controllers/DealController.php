@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Database\Repositories\DealRepository;
+use App\Http\Requests\DealStoreRequest;
 use App\Http\Resources\DealResource;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -21,9 +22,20 @@ class DealController extends Controller
         return DealResource::collection($this->dealRepository->getByUserId(Auth::id()));
     }
 
-    public function store(Request $request)
+    public function store(DealStoreRequest $request)
     {
-        //
+        $data = [
+            'user_id'  => Auth::id(),
+            'title'    => $request->get('title'),
+            'price'    => $request->input('price.nominal'),
+            'currency' => $request->input('price.currency'),
+            'address'  => $request->get('address'),
+            'dateTime' => $request->get('datetime'),
+            'deadline' => $request->get('deadline'),
+        ];
+        $deal = $this->dealRepository->create($data);
+
+        return new DealResource($deal);
     }
 
     public function show(int $dealId): ?DealResource
