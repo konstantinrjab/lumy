@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Entities\Enum\CurrencyEnum;
 use Illuminate\Foundation\Http\FormRequest;
 
 class DealStoreRequest extends FormRequest
@@ -21,7 +22,7 @@ class DealStoreRequest extends FormRequest
         return [
             'title' => 'required|string|max:100',
             'price.nominal' => 'required|integer',
-            'price.currency' => 'required|string|max:3',
+            'price.currency' => 'required|string|in:' . implode(',', CurrencyEnum::getValues()),
             'datetime' => 'required|date_format:Y-m-d\TH:i:s',
             'address' => 'required|string|max:100',
             'deadline' => 'required|date_format:Y-m-d\TH:i:s',

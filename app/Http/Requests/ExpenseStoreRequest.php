@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Entities\Enum\ExpenseTypeEnum;
 use Illuminate\Foundation\Http\FormRequest;
 
 class ExpenseStoreRequest extends FormRequest
@@ -19,10 +20,10 @@ class ExpenseStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => 'required|string|max:100',
-            'price.nominal' => 'required|integer',
+            'title'          => 'required|string|max:100',
+            'price.nominal'  => 'required|integer',
             'price.currency' => 'required|string|max:3',
-            'type' => 'required',
+            'type'           => 'required|in:' . implode(',', ExpenseTypeEnum::getValues()),
         ];
     }
 }
