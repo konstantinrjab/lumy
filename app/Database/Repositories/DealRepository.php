@@ -7,9 +7,9 @@ use Illuminate\Database\Eloquent\Collection;
 
 class DealRepository
 {
-    public function get(int $dealId): ?Deal
+    public function get(int $id): ?Deal
     {
-        return Deal::find($dealId);
+        return Deal::find($id);
     }
 
     public function all(): Collection
@@ -33,13 +33,13 @@ class DealRepository
         return $deal;
     }
 
-    public function delete(int $dealId): int
+    public function delete(int $id): int
     {
-        return Deal::destroy($dealId);
+        return Deal::destroy($id);
     }
 
-    public function update(int $dealId, array $data)
+    public function update(int $id, array $data)
     {
-        Deal::find($dealId)->update($data);
+        Deal::find($id)->update($data);
     }
 }

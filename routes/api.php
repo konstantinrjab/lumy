@@ -16,7 +16,8 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->group(function () {
     Route::apiResources([
         'clients' => 'ClientController',
-        'deals' => 'DealController'
+        'deals' => 'DealController',
+        'facilities' => 'FacilityController'
     ]);
 });
 

@@ -7,9 +7,9 @@ use Illuminate\Database\Eloquent\Collection;
 
 class ClientRepository
 {
-    public function get(int $clientId): ?Client
+    public function get(int $id): ?Client
     {
-        return Client::find($clientId);
+        return Client::find($id);
     }
 
     public function all(): Collection
@@ -45,13 +45,13 @@ class ClientRepository
         return $client;
     }
 
-    public function update(int $clientId, array $data)
+    public function update(int $id, array $data)
     {
-        Client::find($clientId)->update($data);
+        Client::find($id)->update($data);
     }
 
-    public function delete(int $clientId): int
+    public function delete(int $id): int
     {
-        return Client::destroy($clientId);
+        return Client::destroy($id);
     }
 }

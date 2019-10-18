@@ -1,10 +1,10 @@
 <?php
 
-use App\Database\Models\Deal;
+use App\Database\Models\Facility;
 use App\Entities\Enum\CurrencyEnum;
 use Illuminate\Database\Seeder;
 
-class DealsTableSeeder extends Seeder
+class FacilitiesTableSeeder extends Seeder
 {
     public const COUNT = 20;
 
@@ -14,14 +14,14 @@ class DealsTableSeeder extends Seeder
         $currencies = CurrencyEnum::getValues();
 
         for ($clientsCount = 1; $clientsCount <= self::COUNT; $clientsCount++) {
-            Deal::create([
+            Facility::create([
                 'user_id'  => rand(1, UsersTableSeeder::COUNT),
                 'title'     => $faker->words(3, true),
-                'address'  => $faker->address,
                 'price'  => $faker->randomFloat(2, 10, 100),
                 'currency'  => $faker->randomElement($currencies),
-                'deadline'  => $faker->dateTime(),
-                'dateTime'  => $faker->dateTime(),
+                'workingTime'  => $faker->numberBetween(600, 1800),
+                'transportTime'  => $faker->numberBetween(0, 10800),
+                'deadlineTime'  => $faker->numberBetween(0, 10800),
             ]);
         }
     }
