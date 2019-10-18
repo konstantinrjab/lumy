@@ -19,9 +19,9 @@ class FacilitiesTableSeeder extends Seeder
                 'title'     => $faker->words(3, true),
                 'price'  => $faker->randomFloat(2, 10, 100),
                 'currency'  => $faker->randomElement($currencies),
-                'workingTime'  => $faker->numberBetween(600, 1800),
-                'transportTime'  => $faker->numberBetween(0, 10800),
-                'deadlineTime'  => $faker->numberBetween(0, 10800),
+                'working_time'  => $faker->numberBetween(600, 1800),
+                'transport_time'  => $faker->numberBetween(0, 10800),
+                'deadline_time'  => $faker->numberBetween(0, 10800),
             ]);
         }
     }
