@@ -3,6 +3,7 @@
 namespace App\Exceptions;
 
 use Exception;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Validation\ValidationException;
 
@@ -50,10 +51,14 @@ class Handler extends ExceptionHandler
         $response['data'] = [
             'message' => 'Unexpected error'
         ];
-        if (isset($exception->validator) && $exception instanceof ValidationException) {
+        if ($exception instanceof ValidationException && isset($exception->validator)) {
             $response['data'] = [
                 'message' => $exception->getMessage(),
                 'errors'  => $exception->validator->errors()->toArray()
+            ];
+        } elseif ($exception instanceof ModelNotFoundException) {
+            $response['data'] = [
+                'message' => $exception->getMessage(),
             ];
         }
 

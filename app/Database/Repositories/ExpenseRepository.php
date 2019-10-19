@@ -35,7 +35,7 @@ class ExpenseRepository
 
     public function update(int $clientId, array $data): bool
     {
-        return Expense::find($clientId)->update($data);
+        return Expense::findOrFail($clientId)->update($data);
     }
 
     public function delete(int $id): int

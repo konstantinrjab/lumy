@@ -40,6 +40,6 @@ class DealRepository
 
     public function update(int $id, array $data): bool
     {
-        return Deal::find($id)->update($data);
+        return Deal::findOrFail($id)->update($data);
     }
 }

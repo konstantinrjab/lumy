@@ -18,6 +18,6 @@ class ProfileRepository
 
     public function update(int $id, array $data): bool
     {
-        return Profile::find($id)->update($data);
+        return Profile::findOrFail($id)->update($data);
     }
 }

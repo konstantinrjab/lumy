@@ -35,7 +35,7 @@ class FacilityRepository
 
     public function update(int $clientId, array $data): bool
     {
-        return Facility::find($clientId)->update($data);
+        return Facility::findOrFail($clientId)->update($data);
     }
 
     public function delete(int $id): int
