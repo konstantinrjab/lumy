@@ -49,7 +49,7 @@ class DealController extends Controller
         return new DealResource($deal);
     }
 
-    public function update(Request $request, $dealId): DealResource
+    public function update(DealStoreRequest $request, $dealId): DealResource
     {
         $data = [
             'title'    => $request->get('title'),

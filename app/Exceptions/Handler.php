@@ -49,16 +49,11 @@ class Handler extends ExceptionHandler
     public function render($request, Exception $exception)
     {
         $response['data'] = [
-            'message' => 'Unexpected error'
+            'message' => $exception->getMessage()
         ];
         if ($exception instanceof ValidationException && isset($exception->validator)) {
             $response['data'] = [
-                'message' => $exception->getMessage(),
                 'errors'  => $exception->validator->errors()->toArray()
-            ];
-        } elseif ($exception instanceof ModelNotFoundException) {
-            $response['data'] = [
-                'message' => $exception->getMessage(),
             ];
         }
 
