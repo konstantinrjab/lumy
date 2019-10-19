@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Database\Repositories\ExpenseRepository;
 use App\Http\Requests\ExpenseStoreRequest;
 use App\Http\Resources\ExpenseResource;
-use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Support\Facades\Auth;
 
@@ -47,7 +46,7 @@ class ExpenseController extends Controller
         return new ExpenseResource($expense);
     }
 
-    public function update(ExpenseStoreRequest $request, $expenseId)
+    public function update(ExpenseStoreRequest $request, $expenseId): ExpenseResource
     {
         $data = [
             'title'    => $request->get('title'),
@@ -57,6 +56,8 @@ class ExpenseController extends Controller
         ];
 
         $this->expenseRepository->update($expenseId, $data);
+
+        return new ExpenseResource($this->expenseRepository->get($expenseId));
     }
 
     public function destroy(int $expenseId)

@@ -46,7 +46,16 @@ class FacilityController extends Controller
 
     public function update(FacilityStoreRequest $request, int $facilityId): FacilityResource
     {
-        $this->facilityRepository->update($facilityId, $request->toArray());
+        $data = [
+            'title'         => $request->get('title'),
+            'price'         => $request->input('price.nominal'),
+            'currency'      => $request->input('price.currency'),
+            'expenses'      => $request->get('expenses'),
+            'working_time'   => $request->get('workingTime'),
+            'transport_time' => $request->get('transportTime'),
+            'deadline_time'  => $request->get('deadlineTime'),
+        ];
+        $this->facilityRepository->update($facilityId, $data);
 
         return new FacilityResource($this->facilityRepository->get($facilityId));
     }

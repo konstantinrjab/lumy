@@ -16,9 +16,9 @@ class FacilityResource extends JsonResource
                 'currency' => $this->currency
             ],
 //            'expenses' => $this->expenses(),
-            'workingTime' => $this->workingTime,
-            'transportTime' => $this->transportTime,
-            'deadlineTime' => $this->deadlineTime,
+            'workingTime' => $this->working_time,
+            'transportTime' => $this->transport_time,
+            'deadlineTime' => $this->deadline_time,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at
         ];

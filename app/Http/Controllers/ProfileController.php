@@ -21,8 +21,10 @@ class ProfileController extends Controller
         return $this->profileRepository->getByUserId(Auth::id());
     }
 
-    public function update(FacilityStoreRequest $request)
+    public function update(FacilityStoreRequest $request): Profile
     {
         $this->profileRepository->update(Auth::id(), $request->toArray());
+
+        return $this->profileRepository->get(Auth::id());
     }
 }

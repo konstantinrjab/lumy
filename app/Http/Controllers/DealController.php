@@ -49,9 +49,20 @@ class DealController extends Controller
         return new DealResource($deal);
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, $dealId): DealResource
     {
-        //
+        $data = [
+            'title'    => $request->get('title'),
+            'price'    => $request->input('price.nominal'),
+            'currency' => $request->input('price.currency'),
+            'address'  => $request->get('address'),
+            'dateTime' => $request->get('datetime'),
+            'deadline' => $request->get('deadline'),
+        ];
+
+        $this->dealRepository->update($dealId, $data);
+
+        return new DealResource($this->dealRepository->get($dealId));
     }
 
     public function destroy(int $dealId)
