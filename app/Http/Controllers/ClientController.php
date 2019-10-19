@@ -38,9 +38,14 @@ class ClientController extends Controller
         return new ClientResource($client);
     }
 
-    public function show(int $clientId): ClientResource
+    public function show(int $clientId): ?ClientResource
     {
-        return new ClientResource($this->clientRepository->get($clientId));
+        $client = $this->clientRepository->get($clientId);
+        if (!$client) {
+            return null;
+        }
+
+        return new ClientResource($client);
     }
 
     public function update(ClientStoreRequest $request, int $clientId): ClientResource

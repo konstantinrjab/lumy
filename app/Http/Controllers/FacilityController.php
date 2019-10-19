@@ -41,7 +41,12 @@ class FacilityController extends Controller
 
     public function show(int $facilityId): FacilityResource
     {
-        return new FacilityResource($this->facilityRepository->get($facilityId));
+        $facility = $this->facilityRepository->get($facilityId);
+        if (!$facility) {
+            return null;
+        }
+
+        return new FacilityResource($facility);
     }
 
     public function update(FacilityStoreRequest $request, int $facilityId): FacilityResource
