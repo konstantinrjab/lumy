@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Database\Repositories\DealRepository;
 use App\Http\Requests\DealStoreRequest;
 use App\Http\Resources\DealResource;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Support\Facades\Auth;
@@ -39,11 +40,11 @@ class DealController extends Controller
         return new DealResource($deal);
     }
 
-    public function show(int $dealId): ?DealResource
+    public function show(int $dealId): DealResource
     {
         $deal = $this->dealRepository->get($dealId);
         if (!$deal) {
-            return null;
+            throw new ModelNotFoundException();
         }
 
         return new DealResource($deal);

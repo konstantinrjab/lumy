@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Database\Repositories\ClientRepository;
 use App\Http\Requests\ClientStoreRequest;
 use App\Http\Resources\ClientResource;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Support\Facades\Auth;
 
@@ -38,11 +39,11 @@ class ClientController extends Controller
         return new ClientResource($client);
     }
 
-    public function show(int $clientId): ?ClientResource
+    public function show(int $clientId): ClientResource
     {
         $client = $this->clientRepository->get($clientId);
         if (!$client) {
-            return null;
+            throw new ModelNotFoundException;
         }
 
         return new ClientResource($client);

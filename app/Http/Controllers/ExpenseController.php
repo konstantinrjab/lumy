@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Database\Repositories\ExpenseRepository;
 use App\Http\Requests\ExpenseStoreRequest;
 use App\Http\Resources\ExpenseResource;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Support\Facades\Auth;
 
@@ -36,11 +37,11 @@ class ExpenseController extends Controller
         return new ExpenseResource($expense);
     }
 
-    public function show(int $dealId): ?ExpenseResource
+    public function show(int $dealId): ExpenseResource
     {
         $expense = $this->expenseRepository->get($dealId);
         if (!$expense) {
-            return null;
+            throw new ModelNotFoundException;
         }
 
         return new ExpenseResource($expense);

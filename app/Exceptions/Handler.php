@@ -52,9 +52,10 @@ class Handler extends ExceptionHandler
             'message' => $exception->getMessage()
         ];
         if ($exception instanceof ValidationException && isset($exception->validator)) {
-            $response['data'] = [
-                'errors'  => $exception->validator->errors()->toArray()
-            ];
+            $response['data']['errors'] = $exception->validator->errors()->toArray();
+        }
+        if ($exception instanceof ModelNotFoundException) {
+            $response['data']['message'] = 'Model not found';
         }
 
         if (config('app.debug')) {

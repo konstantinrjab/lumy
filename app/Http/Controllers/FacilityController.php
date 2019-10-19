@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Database\Repositories\FacilityRepository;
 use App\Http\Requests\FacilityStoreRequest;
 use App\Http\Resources\FacilityResource;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Support\Facades\Auth;
 
@@ -43,7 +44,7 @@ class FacilityController extends Controller
     {
         $facility = $this->facilityRepository->get($facilityId);
         if (!$facility) {
-            return null;
+            throw new ModelNotFoundException;
         }
 
         return new FacilityResource($facility);
