@@ -2,7 +2,7 @@ stages:
   - production
 
 master_deploy:
-  stage: master
+  stage: production
   script:
     - ssh $SSH_USERNAME_PROD@$SSH_HOST_PROD "cd /var/www/lumi && git reset --hard HEAD && git checkout master && git pull origin master && exit"
   only:
