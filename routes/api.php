@@ -20,6 +20,9 @@ Route::middleware('auth:api')->group(function () {
         'facilities' => 'FacilityController',
         'expenses' => 'ExpenseController'
     ]);
+    Route::apiResource('profiles', 'ProfileController')->only([
+        'index', 'update'
+    ]);
 });
 
 Route::post('users/authenticate/password', 'Auth\LoginController@login');
