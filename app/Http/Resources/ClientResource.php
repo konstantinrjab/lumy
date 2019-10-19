@@ -2,7 +2,7 @@
 
 namespace App\Http\Resources;
 
-use Illuminate\Http\Resources\Json\JsonResource;
+use App\Entities\JsonResource;
 
 class ClientResource extends JsonResource
 {
@@ -14,11 +14,11 @@ class ClientResource extends JsonResource
             'name' => $this->name,
             'surname' => $this->surname,
             'patronymic' => $this->patronymic,
-            'emails' => $this->emails,
-            'phones' => $this->phones,
+            'emails' => $this->emails->pluck('email'),
+            'phones' => $this->phones->pluck('phone'),
             'comment' => $this->comment,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at
+            'created_at' => $this->created_at->format(static::DATE_FORMAT),
+            'updated_at' => $this->updated_at->format(static::DATE_FORMAT)
         ];
     }
 }

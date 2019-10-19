@@ -2,7 +2,7 @@
 
 namespace App\Http\Resources;
 
-use Illuminate\Http\Resources\Json\JsonResource;
+use App\Entities\JsonResource;
 
 class ExpenseResource extends JsonResource
 {
@@ -16,8 +16,8 @@ class ExpenseResource extends JsonResource
                 'currency' => $this->currency
             ],
             'type' => $this->type,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at
+            'created_at' => $this->created_at->format(static::DATE_FORMAT),
+            'updated_at' => $this->updated_at->format(static::DATE_FORMAT)
         ];
     }
 }
