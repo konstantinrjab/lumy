@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Database\Repositories\UserRepository;
 use App\Http\Controllers\Controller;
 use App\Database\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Str;
 
 class RegisterController extends Controller
 {
@@ -32,14 +31,12 @@ class RegisterController extends Controller
      */
     protected $redirectTo = '/home';
 
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
+    private $userRepository;
+
+    public function __construct(UserRepository $userRepository)
     {
         $this->middleware('guest');
+        $this->userRepository = $userRepository;
     }
 
     /**
@@ -61,22 +58,17 @@ class RegisterController extends Controller
      * Create a new user instance after a valid registration.
      *
      * @param  array  $data
-     * @return \App\Database\Models\User
+     * @return User
      */
-    protected function create(array $data)
+    protected function create(array $data): User
     {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-            'api_token' => Str::random(60)
-        ]);
+        return $this->userRepository->create($data);
     }
 
     /**
      * The user has been registered.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  Request  $request
      * @param  mixed  $user
      * @return mixed
      */
