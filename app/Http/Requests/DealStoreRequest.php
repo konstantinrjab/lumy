@@ -21,7 +21,7 @@ class DealStoreRequest extends FormRequest
     {
         return [
             'title' => 'required|string|max:100',
-            'price.nominal' => 'required|integer',
+            'price.nominal' => 'required|numeric',
             'price.currency' => 'required|string|in:' . implode(',', CurrencyEnum::getValues()),
             'datetime' => 'required|date_format:Y-m-d\TH:i:s',
             'address' => 'required|string|max:100',

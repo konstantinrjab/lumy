@@ -18,11 +18,10 @@ Route::middleware('auth:api')->group(function () {
         'clients' => 'ClientController',
         'deals' => 'DealController',
         'facilities' => 'FacilityController',
-        'expenses' => 'ExpenseController'
+        'expenses' => 'ExpenseController',
     ]);
-    Route::apiResource('profiles', 'ProfileController')->only([
-        'index', 'update'
-    ]);
+    Route::put('profiles', 'ProfileController@update');
+    Route::get('profiles', 'ProfileController@index');
 });
 
 Route::post('users/authenticate/password', 'Auth\LoginController@login');

@@ -22,7 +22,7 @@ class ExpenseStoreRequest extends FormRequest
     {
         return [
             'title'          => 'required|string|max:100',
-            'price.nominal'  => 'required|integer',
+            'price.nominal'  => 'required|numeric',
             'price.currency' => 'required|string|max:3|in:' . implode(',', CurrencyEnum::getValues()),
             'type'           => 'required|in:' . implode(',', ExpenseTypeEnum::getValues()),
         ];

@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Database\Models\Profile;
 use App\Database\Repositories\ProfileRepository;
-use App\Http\Requests\FacilityStoreRequest;
+use App\Http\Requests\ProfileStoreRequest;
+use App\Http\Resources\ProfileResource;
 use Illuminate\Support\Facades\Auth;
 
 class ProfileController extends Controller
@@ -16,15 +17,20 @@ class ProfileController extends Controller
         $this->profileRepository = $profileRepository;
     }
 
-    public function index(): Profile
+    public function index(): ProfileResource
     {
-        return $this->profileRepository->getByUserId(Auth::id());
+        return new ProfileResource($this->profileRepository->getByUserId(Auth::id()));
     }
 
-    public function update(FacilityStoreRequest $request): Profile
+    public function update(ProfileStoreRequest $request): ProfileResource
     {
-        $this->profileRepository->update(Auth::id(), $request->toArray());
+        $data = [
+            'workHours_in_month' => $request->get('workHoursInMonth'),
+            'salary' => $request->input('price.nominal'),
+            'currency' => $request->input('price.currency')
+        ];
+        $this->profileRepository->update(Auth::id(), $data);
 
-        return $this->profileRepository->get(Auth::id());
+        return new ProfileResource($this->profileRepository->get(Auth::id()));
     }
 }

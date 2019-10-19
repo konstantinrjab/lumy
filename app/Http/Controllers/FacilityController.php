@@ -26,11 +26,11 @@ class FacilityController extends Controller
     public function store(FacilityStoreRequest $request): FacilityResource
     {
         $data = [
-            'user_id'       => Auth::id(),
-            'title'         => $request->get('title'),
-            'price'         => $request->input('price.nominal'),
-            'currency'      => $request->input('price.currency'),
-            'expenses'      => $request->get('expenses'),
+            'user_id'        => Auth::id(),
+            'title'          => $request->get('title'),
+            'price'          => $request->input('price.nominal'),
+            'currency'       => $request->input('price.currency'),
+            'expenses'       => $request->get('expenses'),
             'working_time'   => $request->get('workingTime'),
             'transport_time' => $request->get('transportTime'),
             'deadline_time'  => $request->get('deadlineTime'),
@@ -53,10 +53,10 @@ class FacilityController extends Controller
     public function update(FacilityStoreRequest $request, int $facilityId): FacilityResource
     {
         $data = [
-            'title'         => $request->get('title'),
-            'price'         => $request->input('price.nominal'),
-            'currency'      => $request->input('price.currency'),
-            'expenses'      => $request->get('expenses'),
+            'title'          => $request->get('title'),
+            'price'          => $request->input('price.nominal'),
+            'currency'       => $request->input('price.currency'),
+            'expenses'       => $request->get('expenses'),
             'working_time'   => $request->get('workingTime'),
             'transport_time' => $request->get('transportTime'),
             'deadline_time'  => $request->get('deadlineTime'),
