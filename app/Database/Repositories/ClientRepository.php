@@ -45,9 +45,9 @@ class ClientRepository
         return $client;
     }
 
-    public function update(int $id, array $data)
+    public function update(int $id, array $data): bool
     {
-        Client::find($id)->update($data);
+        return Client::find($id)->update($data);
     }
 
     public function delete(int $id): int

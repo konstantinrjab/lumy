@@ -30,7 +30,7 @@ class ExpenseController extends Controller
             'title'    => $request->get('title'),
             'price'    => $request->input('price.nominal'),
             'currency' => $request->input('price.currency'),
-            'type' => $request->get('type'),
+            'type'     => $request->get('type'),
         ];
         $expense = $this->expenseRepository->create($data);
 
@@ -47,9 +47,16 @@ class ExpenseController extends Controller
         return new ExpenseResource($expense);
     }
 
-    public function update(Request $request, $id)
+    public function update(ExpenseStoreRequest $request, $expenseId)
     {
-        //
+        $data = [
+            'title'    => $request->get('title'),
+            'price'    => $request->input('price.nominal'),
+            'currency' => $request->input('price.currency'),
+            'type'     => $request->get('type'),
+        ];
+
+        $this->expenseRepository->update($expenseId, $data);
     }
 
     public function destroy(int $expenseId)

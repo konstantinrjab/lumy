@@ -38,8 +38,8 @@ class DealRepository
         return Deal::destroy($id);
     }
 
-    public function update(int $id, array $data)
+    public function update(int $id, array $data): bool
     {
-        Deal::find($id)->update($data);
+        return Deal::find($id)->update($data);
     }
 }

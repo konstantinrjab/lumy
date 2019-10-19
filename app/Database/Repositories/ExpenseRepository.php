@@ -33,9 +33,9 @@ class ExpenseRepository
         return $facility;
     }
 
-    public function update(int $clientId, array $data)
+    public function update(int $clientId, array $data): bool
     {
-        Expense::find($clientId)->update($data);
+        return Expense::find($clientId)->update($data);
     }
 
     public function delete(int $id): int
