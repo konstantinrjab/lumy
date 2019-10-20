@@ -20,7 +20,7 @@ class ExpenseController extends Controller
 
     public function index(): AnonymousResourceCollection
     {
-        return ExpenseResource::collection($this->expenseRepository->getByUserId(Auth::id()));
+        return ExpenseResource::collection($this->expenseRepository->getAllByUserId(Auth::id()));
     }
 
     public function store(ExpenseStoreRequest $request)
@@ -39,7 +39,7 @@ class ExpenseController extends Controller
 
     public function show(int $dealId): ExpenseResource
     {
-        $expense = $this->expenseRepository->get($dealId);
+        $expense = $this->expenseRepository->getByIdAndUserId($dealId, Auth::id());
         if (!$expense) {
             throw new ModelNotFoundException;
         }
@@ -56,13 +56,13 @@ class ExpenseController extends Controller
             'type'     => $request->get('type'),
         ];
 
-        $this->expenseRepository->update($expenseId, $data);
+        $this->expenseRepository->update($expenseId, $data, Auth::id());
 
-        return new ExpenseResource($this->expenseRepository->get($expenseId));
+        return new ExpenseResource($this->expenseRepository->getByIdAndUserId($expenseId, Auth::id()));
     }
 
     public function destroy(int $expenseId)
     {
-        $this->expenseRepository->delete($expenseId);
+        $this->expenseRepository->delete($expenseId, Auth::id());
     }
 }

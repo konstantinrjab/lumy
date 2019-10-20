@@ -7,17 +7,12 @@ use Illuminate\Database\Eloquent\Collection;
 
 class FacilityRepository
 {
-    public function get(int $id): ?Facility
+    public function getByIdAndUserId(int $id, int $userId): ?Facility
     {
-        return Facility::find($id);
+        return Facility::where(['id' => $id, 'user_id' => $userId])->first();
     }
 
-    public function all(): Collection
-    {
-        return Facility::all();
-    }
-
-    public function getByUserId(int $userId): Collection
+    public function getAllByUserId(int $userId): Collection
     {
         return Facility::where('user_id', $userId)->get();
     }
@@ -33,13 +28,13 @@ class FacilityRepository
         return $facility;
     }
 
-    public function update(int $clientId, array $data): bool
+    public function update(int $id, array $data, int $userId): bool
     {
-        return Facility::findOrFail($clientId)->update($data);
+        return Facility::where(['id' => $id, 'user_id' => $userId])->firstOrFail()->update($data);
     }
 
-    public function delete(int $id): int
+    public function delete(int $id, int $userId): int
     {
-        return Facility::destroy($id);
+        return Facility::where(['id' => $id, 'user_id' => $userId])->delete();
     }
 }

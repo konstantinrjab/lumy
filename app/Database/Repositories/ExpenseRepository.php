@@ -7,17 +7,12 @@ use Illuminate\Database\Eloquent\Collection;
 
 class ExpenseRepository
 {
-    public function get(int $id): ?Expense
+    public function getByIdAndUserId(int $id, int $userId): ?Expense
     {
-        return Expense::find($id);
+        return Expense::where(['id' => $id, 'user_id' => $userId])->first();
     }
 
-    public function all(): Collection
-    {
-        return Expense::all();
-    }
-
-    public function getByUserId(int $userId): Collection
+    public function getAllByUserId(int $userId): Collection
     {
         return Expense::where('user_id', $userId)->get();
     }
@@ -33,13 +28,13 @@ class ExpenseRepository
         return $facility;
     }
 
-    public function update(int $clientId, array $data): bool
+    public function update(int $id, array $data, int $userId): bool
     {
-        return Expense::findOrFail($clientId)->update($data);
+        return Expense::where(['id' => $id, 'user_id' => $userId])->firstOrFail()->update($data);
     }
 
-    public function delete(int $id): int
+    public function delete(int $id, int $userId): int
     {
-        return Expense::destroy($id);
+        return Expense::where(['id' => $id, 'user_id' => $userId])->delete();
     }
 }

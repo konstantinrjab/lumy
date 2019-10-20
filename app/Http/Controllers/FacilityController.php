@@ -20,7 +20,7 @@ class FacilityController extends Controller
 
     public function index(): AnonymousResourceCollection
     {
-        return FacilityResource::collection($this->facilityRepository->getByUserId(Auth::id()));
+        return FacilityResource::collection($this->facilityRepository->getAllByUserId(Auth::id()));
     }
 
     public function store(FacilityStoreRequest $request): FacilityResource
@@ -42,7 +42,7 @@ class FacilityController extends Controller
 
     public function show(int $facilityId): FacilityResource
     {
-        $facility = $this->facilityRepository->get($facilityId);
+        $facility = $this->facilityRepository->getByIdAndUserId($facilityId, Auth::id());
         if (!$facility) {
             throw new ModelNotFoundException;
         }
@@ -61,13 +61,13 @@ class FacilityController extends Controller
             'transport_time' => $request->get('transportTime'),
             'deadline_time'  => $request->get('deadlineTime'),
         ];
-        $this->facilityRepository->update($facilityId, $data);
+        $this->facilityRepository->update($facilityId, $data, Auth::id());
 
-        return new FacilityResource($this->facilityRepository->get($facilityId));
+        return new FacilityResource($this->facilityRepository->getByIdAndUserId($facilityId, Auth::id()));
     }
 
     public function destroy(int $facilityId)
     {
-        $this->facilityRepository->delete($facilityId);
+        $this->facilityRepository->delete($facilityId, Auth::id());
     }
 }
