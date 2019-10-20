@@ -10,15 +10,15 @@ class ClientResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'user_id' => $this->userId,
+            'userId' => $this->userId,
             'name' => $this->name,
             'surname' => $this->surname,
             'patronymic' => $this->patronymic,
             'emails' => $this->emails->pluck('email'),
             'phones' => $this->phones->pluck('phone'),
             'comment' => $this->comment,
-            'created_at' => $this->created_at->format(static::DATE_FORMAT),
-            'updated_at' => $this->updated_at->format(static::DATE_FORMAT)
+            'createdAt' => $this->created_at->format(static::DATE_FORMAT),
+            'updatedAt' => $this->updated_at->format(static::DATE_FORMAT)
         ];
     }
 }

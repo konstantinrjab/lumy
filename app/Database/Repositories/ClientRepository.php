@@ -7,17 +7,12 @@ use Illuminate\Database\Eloquent\Collection;
 
 class ClientRepository
 {
-    public function get(int $id): ?Client
+    public function getByIdAndUserId(int $id, int $userId): ?Client
     {
-        return Client::find($id);
+        return Client::where(['id' => $id, 'user_id' => $userId])->first();
     }
 
-    public function all(): Collection
-    {
-        return Client::all();
-    }
-
-    public function getByUserId(int $userId): Collection
+    public function getAllByUserId(int $userId): Collection
     {
         return Client::where('user_id', $userId)->get();
     }
@@ -45,13 +40,13 @@ class ClientRepository
         return $client;
     }
 
-    public function update(int $id, array $data): bool
+    public function update(int $id, array $data, int $userId): bool
     {
-        return Client::findOrFail($id)->update($data);
+        return Client::where(['id' => $id, 'user_id' => $userId])->firstOrFail()->update($data);
     }
 
-    public function delete(int $id): int
+    public function delete(int $id, int $userId): int
     {
-        return Client::destroy($id);
+        return Client::where(['id' => $id, 'user_id' => $userId])->delete();
     }
 }

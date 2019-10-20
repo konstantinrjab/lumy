@@ -18,8 +18,8 @@ class DealResource extends JsonResource
             'datetime' => $this->dateTime,
             'address' => $this->address,
             'deadline' => $this->deadline,
-            'created_at' => $this->created_at->format(static::DATE_FORMAT),
-            'updated_at' => $this->updated_at->format(static::DATE_FORMAT)
+            'createdAt' => $this->created_at->format(static::DATE_FORMAT),
+            'updatedAt' => $this->updated_at->format(static::DATE_FORMAT)
         ];
     }
 }

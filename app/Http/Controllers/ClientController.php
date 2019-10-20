@@ -20,7 +20,7 @@ class ClientController extends Controller
 
     public function index(): AnonymousResourceCollection
     {
-        return ClientResource::collection($this->clientRepository->getByUserId(Auth::id()));
+        return ClientResource::collection($this->clientRepository->getAllByUserId(Auth::id()));
     }
 
     public function store(ClientStoreRequest $request): ClientResource
@@ -41,7 +41,7 @@ class ClientController extends Controller
 
     public function show(int $clientId): ClientResource
     {
-        $client = $this->clientRepository->get($clientId);
+        $client = $this->clientRepository->getByIdAndUserId($clientId, Auth::id());
         if (!$client) {
             throw new ModelNotFoundException;
         }
@@ -51,13 +51,13 @@ class ClientController extends Controller
 
     public function update(ClientStoreRequest $request, int $clientId): ClientResource
     {
-        $this->clientRepository->update($clientId, $request->toArray());
+        $this->clientRepository->update($clientId, $request->toArray(), Auth::id());
 
-        return new ClientResource($this->clientRepository->get($clientId));
+        return new ClientResource($this->clientRepository->getByIdAndUserId($clientId, Auth::id()));
     }
 
     public function destroy(int $clientId)
     {
-        $this->clientRepository->delete($clientId);
+        $this->clientRepository->delete($clientId, Auth::id());
     }
 }
