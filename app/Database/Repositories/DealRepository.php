@@ -7,17 +7,12 @@ use Illuminate\Database\Eloquent\Collection;
 
 class DealRepository
 {
-    public function get(int $id): ?Deal
+    public function getByIdAndUserId(int $id, int $userId): ?Deal
     {
-        return Deal::find($id);
+        return Deal::where(['id' => $id, 'user_id' => $userId])->first();
     }
 
-    public function all(): Collection
-    {
-        return Deal::all();
-    }
-
-    public function getByUserId(int $userId): Collection
+    public function getAllByUserId(int $userId): Collection
     {
         return Deal::where('user_id', $userId)->get();
     }
@@ -33,13 +28,13 @@ class DealRepository
         return $deal;
     }
 
-    public function delete(int $id): int
+    public function update(int $id, array $data, int $userId): bool
     {
-        return Deal::destroy($id);
+        return Deal::where(['id' => $id, 'user_id' => $userId])->firstOrFail()->update($data);
     }
 
-    public function update(int $id, array $data): bool
+    public function delete(int $id, int $userId): int
     {
-        return Deal::findOrFail($id)->update($data);
+        return Deal::where(['id' => $id, 'user_id' => $userId])->delete();
     }
 }

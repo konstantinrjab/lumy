@@ -6,7 +6,6 @@ use App\Database\Repositories\DealRepository;
 use App\Http\Requests\DealStoreRequest;
 use App\Http\Resources\DealResource;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
-use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Support\Facades\Auth;
 
@@ -21,7 +20,7 @@ class DealController extends Controller
 
     public function index(): AnonymousResourceCollection
     {
-        return DealResource::collection($this->dealRepository->getByUserId(Auth::id()));
+        return DealResource::collection($this->dealRepository->getAllByUserId(Auth::id()));
     }
 
     public function store(DealStoreRequest $request)
@@ -42,7 +41,7 @@ class DealController extends Controller
 
     public function show(int $dealId): DealResource
     {
-        $deal = $this->dealRepository->get($dealId);
+        $deal = $this->dealRepository->getByIdAndUserId($dealId, Auth::id());
         if (!$deal) {
             throw new ModelNotFoundException();
         }
@@ -61,13 +60,13 @@ class DealController extends Controller
             'deadline' => $request->get('deadline'),
         ];
 
-        $this->dealRepository->update($dealId, $data);
+        $this->dealRepository->update($dealId, $data, Auth::id());
 
-        return new DealResource($this->dealRepository->get($dealId));
+        return new DealResource($this->dealRepository->getByIdAndUserId($dealId, Auth::id()));
     }
 
     public function destroy(int $dealId)
     {
-        $this->dealRepository->delete($dealId);
+        $this->dealRepository->delete($dealId, Auth::id());
     }
 }
