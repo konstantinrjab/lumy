@@ -2,7 +2,7 @@
 
 namespace App\Http\Resources;
 
-use App\Entities\JsonResource;
+use Illuminate\Http\Resources\Json\JsonResource;
 
 class ProfileResource extends JsonResource
 {
@@ -16,8 +16,8 @@ class ProfileResource extends JsonResource
             ],
             'language' => $this->language,
             'workHoursInMonth' => $this->work_hours_in_month,
-            'createdAt' => $this->created_at->format(static::DATE_FORMAT),
-            'updatedAt' => $this->updated_at->format(static::DATE_FORMAT)
+            'createdAt' => $this->created_at->format(config('app.dateFormat')),
+            'updatedAt' => $this->updated_at->format(config('app.dateFormat'))
         ];
     }
 }

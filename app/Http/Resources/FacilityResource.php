@@ -2,7 +2,7 @@
 
 namespace App\Http\Resources;
 
-use App\Entities\JsonResource;
+use Illuminate\Http\Resources\Json\JsonResource;
 
 class FacilityResource extends JsonResource
 {
@@ -19,8 +19,8 @@ class FacilityResource extends JsonResource
             'workingTime' => $this->working_time,
             'transportTime' => $this->transport_time,
             'deadlineTime' => $this->deadline_time,
-            'createdAt' => $this->created_at->format(static::DATE_FORMAT),
-            'updatedAt' => $this->updated_at->format(static::DATE_FORMAT)
+            'createdAt' => $this->created_at->format(config('app.dateFormat')),
+            'updatedAt' => $this->updated_at->format(config('app.dateFormat'))
         ];
     }
 }

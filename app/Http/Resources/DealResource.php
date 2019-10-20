@@ -2,7 +2,7 @@
 
 namespace App\Http\Resources;
 
-use App\Entities\JsonResource;
+use Illuminate\Http\Resources\Json\JsonResource;
 
 class DealResource extends JsonResource
 {
@@ -18,8 +18,8 @@ class DealResource extends JsonResource
             'datetime' => $this->dateTime,
             'address' => $this->address,
             'deadline' => $this->deadline,
-            'createdAt' => $this->created_at->format(static::DATE_FORMAT),
-            'updatedAt' => $this->updated_at->format(static::DATE_FORMAT)
+            'createdAt' => $this->created_at->format(config('app.dateFormat')),
+            'updatedAt' => $this->updated_at->format(config('app.dateFormat'))
         ];
     }
 }

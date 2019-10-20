@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Database\Models\Profile;
 use App\Database\Repositories\ProfileRepository;
 use App\Http\Requests\ProfileStoreRequest;
 use App\Http\Resources\ProfileResource;
@@ -29,8 +28,8 @@ class ProfileController extends Controller
             'desired_income_nominal' => $request->input('desiredIncome.nominal'),
             'desired_income_currency' => $request->input('desiredIncome.currency')
         ];
-        $this->profileRepository->update(Auth::id(), $data);
+        $this->profileRepository->updateByUserId(Auth::id(), $data);
 
-        return new ProfileResource($this->profileRepository->get(Auth::id()));
+        return new ProfileResource($this->profileRepository->getByUserId(Auth::id()));
     }
 }

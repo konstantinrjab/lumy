@@ -23,9 +23,9 @@ class DealStoreRequest extends FormRequest
             'title' => 'required|string|max:100',
             'price.nominal' => 'required|numeric',
             'price.currency' => 'required|string|in:' . implode(',', CurrencyEnum::getValues()),
-            'datetime' => 'required|date_format:Y-m-d\TH:i:s',
+            'datetime' => 'required|date_format:' . config('app.dateFormat') . '|after:now',
             'address' => 'required|string|max:100',
-            'deadline' => 'required|date_format:Y-m-d\TH:i:s',
+            'deadline' => 'required|date_format:' . config('app.dateFormat') . '|after:now'
         ];
     }
 }
