@@ -17,8 +17,9 @@ class CreateProfilesTable extends Migration
             $table->increments('id');
             $table->integer('user_id')->unsigned();
             $table->integer('work_hours_in_month')->unsigned();
-            $table->integer('salary')->unsigned();
-            $table->char('currency', 5);
+            $table->integer('desired_income_nominal')->unsigned();
+            $table->char('desired_income_currency', 5);
+            $table->char('language', 5);
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users');

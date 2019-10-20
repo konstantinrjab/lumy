@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use App\Entities\Enum\CurrencyEnum;
+use App\Entities\Enum\LanguageEnum;
 use Illuminate\Foundation\Http\FormRequest;
 
 class ProfileStoreRequest extends FormRequest
@@ -20,9 +21,10 @@ class ProfileStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'price.nominal'    => 'required|numeric',
-            'price.currency'   => 'required|string|in:' . implode(',', CurrencyEnum::getValues()),
-            'workHoursInMonth' => 'required|integer',
+            'desiredIncome.nominal'  => 'required|numeric',
+            'desiredIncome.currency' => 'required|string|in:' . implode(',', CurrencyEnum::getValues()),
+            'language'               => 'required|string|in:' . implode(',', LanguageEnum::getValues()),
+            'workHoursInMonth'       => 'required|integer',
         ];
     }
 }

@@ -26,8 +26,8 @@ class ProfileController extends Controller
     {
         $data = [
             'workHours_in_month' => $request->get('workHoursInMonth'),
-            'salary' => $request->input('price.nominal'),
-            'currency' => $request->input('price.currency')
+            'desired_income_nominal' => $request->input('desiredIncome.nominal'),
+            'desired_income_currency' => $request->input('desiredIncome.currency')
         ];
         $this->profileRepository->update(Auth::id(), $data);
 
