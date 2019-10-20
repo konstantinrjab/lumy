@@ -22,6 +22,8 @@ class ClientStoreRequest extends FormRequest
             'name' => 'required|string|max:100',
             'surname' => 'string|max:100',
             'patronymic' => 'string|max:100',
+            'emails' => 'present|array',
+            'phones' => 'present|array',
             'emails.*' => 'string|email',
             'phones.*' => 'string',
             'comment' => 'string|max:100',

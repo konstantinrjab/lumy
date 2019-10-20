@@ -22,6 +22,7 @@ class ExpensesTableSeeder extends Seeder
                 'price'    => $faker->randomFloat(2, 10, 100),
                 'currency' => $faker->randomElement($currencies),
                 'type'     => $faker->randomElement($types),
+                'is_active' => $faker->boolean,
             ]);
         }
     }

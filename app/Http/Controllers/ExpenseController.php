@@ -25,11 +25,12 @@ class ExpenseController extends Controller
     public function store(ExpenseStoreRequest $request)
     {
         $data = [
-            'user_id'  => Auth::id(),
-            'title'    => $request->get('title'),
-            'price'    => $request->input('price.nominal'),
-            'currency' => $request->input('price.currency'),
-            'type'     => $request->get('type'),
+            'user_id'   => Auth::id(),
+            'title'     => $request->get('title'),
+            'price'     => $request->input('price.nominal'),
+            'currency'  => $request->input('price.currency'),
+            'type'      => $request->get('type'),
+            'is_active' => $request->get('isActive'),
         ];
         $expense = $this->expenseRepository->create($data);
 
