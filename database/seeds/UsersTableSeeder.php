@@ -26,8 +26,8 @@ class UsersTableSeeder extends Seeder
             Profile::create([
                 'user_id'                 => $user->id,
                 'work_hours_in_month'     => Profile::DEFAULT_WORK_HOURS_IN_MONTH,
-                'desired_income_nominal'  => Profile::PROFILE_DEFAULT_SALARY,
-                'desired_income_currency' => Profile::PROFILE_DEFAULT_CURRENCY,
+                'desired_income_nominal'  => Profile::DEFAULT_DESIRED_INCOME_NOMINAL,
+                'desired_income_currency' => Profile::DEFAULT_DESIRED_INCOME_CURRENCY,
                 'language'                => $faker->randomElement($languages),
             ]);
         }

@@ -6,10 +6,10 @@ before_script:
   - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
 
 stages:
-  - production
+  - development
 
-master_deploy:
-  stage: production
+dev_deploy:
+  stage: development
   script:
     - ssh $SSH_USERNAME_PROD@$SSH_HOST_PROD "cd /var/lumi && git reset --hard HEAD && git checkout master && git pull origin master && docker run --rm --interactive --volume /var/lumi:/app composer install --ignore-platform-reqs --no-scripts && docker exec lum_php php artisan migrate:fresh --seed && exit"
   only:
