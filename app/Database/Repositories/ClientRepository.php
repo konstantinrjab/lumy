@@ -4,12 +4,14 @@ namespace App\Database\Repositories;
 
 use App\Database\Models\Client;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\DB;
+use Exception;
 
 class ClientRepository
 {
-    public function getByIdAndUserId(int $id, int $userId): ?Client
+    public function getByIdAndUserIdOrFail(int $id, int $userId): Client
     {
-        return Client::where(['id' => $id, 'user_id' => $userId])->first();
+        return Client::where(['id' => $id, 'user_id' => $userId])->firstOrFail();
     }
 
     public function getAllByUserId(int $userId): Collection
@@ -24,29 +26,53 @@ class ClientRepository
         if (!$client->save()) {
             return null;
         }
-        foreach ($data['emails'] as $email) {
-            $related['emails'][]['email'] = $email;
-        }
-        foreach ($data['phones'] as $phone) {
-            $related['phones'][]['phone'] = $phone;
-        }
-        if (isset($related['emails'])) {
-            $client->emails()->createMany($related['emails']);
-        }
-        if (isset($related['phones'])) {
-            $client->phones()->createMany($related['phones']);
-        }
+        $this->saveRelations($client, $data);
 
         return $client;
     }
 
     public function update(int $id, array $data, int $userId): bool
     {
-        return Client::where(['id' => $id, 'user_id' => $userId])->firstOrFail()->update($data);
+        $client = $this->getByIdAndUserIdOrFail($id, $userId);
+
+        DB::beginTransaction();
+
+        try {
+            if (!$client->update($data)) {
+                throw new Exception();
+            }
+
+            $client->emails()->delete();
+            $client->phones()->delete();
+            $this->saveRelations($client, $data);
+
+            DB::commit();
+        } catch (Exception $e) {
+            DB::rollback();
+            throw new Exception('Cannot update client');
+        }
+
+        return true;
     }
 
     public function delete(int $id, int $userId): int
     {
         return Client::where(['id' => $id, 'user_id' => $userId])->delete();
+    }
+
+    private function saveRelations(Client $client, array $data): void
+    {
+        foreach ($data['emails'] as $email) {
+            $clientEmails[]['email'] = $email;
+        }
+        foreach ($data['phones'] as $phone) {
+            $clientPhones[]['phone'] = $phone;
+        }
+        if (!empty($clientEmails)) {
+            $client->emails()->createMany($clientEmails);
+        }
+        if (!empty($clientPhones)) {
+            $client->phones()->createMany($clientPhones);
+        }
     }
 }

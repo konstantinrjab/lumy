@@ -7,9 +7,9 @@ use Illuminate\Database\Eloquent\Collection;
 
 class FacilityRepository
 {
-    public function getByIdAndUserId(int $id, int $userId): ?Facility
+    public function getByIdAndUserIdOrFail(int $id, int $userId): Facility
     {
-        return Facility::where(['id' => $id, 'user_id' => $userId])->first();
+        return Facility::where(['id' => $id, 'user_id' => $userId])->firstOrFail();
     }
 
     public function getAllByUserId(int $userId): Collection

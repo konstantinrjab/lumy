@@ -7,9 +7,9 @@ use Illuminate\Database\Eloquent\Collection;
 
 class DealRepository
 {
-    public function getByIdAndUserId(int $id, int $userId): ?Deal
+    public function getByIdAndUserIdOrFail(int $id, int $userId): Deal
     {
-        return Deal::where(['id' => $id, 'user_id' => $userId])->first();
+        return Deal::where(['id' => $id, 'user_id' => $userId])->firstOrFail();
     }
 
     public function getAllByUserId(int $userId): Collection

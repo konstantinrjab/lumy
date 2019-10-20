@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Database\Repositories\FacilityRepository;
 use App\Http\Requests\FacilityStoreRequest;
 use App\Http\Resources\FacilityResource;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Support\Facades\Auth;
 
@@ -42,10 +41,7 @@ class FacilityController extends Controller
 
     public function show(int $facilityId): FacilityResource
     {
-        $facility = $this->facilityRepository->getByIdAndUserId($facilityId, Auth::id());
-        if (!$facility) {
-            throw new ModelNotFoundException;
-        }
+        $facility = $this->facilityRepository->getByIdAndUserIdOrFail($facilityId, Auth::id());
 
         return new FacilityResource($facility);
     }
@@ -63,7 +59,7 @@ class FacilityController extends Controller
         ];
         $this->facilityRepository->update($facilityId, $data, Auth::id());
 
-        return new FacilityResource($this->facilityRepository->getByIdAndUserId($facilityId, Auth::id()));
+        return new FacilityResource($this->facilityRepository->getByIdAndUserIdOrFail($facilityId, Auth::id()));
     }
 
     public function destroy(int $facilityId)

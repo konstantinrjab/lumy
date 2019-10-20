@@ -7,9 +7,9 @@ use Illuminate\Database\Eloquent\Collection;
 
 class ExpenseRepository
 {
-    public function getByIdAndUserId(int $id, int $userId): ?Expense
+    public function getByIdAndUserIdOrFail(int $id, int $userId): Expense
     {
-        return Expense::where(['id' => $id, 'user_id' => $userId])->first();
+        return Expense::where(['id' => $id, 'user_id' => $userId])->firstOrFail();
     }
 
     public function getAllByUserId(int $userId): Collection

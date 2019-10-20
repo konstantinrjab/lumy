@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Database\Repositories\ClientRepository;
 use App\Http\Requests\ClientStoreRequest;
 use App\Http\Resources\ClientResource;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Support\Facades\Auth;
 
@@ -41,10 +40,7 @@ class ClientController extends Controller
 
     public function show(int $clientId): ClientResource
     {
-        $client = $this->clientRepository->getByIdAndUserId($clientId, Auth::id());
-        if (!$client) {
-            throw new ModelNotFoundException;
-        }
+        $client = $this->clientRepository->getByIdAndUserIdOrFail($clientId, Auth::id());
 
         return new ClientResource($client);
     }
@@ -53,7 +49,7 @@ class ClientController extends Controller
     {
         $this->clientRepository->update($clientId, $request->toArray(), Auth::id());
 
-        return new ClientResource($this->clientRepository->getByIdAndUserId($clientId, Auth::id()));
+        return new ClientResource($this->clientRepository->getByIdAndUserIdOrFail($clientId, Auth::id()));
     }
 
     public function destroy(int $clientId)
