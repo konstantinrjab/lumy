@@ -21,7 +21,7 @@ class CreateExpensesTable extends Migration
             $table->char('currency', 5);
             $table->string('type', 30);
             $table->dateTime('start_date')->nullable();
-            $table->integer('period', 30)->unsigned()->nullable();
+            $table->integer('period')->unsigned()->nullable();
             $table->tinyInteger('is_active')->unsigned();
             $table->timestamps();
 
