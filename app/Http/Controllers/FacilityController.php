@@ -33,6 +33,8 @@ class FacilityController extends Controller
             'working_time'   => $request->get('workingTime'),
             'transport_time' => $request->get('transportTime'),
             'deadline_time'  => $request->get('deadlineTime'),
+            'type'           => $request->get('type'),
+            'is_active'      => $request->get('isActive'),
         ];
         $facility = $this->facilityRepository->create($data);
 

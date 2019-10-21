@@ -21,13 +21,18 @@ class ExpenseStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'title'          => 'required|string|max:100',
-            'price.nominal'  => 'required|numeric',
-            'price.currency' => 'required|string|max:3|in:' . implode(',', CurrencyEnum::getValues()),
-            'startDate'      => 'required|date_format:' . config('app.dateFormat'),
-            'period'         => 'required|integer',
-            'isActive'       => 'required|boolean',
-            'type'           => 'required|in:' . implode(',', ExpenseTypeEnum::getValues()),
+            'title'                   => 'required|string|max:100',
+            'price.nominal'           => 'required|numeric',
+            'price.currency'          => 'required|string|max:3|in:' . implode(',', CurrencyEnum::getValues()),
+            'startDate'               => 'required|date_format:' . config('app.dateFormat'),
+            'period'                  => 'required|integer',
+            'isActive'                => 'required|boolean',
+            'type'                    => 'required|in:' . implode(',', ExpenseTypeEnum::getValues()),
+            'expenses'                => 'present|array',
+            'expenses.title'          => 'required|string',
+            'expenses.price.nominal'  => 'required|numeric',
+            'expenses.price.currency' => 'required|string|max:3|in:' . implode(',', CurrencyEnum::getValues()),
+            'expenses.number'         => 'required|integer',
         ];
     }
 }
