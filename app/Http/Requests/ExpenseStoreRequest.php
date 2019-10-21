@@ -28,11 +28,6 @@ class ExpenseStoreRequest extends FormRequest
             'period'                  => 'required|integer',
             'isActive'                => 'required|boolean',
             'type'                    => 'required|in:' . implode(',', ExpenseTypeEnum::getValues()),
-            'expenses'                => 'present|array',
-            'expenses.title'          => 'required|string',
-            'expenses.price.nominal'  => 'required|numeric',
-            'expenses.price.currency' => 'required|string|max:3|in:' . implode(',', CurrencyEnum::getValues()),
-            'expenses.number'         => 'required|integer',
         ];
     }
 }
