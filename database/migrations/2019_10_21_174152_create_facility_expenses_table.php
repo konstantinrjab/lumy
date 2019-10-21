@@ -22,7 +22,8 @@ class CreateFacilityExpensesTable extends Migration
             $table->integer('number')->unsigned();
             $table->timestamps();
 
-            $table->foreign('facility_id')->references('id')->on('facilities');
+            $table->foreign('facility_id')->references('id')->on('facilities')
+                ->onDelete('cascade');
         });
     }
 
