@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use App\Entities\Enum\CurrencyEnum;
 use App\Entities\Enum\LanguageEnum;
+use App\Entities\Enum\ProfileThemeEnum;
 use Illuminate\Foundation\Http\FormRequest;
 
 class ProfileStoreRequest extends FormRequest
@@ -25,6 +26,7 @@ class ProfileStoreRequest extends FormRequest
             'desiredIncome.currency' => 'required|string|in:' . implode(',', CurrencyEnum::getValues()),
             'language'               => 'required|string|in:' . implode(',', LanguageEnum::getValues()),
             'workHoursInMonth'       => 'required|integer',
+            'theme'                  => 'required|string|in:' . implode(',', ProfileThemeEnum::getValues()),
         ];
     }
 }

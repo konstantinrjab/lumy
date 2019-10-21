@@ -20,6 +20,7 @@ class CreateProfilesTable extends Migration
             $table->integer('desired_income_nominal')->unsigned();
             $table->char('desired_income_currency', 5);
             $table->char('language', 5);
+            $table->string('theme', 100);
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users');

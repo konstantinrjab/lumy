@@ -20,7 +20,7 @@ class UserRepository
                 'name'      => $data['name'],
                 'email'     => $data['email'],
                 'password'  => Hash::make($data['password']),
-                'api_token' => Str::random(60)
+                'api_token' => Str::random(User::API_TOKEN_LENGTH)
             ]);
             Profile::create([
                 'user_id'                 => $user->id,
@@ -28,6 +28,7 @@ class UserRepository
                 'desired_income_nominal'  => Profile::DEFAULT_DESIRED_INCOME_NOMINAL,
                 'desired_income_currency' => Profile::DEFAULT_DESIRED_INCOME_CURRENCY,
                 'language'                => Profile::DEFAULT_LANGUAGE,
+                'theme'                   => Profile::DEFAULT_THEME,
             ]);
 
             DB::commit();

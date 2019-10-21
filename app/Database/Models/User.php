@@ -7,6 +7,8 @@ use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
+    public const API_TOKEN_LENGTH = 60;
+
     use Notifiable;
 
     /**

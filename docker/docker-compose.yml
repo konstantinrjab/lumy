@@ -29,7 +29,7 @@ services:
     image: mysql:5.7
     environment:
       MYSQL_ROOT_PASSWORD: 'root'
-      MYSQL_DATABASE: 'lumi'
+      MYSQL_DATABASE: 'lumy'
       MYSQL_USER: 'user'
       MYSQL_PASSWORD: 'password'
     ports:
