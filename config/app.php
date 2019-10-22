@@ -68,7 +68,8 @@ return [
     */
 
     'timezone' => 'UTC',
-    'dateFormat' => 'Y-m-d\TH:i:s\Z',
+    'mysqlDateFormat' => 'Y-m-d H:i:s',
+    'apiDateFormat' => 'Y-m-d\TH:i:s\Z',
 
     /*
     |--------------------------------------------------------------------------

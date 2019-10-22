@@ -25,6 +25,8 @@ class DealRepository
             return null;
         }
 
+        $this->saveRelations($deal, $data);
+
         return $deal;
     }
 
@@ -36,5 +38,19 @@ class DealRepository
     public function delete(int $id, int $userId): int
     {
         return Deal::where(['id' => $id, 'user_id' => $userId])->delete();
+    }
+
+    private function saveRelations(Deal $deal, array $data): void
+    {
+        foreach ($data['facilities'] as $facility) {
+            $dealFacilities[] = [
+                'dela_id'     => $deal->id,
+                'facility_id' => $facility['id'],
+                'number'      => $facility['number'],
+            ];
+        }
+        if (!empty($dealFacilities)) {
+            $deal->facilities()->createMany($dealFacilities);
+        }
     }
 }

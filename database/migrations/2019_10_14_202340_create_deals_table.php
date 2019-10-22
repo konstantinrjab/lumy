@@ -16,15 +16,21 @@ class CreateDealsTable extends Migration
         Schema::create('deals', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->unsigned();
+            $table->integer('client_id')->unsigned();
             $table->string('title', 100);
             $table->string('address', 100);
             $table->decimal('price', 11, 2)->unsigned();
             $table->char('currency', 5);
-            $table->dateTime('dateTime');
+            $table->decimal('prepay_price', 11, 2)->unsigned();
+            $table->char('prepay_currency', 5);
+            $table->dateTime('start');
+            $table->dateTime('end');
             $table->dateTime('deadline');
+            $table->text('comment')->nullable();
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('client_id')->references('id')->on('clients');
         });
     }
 

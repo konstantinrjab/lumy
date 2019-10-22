@@ -19,8 +19,8 @@ class FacilityResource extends JsonResource
             'workingTime'   => $this->working_time,
             'transportTime' => $this->transport_time,
             'deadlineTime'  => $this->deadline_time,
-            'createdAt'     => $this->created_at->format(config('app.dateFormat')),
-            'updatedAt'     => $this->updated_at->format(config('app.dateFormat'))
+            'createdAt'     => $this->created_at->format(config('app.apiDateFormat')),
+            'updatedAt'     => $this->updated_at->format(config('app.apiDateFormat'))
         ];
     }
 }
