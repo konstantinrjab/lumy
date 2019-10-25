@@ -25,4 +25,5 @@ Route::middleware('auth:api')->group(function () {
 });
 
 Route::post('users/authenticate/password', 'Auth\LoginController@login');
+Route::post('users/authenticate/google', 'Auth\GoogleLoginController@login');
 Route::post('users/register', 'Auth\RegisterController@register');

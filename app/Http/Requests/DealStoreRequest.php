@@ -4,7 +4,10 @@ namespace App\Http\Requests;
 
 use App\Entities\Enum\CurrencyEnum;
 use App\Entities\Enum\DealStatusEnum;
+use Illuminate\Database\Query\Builder;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
 
 class DealStoreRequest extends FormRequest
 {
@@ -28,7 +31,11 @@ class DealStoreRequest extends FormRequest
             'price.currency'  => 'required|string|in:' . implode(',', CurrencyEnum::getValues()),
             'prepay.nominal'  => 'required|numeric',
             'prepay.currency' => 'required|string|in:' . implode(',', CurrencyEnum::getValues()),
-            'facilities.*.id' => 'required|integer|exists:facilities,id',
+            'facilities.*.id' => [
+                'required', 'integer', 'exists:facilities,id', Rule::exists('facilities')->where(function (Builder $query) {
+                    $query->where('user_id', Auth::id());
+                }),
+            ],
             'start'           => 'required|date_format:' . config('app.apiDateFormat'),
             'end'             => 'required|date_format:' . config('app.apiDateFormat') . '|after:now',
             'deadline'        => 'required|date_format:' . config('app.apiDateFormat') . '|after:now',

@@ -4,6 +4,8 @@ namespace App\Database\Repositories;
 
 use App\Database\Models\Deal;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\DB;
+use Exception;
 
 class DealRepository
 {
@@ -32,7 +34,25 @@ class DealRepository
 
     public function update(int $id, array $data, int $userId): bool
     {
-        return Deal::where(['id' => $id, 'user_id' => $userId])->firstOrFail()->update($data);
+        $deal = $this->getByIdAndUserIdOrFail($id, $userId);
+
+        DB::beginTransaction();
+
+        try {
+            if (!$deal->update($data)) {
+                throw new Exception();
+            }
+
+            $deal->facilities()->delete();
+            $this->saveRelations($deal, $data);
+
+            DB::commit();
+        } catch (Exception $e) {
+            DB::rollback();
+            throw new Exception('Update fails');
+        }
+
+        return true;
     }
 
     public function delete(int $id, int $userId): int
