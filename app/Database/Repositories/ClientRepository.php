@@ -4,6 +4,7 @@ namespace App\Database\Repositories;
 
 use App\Database\Models\Client;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\DB;
 use Exception;
 
@@ -14,9 +15,9 @@ class ClientRepository
         return Client::where(['id' => $id, 'user_id' => $userId])->firstOrFail();
     }
 
-    public function getAllByUserId(int $userId): Collection
+    public function getVisibleByUserId(int $userId): Collection
     {
-        return Client::where('user_id', $userId)->get();
+        return Client::where(['user_id' => $userId, 'visibility' => Client::VISIBILITY_VISIBLE])->get();
     }
 
     public function create(array $data): ?Client
@@ -55,9 +56,16 @@ class ClientRepository
         return true;
     }
 
-    public function delete(int $id, int $userId): int
+    public function deleteOrHide(int $id, int $userId): bool
     {
-        return Client::where(['id' => $id, 'user_id' => $userId])->delete();
+        try {
+            $result = Client::where(['id' => $id, 'user_id' => $userId])->delete();
+        } catch (QueryException $exception) {
+            $client = $this->getByIdAndUserIdOrFail($id, $userId);
+            $result = $client->save(['visibility' => Client::VISIBILITY_HIDDEN]);
+        }
+
+        return $result;
     }
 
     private function saveRelations(Client $client, array $data): void

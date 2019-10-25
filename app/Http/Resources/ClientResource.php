@@ -16,6 +16,7 @@ class ClientResource extends JsonResource
             'emails' => $this->emails->pluck('email'),
             'phones' => $this->phones->pluck('phone'),
             'comment' => $this->comment,
+            'visibility' => $this->visibility,
             'createdAt' => $this->created_at->format(config('app.apiDateFormat')),
             'updatedAt' => $this->updated_at->format(config('app.apiDateFormat'))
         ];

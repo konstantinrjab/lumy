@@ -6,7 +6,20 @@ use Illuminate\Database\Eloquent\Model;
 
 class Deal extends Model
 {
-    protected $fillable = ['user_id', 'client_id', 'title', 'address', 'price', 'currency', 'prepay_price', 'prepay_currency', 'start', 'end', 'deadline', 'comment'];
+    protected $fillable = [
+        'user_id',
+        'client_id',
+        'status',
+        'title',
+        'address',
+        'price', 'currency',
+        'prepay_price',
+        'prepay_currency',
+        'start',
+        'end',
+        'deadline',
+        'comment'
+    ];
 
     public function facilities()
     {

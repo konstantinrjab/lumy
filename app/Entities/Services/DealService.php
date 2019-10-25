@@ -21,8 +21,8 @@ class DealService
     {
         $data = array_merge(
             [
-                'user_id'   => Auth::id(),
-                'client_id' => $request->get('clientId'),
+                'user_id'    => Auth::id(),
+                'client_id'  => $request->get('clientId'),
             ],
             $this->getUpdatableDataFromRequest($request)
         );
@@ -40,6 +40,7 @@ class DealService
     private function getUpdatableDataFromRequest(DealStoreRequest $request): array
     {
         return [
+            'status'           => $request->get('status'),
             'title'           => $request->get('title'),
             'price'           => $request->input('price.nominal'),
             'currency'        => $request->input('price.currency'),

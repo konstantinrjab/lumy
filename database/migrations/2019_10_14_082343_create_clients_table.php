@@ -19,6 +19,7 @@ class CreateClientsTable extends Migration
             $table->string('name', 100)->nullable();
             $table->string('surname', 100)->nullable();
             $table->string('patronymic', 100)->nullable();
+            $table->tinyInteger('visibility')->unsigned();
             $table->text('comment')->nullable();
             $table->timestamps();
 

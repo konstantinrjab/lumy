@@ -3,6 +3,7 @@
 use App\Database\Models\Deal;
 use App\Database\Models\DealFacility;
 use App\Entities\Enum\CurrencyEnum;
+use App\Entities\Enum\DealStatusEnum;
 use Illuminate\Database\Seeder;
 
 class DealsTableSeeder extends Seeder
@@ -13,11 +14,13 @@ class DealsTableSeeder extends Seeder
     {
         $faker = Faker\Factory::create();
         $currencies = CurrencyEnum::getValues();
+        $statuses = DealStatusEnum::getValues();
 
         for ($count = 1; $count <= self::COUNT; $count++) {
             $deal = Deal::create([
                 'user_id'  => rand(1, UsersTableSeeder::COUNT),
                 'client_id'  => rand(1, ClientsTableSeeder::COUNT),
+                'status'  => $faker->randomElement($statuses),
                 'title'     => $faker->words(3, true),
                 'address'  => $faker->address,
                 'price'  => $faker->randomFloat(2, 10, 100),

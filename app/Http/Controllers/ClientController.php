@@ -19,7 +19,7 @@ class ClientController extends Controller
 
     public function index(): AnonymousResourceCollection
     {
-        return ClientResource::collection($this->clientRepository->getAllByUserId(Auth::id()));
+        return ClientResource::collection($this->clientRepository->getVisibleByUserId(Auth::id()));
     }
 
     public function store(ClientStoreRequest $request): ClientResource
@@ -54,6 +54,6 @@ class ClientController extends Controller
 
     public function destroy(int $clientId)
     {
-        $this->clientRepository->delete($clientId, Auth::id());
+        $this->clientRepository->deleteOrHide($clientId, Auth::id());
     }
 }

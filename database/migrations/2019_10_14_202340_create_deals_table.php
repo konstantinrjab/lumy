@@ -17,6 +17,7 @@ class CreateDealsTable extends Migration
             $table->increments('id');
             $table->integer('user_id')->unsigned();
             $table->integer('client_id')->unsigned();
+            $table->string('status', 50);
             $table->string('title', 100);
             $table->string('address', 100);
             $table->decimal('price', 11, 2)->unsigned();
