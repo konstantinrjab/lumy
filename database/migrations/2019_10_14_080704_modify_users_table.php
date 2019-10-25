@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddColumnApiTokenToUsersTable extends Migration
+class ModifyUsersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -15,6 +15,10 @@ class AddColumnApiTokenToUsersTable extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->string('api_token', 80)->after('password')
+                ->unique()
+                ->nullable()
+                ->default(null);
+            $table->string('google_id', 80)->after('api_token')
                 ->unique()
                 ->nullable()
                 ->default(null);
@@ -29,6 +33,7 @@ class AddColumnApiTokenToUsersTable extends Migration
     public function down()
     {
         Schema::table('users', function (Blueprint $table) {
+            $table->dropColumn('google_id');
             $table->dropColumn('api_token');
         });
     }

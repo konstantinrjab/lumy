@@ -20,7 +20,7 @@ class UsersTableSeeder extends Seeder
             $user = User::create([
                 'name'      => $faker->name,
                 'email'     => $count == 1 ? 'user@mail.com' : $faker->email,
-                'password'  => Hash::make(Str::random()),
+                'password'  => $count == 1 ? Hash::make('12345678') : Hash::make(Str::random()),
                 'api_token' => $count == 1 ? 'Oa8cduFPjvzG4LYcWAVCHhlB8gfDlWZvROQ10qoODq0eTLEkFq518rDwCc5R' : Str::random(User::API_TOKEN_LENGTH)
             ]);
             Profile::create([
