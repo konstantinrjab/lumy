@@ -2,10 +2,13 @@
 
 namespace App\Exceptions;
 
+use App\Mail\ExceptionOccured;
 use Exception;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Validation\ValidationException;
+use Symfony\Component\Debug\Exception\FlattenException;
 
 class Handler extends ExceptionHandler
 {
@@ -36,7 +39,11 @@ class Handler extends ExceptionHandler
      */
     public function report(Exception $exception)
     {
-        parent::report($exception);
+        if ($this->shouldReport($exception)) {
+            $this->sendEmail($exception);
+        }
+
+        return parent::report($exception);
     }
 
     /**
@@ -48,28 +55,44 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
-        $response['data'] = [
-            'message' => $exception->getMessage()
-        ];
-        if ($exception instanceof ValidationException && isset($exception->validator)) {
-            $response['data']['errors'] = $exception->validator->errors()->toArray();
-        }
-        if ($exception instanceof ModelNotFoundException) {
-            $response['data']['message'] = 'Model not found';
+        if ($request->wantsJson()) {
+            $response['data'] = [
+                'message' => $exception->getMessage()
+            ];
+            if ($exception instanceof ValidationException && isset($exception->validator)) {
+                $response['data']['errors'] = $exception->validator->errors()->toArray();
+            }
+            if ($exception instanceof ModelNotFoundException) {
+                $response['data']['message'] = 'Model not found';
+            }
+
+            if (config('app.debug')) {
+                $response['exception'] = get_class($exception);
+                $response['message'] = $exception->getMessage();
+                $response['trace'] = $exception->getTrace();
+            }
+
+            $status = 400;
+
+            if ($this->isHttpException($exception)) {
+                $status = $exception->getStatusCode();
+            }
+
+            return response()->json($response, $status);
         }
 
-        if (config('app.debug')) {
-            $response['exception'] = get_class($exception);
-            $response['message'] = $exception->getMessage();
-            $response['trace'] = $exception->getTrace();
+        return parent::render($request, $exception);
+    }
+
+    private function sendEmail(\Exception $exception)
+    {
+        try {
+            $e = FlattenException::create($exception);
+            $emails = explode(',', env('EXCEPTION_EMAILS'));
+
+            Mail::to($emails)->send(new ExceptionOccured($e));
+        } catch (Exception $ex) {
+            // TODO: write some logic here
         }
-
-        $status = 400;
-
-        if ($this->isHttpException($exception)) {
-            $status = $exception->getStatusCode();
-        }
-
-        return response()->json($response, $status);
     }
 }
