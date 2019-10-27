@@ -24,18 +24,8 @@ class FacilityController extends Controller
 
     public function store(FacilityStoreRequest $request): FacilityResource
     {
-        $data = [
-            'user_id'        => Auth::id(),
-            'title'          => $request->get('title'),
-            'price'          => $request->input('price.nominal'),
-            'currency'       => $request->input('price.currency'),
-            'expenses'       => $request->get('expenses'),
-            'working_time'   => $request->get('workingTime'),
-            'transport_time' => $request->get('transportTime'),
-            'deadline_time'  => $request->get('deadlineTime'),
-            'type'           => $request->get('type'),
-            'is_active'      => $request->get('isActive'),
-        ];
+        $data = $this->getRequestData($request);
+        $data['user_id'] = Auth::id();
         $facility = $this->facilityRepository->create($data);
 
         return new FacilityResource($facility);
@@ -50,16 +40,7 @@ class FacilityController extends Controller
 
     public function update(FacilityStoreRequest $request, int $facilityId): FacilityResource
     {
-        $data = [
-            'title'          => $request->get('title'),
-            'price'          => $request->input('price.nominal'),
-            'currency'       => $request->input('price.currency'),
-            'expenses'       => $request->get('expenses'),
-            'working_time'   => $request->get('workingTime'),
-            'transport_time' => $request->get('transportTime'),
-            'deadline_time'  => $request->get('deadlineTime'),
-        ];
-        $this->facilityRepository->update($facilityId, $data, Auth::id());
+        $this->facilityRepository->update($facilityId, $this->getRequestData($request), Auth::id());
 
         return new FacilityResource($this->facilityRepository->getByIdAndUserIdOrFail($facilityId, Auth::id()));
     }
@@ -67,5 +48,20 @@ class FacilityController extends Controller
     public function destroy(int $facilityId)
     {
         $this->facilityRepository->delete($facilityId, Auth::id());
+    }
+
+    private function getRequestData(FacilityStoreRequest $request)
+    {
+        return [
+            'title'          => $request->get('title'),
+            'price'          => $request->input('price.nominal'),
+            'currency'       => $request->input('price.currency'),
+            'expenses'       => $request->get('expenses'),
+            'working_time'   => $request->get('workingTime'),
+            'transport_time' => $request->get('transportTime'),
+            'deadline_time'  => $request->get('deadlineTime'),
+            'type'           => $request->get('type'),
+            'is_active'      => $request->get('isActive'),
+        ];
     }
 }

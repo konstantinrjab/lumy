@@ -19,14 +19,14 @@ class ClientStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|string|max:100',
-            'surname' => 'string|max:100',
+            'name'       => 'required|string|max:100',
+            'surname'    => 'string|max:100',
             'patronymic' => 'string|max:100',
-            'emails' => 'present|array',
-            'phones' => 'present|array',
-            'emails.*' => 'string|email',
-            'phones.*' => 'string',
-            'comment' => 'string|max:100',
+            'emails'     => 'present|array',
+            'phones'     => 'present|array',
+            'emails.*'   => 'string|email',
+            'phones.*'   => 'string',
+            'comment'    => 'string|max:100',
         ];
     }
 }

@@ -24,14 +24,8 @@ class ExpenseController extends Controller
 
     public function store(ExpenseStoreRequest $request)
     {
-        $data = [
-            'user_id'   => Auth::id(),
-            'title'     => $request->get('title'),
-            'price'     => $request->input('price.nominal'),
-            'currency'  => $request->input('price.currency'),
-            'type'      => $request->get('type'),
-            'is_active' => $request->get('isActive'),
-        ];
+        $data = $this->getRequestData($request);
+        $data['user_id'] = Auth::id();
         $expense = $this->expenseRepository->create($data);
 
         return new ExpenseResource($expense);
@@ -46,14 +40,7 @@ class ExpenseController extends Controller
 
     public function update(ExpenseStoreRequest $request, $expenseId): ExpenseResource
     {
-        $data = [
-            'title'    => $request->get('title'),
-            'price'    => $request->input('price.nominal'),
-            'currency' => $request->input('price.currency'),
-            'type'     => $request->get('type'),
-        ];
-
-        $this->expenseRepository->update($expenseId, $data, Auth::id());
+        $this->expenseRepository->update($expenseId, $this->getRequestData($request), Auth::id());
 
         return new ExpenseResource($this->expenseRepository->getByIdAndUserIdOrFail($expenseId, Auth::id()));
     }
@@ -61,5 +48,16 @@ class ExpenseController extends Controller
     public function destroy(int $expenseId)
     {
         $this->expenseRepository->delete($expenseId, Auth::id());
+    }
+
+    private function getRequestData(ExpenseStoreRequest $request)
+    {
+        return [
+            'title'     => $request->get('title'),
+            'price'     => $request->input('price.nominal'),
+            'currency'  => $request->input('price.currency'),
+            'type'      => $request->get('type'),
+            'is_active' => $request->get('isActive'),
+        ];
     }
 }

@@ -23,7 +23,7 @@ class FacilityStoreRequest extends FormRequest
             'title'          => 'required|string|max:100',
             'price.nominal'  => 'required|numeric',
             'price.currency' => 'required|string|in:' . implode(',', CurrencyEnum::getValues()),
-            'expenses'       => 'array',
+            'expenses'       => 'present|array',
             'workingTime'    => 'required|integer',
             'transportTime'  => 'required|integer',
             'deadlineTime'   => 'required|integer',
