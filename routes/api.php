@@ -13,7 +13,7 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->group(function () {
+Route::middleware(['auth:api', 'cors'])->group(function () {
     Route::apiResources([
         'clients' => 'ClientController',
         'deals' => 'DealController',
@@ -28,3 +28,11 @@ Route::post('users/authenticate/password', 'Auth\LoginController@login');
 Route::post('users/authenticate/google', 'Auth\GoogleLoginController@login');
 Route::post('users/register/password', 'Auth\RegisterController@register');
 Route::post('users/register/google', 'Auth\GoogleRegisterController@register');
+
+
+Route::options('clients/{any?}', ['middleware' => 'cors', function(){return;}]);
+Route::options('deals/{any?}', ['middleware' => 'cors', function(){return;}]);
+Route::options('facilities/{any?}', ['middleware' => 'cors', function(){return;}]);
+Route::options('expenses/{any?}', ['middleware' => 'cors', function(){return;}]);
+Route::options('profiles/{any?}', ['middleware' => 'cors', function(){return;}]);
+Route::options('users/{any?}', ['middleware' => 'cors', function(){return;}]);
