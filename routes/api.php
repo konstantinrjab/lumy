@@ -13,7 +13,7 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware(['auth:api', 'cors'])->group(function () {
+Route::middleware(['cors', 'auth:api'])->group(function () {
     Route::apiResources([
         'clients' => 'ClientController',
         'deals' => 'DealController',
@@ -24,15 +24,18 @@ Route::middleware(['auth:api', 'cors'])->group(function () {
     Route::get('profiles', 'ProfileController@index');
 });
 
-Route::post('users/authenticate/password', 'Auth\LoginController@login');
-Route::post('users/authenticate/google', 'Auth\GoogleLoginController@login');
-Route::post('users/register/password', 'Auth\RegisterController@register');
-Route::post('users/register/google', 'Auth\GoogleRegisterController@register');
+Route::middleware(['cors'])->group(function () {
+    Route::post('users/authenticate/password', 'Auth\LoginController@login');
+    Route::post('users/authenticate/google', 'Auth\GoogleLoginController@login');
+    Route::post('users/register/password', 'Auth\RegisterController@register');
+    Route::post('users/register/google', 'Auth\GoogleRegisterController@register');
 
+    Route::options('clients/{any?}', function(){return;});
+    Route::options('deals/{any?}', function(){return;});
+    Route::options('facilities/{any?}', function(){return;});
+    Route::options('expenses/{any?}', function(){return;});
+    Route::options('profiles/{any?}', function(){return;});
 
-Route::options('clients/{any?}', ['middleware' => 'cors', function(){return;}]);
-Route::options('deals/{any?}', ['middleware' => 'cors', function(){return;}]);
-Route::options('facilities/{any?}', ['middleware' => 'cors', function(){return;}]);
-Route::options('expenses/{any?}', ['middleware' => 'cors', function(){return;}]);
-Route::options('profiles/{any?}', ['middleware' => 'cors', function(){return;}]);
-Route::options('users/{any?}', ['middleware' => 'cors', function(){return;}]);
+    Route::options('users/authenticate/{any?}', function(){return;});
+    Route::options('users/register/{any?}', function(){return;});
+});
