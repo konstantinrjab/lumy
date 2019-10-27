@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Database\Models\Client;
 use App\Database\Repositories\ClientRepository;
 use App\Http\Requests\ClientStoreRequest;
 use App\Http\Resources\ClientResource;
@@ -24,15 +25,9 @@ class ClientController extends Controller
 
     public function store(ClientStoreRequest $request): ClientResource
     {
-        $data = [
-            'user_id'    => Auth::id(),
-            'name'       => $request->get('name'),
-            'surname'    => $request->get('surname'),
-            'patronymic' => $request->get('patronymic'),
-            'comment'    => $request->get('comment'),
-            'emails'    => $request->get('emails'),
-            'phones'    => $request->get('phones'),
-        ];
+        $data = $request->toArray();
+        $data['user_id'] = Auth::id();
+        $data['visibility'] = Client::VISIBILITY_VISIBLE;
         $client = $this->clientRepository->create($data);
 
         return new ClientResource($client);
