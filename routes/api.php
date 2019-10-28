@@ -13,29 +13,32 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware(['cors', 'auth:api'])->group(function () {
-    Route::apiResources([
-        'clients' => 'ClientController',
-        'deals' => 'DealController',
-        'facilities' => 'FacilityController',
-        'expenses' => 'ExpenseController',
-    ]);
-    Route::put('profiles', 'ProfileController@update');
-    Route::get('profiles', 'ProfileController@index');
-});
+Route::namespace('Api')->group(function () {
 
-Route::middleware(['cors', 'api'])->group(function () {
-    Route::post('users/authenticate/password', 'Auth\LoginController@login');
-    Route::post('users/authenticate/google', 'Auth\GoogleLoginController@login');
-    Route::post('users/register/password', 'Auth\RegisterController@register');
-    Route::post('users/register/google', 'Auth\GoogleRegisterController@register');
+    Route::middleware(['cors', 'auth:api'])->group(function () {
+        Route::apiResources([
+            'clients' => 'ClientController',
+            'deals' => 'DealController',
+            'facilities' => 'FacilityController',
+            'expenses' => 'ExpenseController',
+        ]);
+        Route::put('profiles', 'ProfileController@update');
+        Route::get('profiles', 'ProfileController@index');
+    });
 
-    Route::options('clients/{any?}', function(){return;});
-    Route::options('deals/{any?}', function(){return;});
-    Route::options('facilities/{any?}', function(){return;});
-    Route::options('expenses/{any?}', function(){return;});
-    Route::options('profiles/{any?}', function(){return;});
+    Route::middleware(['cors', 'api'])->group(function () {
+        Route::post('users/authenticate/password', 'Auth\LoginController@login');
+        Route::post('users/authenticate/google', 'Auth\GoogleLoginController@login');
+        Route::post('users/register/password', 'Auth\RegisterController@register');
+        Route::post('users/register/google', 'Auth\GoogleRegisterController@register');
 
-    Route::options('users/authenticate/{any?}', function(){return;});
-    Route::options('users/register/{any?}', function(){return;});
+        Route::options('clients/{any?}', function(){return;});
+        Route::options('deals/{any?}', function(){return;});
+        Route::options('facilities/{any?}', function(){return;});
+        Route::options('expenses/{any?}', function(){return;});
+        Route::options('profiles/{any?}', function(){return;});
+
+        Route::options('users/authenticate/{any?}', function(){return;});
+        Route::options('users/register/{any?}', function(){return;});
+    });
 });

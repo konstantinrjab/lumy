@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
 use App\Database\Repositories\DealRepository;
 use App\Entities\Services\DealService;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\DealStoreRequest;
 use App\Http\Resources\DealResource;
 use Carbon\Carbon;

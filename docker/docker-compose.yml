@@ -39,9 +39,22 @@ services:
 #  elk:
 #    image: sebp/elk
 #    container_name: lum_elk
+##    volumes:
+##      - ./elk/logstash/conf.d:/etc/logstash/conf.d
 #    ports:
 #      - "5601:5601"
 #      - "9200:9200"
 #      - "5044:5044"
+#  filebeat:
+#    image: elastic/filebeat:7.4.1
+#    container_name: lum_filebeat
+#    volumes:
+#      - ../storage/logs:/etc/logs
+##      - ./filebeat/:/usr/share/filebeat/
+#    links:
+#      - "elk"
+#    depends_on:
+#      - "elk"
+    #entrypoint: ./time-to-start.sh
 volumes:
   lum_mysql:

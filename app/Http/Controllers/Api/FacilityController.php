@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
 use App\Database\Repositories\FacilityRepository;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\FacilityStoreRequest;
 use App\Http\Resources\FacilityResource;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;

@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
 use App\Database\Repositories\ExpenseRepository;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\ExpenseStoreRequest;
 use App\Http\Resources\ExpenseResource;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;

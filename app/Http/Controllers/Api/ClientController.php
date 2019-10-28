@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
 use App\Database\Models\Client;
 use App\Database\Repositories\ClientRepository;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\ClientStoreRequest;
 use App\Http\Resources\ClientResource;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
