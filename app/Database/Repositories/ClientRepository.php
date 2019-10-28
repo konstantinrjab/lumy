@@ -70,11 +70,15 @@ class ClientRepository
 
     private function saveRelations(Client $client, array $data): void
     {
-        foreach ($data['emails'] as $email) {
-            $clientEmails[]['email'] = $email;
+        if (isset($data['emails'])) {
+            foreach ($data['emails'] as $email) {
+                $clientEmails[]['email'] = $email;
+            }
         }
-        foreach ($data['phones'] as $phone) {
-            $clientPhones[]['phone'] = $phone;
+        if (isset($data['phones'])) {
+            foreach ($data['phones'] as $phone) {
+                $clientPhones[]['phone'] = $phone;
+            }
         }
         if (!empty($clientEmails)) {
             $client->emails()->createMany($clientEmails);

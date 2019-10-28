@@ -24,7 +24,7 @@ class ProfileController extends Controller
     public function update(ProfileStoreRequest $request): ProfileResource
     {
         $data = [
-            'workHours_in_month' => $request->get('workHoursInMonth'),
+            'work_hours_in_month' => $request->get('workHoursInMonth'),
             'desired_income_nominal' => $request->input('desiredIncome.nominal'),
             'desired_income_currency' => $request->input('desiredIncome.currency'),
             'language' => $request->input('language'),
