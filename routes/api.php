@@ -24,7 +24,7 @@ Route::middleware(['cors', 'auth:api'])->group(function () {
     Route::get('profiles', 'ProfileController@index');
 });
 
-Route::middleware(['cors'])->group(function () {
+Route::middleware(['cors', 'api'])->group(function () {
     Route::post('users/authenticate/password', 'Auth\LoginController@login');
     Route::post('users/authenticate/google', 'Auth\GoogleLoginController@login');
     Route::post('users/register/password', 'Auth\RegisterController@register');

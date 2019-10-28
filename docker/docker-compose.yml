@@ -36,5 +36,12 @@ services:
       - '3306:3306'
     volumes:
       - lum_mysql:/var/lib/mysql
+#  elk:
+#    image: sebp/elk
+#    container_name: lum_elk
+#    ports:
+#      - "5601:5601"
+#      - "9200:9200"
+#      - "5044:5044"
 volumes:
   lum_mysql:

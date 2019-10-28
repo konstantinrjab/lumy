@@ -25,7 +25,6 @@ class ExpenseStoreRequest extends FormRequest
             'price.nominal'  => 'required|numeric',
             'price.currency' => 'required|string|max:3|in:' . implode(',', CurrencyEnum::getValues()),
             'startDate'      => 'required|date_format:' . config('app.apiDateFormat'),
-            'expenses'       => 'required|integer',
             'period'         => 'required|integer',
             'isActive'       => 'required|boolean',
             'type'           => 'required|in:' . implode(',', ExpenseTypeEnum::getValues()),
