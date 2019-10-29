@@ -50,7 +50,7 @@ class GoogleRegisterController extends Controller
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'token_id' => ['required', 'string', 'unique:users,google_id'],
+            'id_token' => ['required', 'string', 'unique:users,google_id'],
         ]);
     }
 
@@ -62,6 +62,9 @@ class GoogleRegisterController extends Controller
      */
     protected function create(array $data): User
     {
+        $data['google_id'] = $data['id_token'];
+        unset($data['id_token']);
+
         return $this->userRepository->create($data);
     }
 

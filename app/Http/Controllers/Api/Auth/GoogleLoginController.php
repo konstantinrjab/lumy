@@ -19,9 +19,30 @@ class GoogleLoginController extends Controller
      */
     protected $redirectTo = '/home';
 
-    public function __construct()
+    private $registerController;
+
+    public function __construct(GoogleRegisterController $registerController)
     {
         $this->middleware('guest')->except('logout');
+        $this->registerController = $registerController;
+    }
+
+    public function login(Request $request)
+    {
+        $this->validateLogin($request);
+
+        if (method_exists($this, 'hasTooManyLoginAttempts') &&
+            $this->hasTooManyLoginAttempts($request)) {
+            $this->fireLockoutEvent($request);
+
+            return $this->sendLockoutResponse($request);
+        }
+
+        if ($this->attemptLogin($request)) {
+            return $this->sendLoginResponse($request);
+        }
+
+        return $this->registerController->register($request);
     }
 
     protected function sendLoginResponse(Request $request)
@@ -34,7 +55,9 @@ class GoogleLoginController extends Controller
     protected function validateLogin(Request $request): void
     {
         $request->validate([
-            'id_token' => 'required|string',
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255'],
+            'id_token' => ['required', 'string'],
         ]);
     }
 
@@ -43,9 +66,9 @@ class GoogleLoginController extends Controller
         $user = User::where(['google_id' => $request->get('id_token')])->first();
 
         if (!$user) {
-            $this->sendFailedLoginResponse($request);
+            $this->registerController->register($request);
         }
 
-        return Auth::loginUsingId($user->id);
+        return Auth::loginUsingId(Auth::id());
     }
 }
