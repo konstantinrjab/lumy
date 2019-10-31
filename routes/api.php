@@ -32,13 +32,13 @@ Route::namespace('Api')->group(function () {
         Route::post('users/register/password', 'Auth\RegisterController@register');
         Route::post('users/register/google', 'Auth\GoogleRegisterController@register');
 
-        Route::options('clients/{any?}', function(){return;});
-        Route::options('deals/{any?}', function(){return;});
-        Route::options('facilities/{any?}', function(){return;});
-        Route::options('expenses/{any?}', function(){return;});
-        Route::options('profiles/{any?}', function(){return;});
+        Route::options('clients/{any?}', 'OptionsController');
+        Route::options('deals/{any?}', 'OptionsController');
+        Route::options('facilities/{any?}', 'OptionsController');
+        Route::options('expenses/{any?}', 'OptionsController');
+        Route::options('profiles/{any?}', 'OptionsController');
 
-        Route::options('users/authenticate/{any?}', function(){return;});
-        Route::options('users/register/{any?}', function(){return;});
+        Route::options('users/authenticate/{any?}', 'OptionsController');
+        Route::options('users/register/{any?}', 'OptionsController');
     });
 });

@@ -13,4 +13,3 @@ docker exec lum_php php artisan migrate:fresh --seed
 ```shell script
 docker exec lum_php bash -c "php artisan cache:clear && php artisan route:cache && php artisan config:clear"
 ```
-123

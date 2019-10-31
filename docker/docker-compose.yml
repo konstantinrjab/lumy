@@ -3,8 +3,7 @@ version: '3'
 services:
   php-fpm:
     container_name: lum_php
-    build:
-      context: ./php-fpm
+    image: konstantinrjab/lumy
     environment:
       XDEBUG_CONFIG: "remote_host=host.docker.internal"
       PHP_IDE_CONFIG: "serverName=Docker"
