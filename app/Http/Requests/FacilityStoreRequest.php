@@ -24,8 +24,8 @@ class FacilityStoreRequest extends FormRequest
             'price.nominal'  => 'required|numeric',
             'price.currency' => 'required|string|in:' . implode(',', CurrencyEnum::getValues()),
             'expenses'       => 'present|array',
-            'workingTime'    => 'required|integer',
-            'transportTime'  => 'required|integer',
+            'workingTime'    => 'integer',
+            'transportTime'  => 'integer',
             'deadlineTime'   => 'required|integer',
         ];
     }

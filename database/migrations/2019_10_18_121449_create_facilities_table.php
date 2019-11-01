@@ -19,8 +19,8 @@ class CreateFacilitiesTable extends Migration
             $table->string('title', 100);
             $table->decimal('price', 11, 2)->unsigned();
             $table->char('currency', 5);
-            $table->integer('working_time')->unsigned();
-            $table->integer('transport_time')->unsigned();
+            $table->integer('working_time')->unsigned()->nullable();
+            $table->integer('transport_time')->unsigned()->nullable();
             $table->integer('deadline_time')->unsigned();
             $table->timestamps();
 
