@@ -33,9 +33,9 @@ class UserRepository
             ]);
 
             DB::commit();
-        } catch (Exception $e) {
+        } catch (Exception $exception) {
             DB::rollback();
-            throw new Exception('Cannot create user');
+            throw $exception;
         }
 
         return $user;

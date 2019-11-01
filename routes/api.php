@@ -30,7 +30,6 @@ Route::namespace('Api')->group(function () {
         Route::post('users/authenticate/password', 'Auth\LoginController@login');
         Route::post('users/authenticate/google', 'Auth\GoogleLoginController@login');
         Route::post('users/register/password', 'Auth\RegisterController@register');
-        Route::post('users/register/google', 'Auth\GoogleRegisterController@register');
 
         Route::options('clients/{any?}', 'OptionsController');
         Route::options('deals/{any?}', 'OptionsController');
