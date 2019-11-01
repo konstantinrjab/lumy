@@ -12,7 +12,7 @@
             integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
             crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/dist/css/adminlte.min.css">
-    <title>App Name - @yield('title')</title>
+    <title>@yield('title')</title>
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
@@ -36,7 +36,7 @@
         <!-- Brand Logo -->
         <a href="/" class="brand-link">
             <img src="/dist/img/logo.png"
-                 alt="AdminLTE Logo"
+                 alt="Lumy Logo"
                  class="brand-image img-circle elevation-3"
                  style="opacity: .8">
             <span class="brand-text font-weight-light">Lumy</span>

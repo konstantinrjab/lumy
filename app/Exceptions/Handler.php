@@ -87,10 +87,10 @@ class Handler extends ExceptionHandler
     private function sendEmail(\Exception $exception)
     {
         try {
-            $e = FlattenException::create($exception);
+            $flattenException = FlattenException::create($exception);
             $emails = explode(',', env('EXCEPTION_EMAILS'));
 
-            Mail::to($emails)->send(new ExceptionOccured($e));
+            Mail::to($emails)->send(new ExceptionOccured($flattenException));
         } catch (Exception $ex) {
             // TODO: write some logic here
         }
