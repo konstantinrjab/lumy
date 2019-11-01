@@ -21,6 +21,10 @@ class Deal extends Model
         'comment'
     ];
 
+    protected $dates = [
+        'start', 'end', 'deadline'
+    ];
+
     public function facilities()
     {
         return $this->hasMany(DealFacility::class);

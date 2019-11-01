@@ -6,6 +6,7 @@ use App\Database\Repositories\ExpenseRepository;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ExpenseStoreRequest;
 use App\Http\Resources\ExpenseResource;
+use Carbon\Carbon;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Support\Facades\Auth;
 
@@ -59,6 +60,7 @@ class ExpenseController extends Controller
             'currency'  => $request->input('price.currency'),
             'type'      => $request->get('type'),
             'is_active' => $request->get('isActive'),
+            'start_date' => Carbon::parse($request->get('startDate'))->format(config('app.mysqlDateFormat')),
         ];
     }
 }

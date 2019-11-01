@@ -69,7 +69,7 @@ return [
 
     'timezone' => 'UTC',
     'mysqlDateFormat' => 'Y-m-d H:i:s',
-    'apiDateFormat' => 'Y-m-d\TH:i:s\Z',
+    'apiDateFormat' => DateTime::ISO8601,
 
     /*
     |--------------------------------------------------------------------------

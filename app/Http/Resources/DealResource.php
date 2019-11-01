@@ -22,9 +22,10 @@ class DealResource extends JsonResource
                 'currency' => $this->prepay_currency
             ],
             'facilities' => DealFacilityResource::collection($this->facilities),
-            'datetime'   => $this->dateTime,
             'address'    => $this->address,
-            'deadline'   => $this->deadline,
+            'start'      => $this->start->format(config('app.apiDateFormat')),
+            'end'        => $this->end->format(config('app.apiDateFormat')),
+            'deadline'   => $this->deadline->format(config('app.apiDateFormat')),
             'createdAt'  => $this->created_at->format(config('app.apiDateFormat')),
             'updatedAt'  => $this->updated_at->format(config('app.apiDateFormat'))
         ];

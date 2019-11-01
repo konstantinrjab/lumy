@@ -17,6 +17,7 @@ class ExpenseResource extends JsonResource
             ],
             'type' => $this->type,
             'isActive' => $this->is_active,
+            'startDate' => $this->start_date->format(config('app.apiDateFormat')),
             'createdAt' => $this->created_at->format(config('app.apiDateFormat')),
             'updatedAt' => $this->updated_at->format(config('app.apiDateFormat'))
         ];
