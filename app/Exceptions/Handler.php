@@ -6,9 +6,9 @@ use App\Mail\ExceptionOccured;
 use Exception;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Validation\ValidationException;
-use Symfony\Component\Debug\Exception\FlattenException;
 
 class Handler extends ExceptionHandler
 {
@@ -36,6 +36,8 @@ class Handler extends ExceptionHandler
      *
      * @param \Exception $exception
      * @return void
+     *
+     * @throws Exception
      */
     public function report(Exception $exception)
     {
@@ -87,12 +89,11 @@ class Handler extends ExceptionHandler
     private function sendEmail(\Exception $exception)
     {
         try {
-            $flattenException = FlattenException::create($exception);
             $emails = explode(',', env('EXCEPTION_EMAILS'));
 
-            Mail::to($emails)->send(new ExceptionOccured($flattenException));
+            Mail::to($emails)->send(new ExceptionOccured($exception));
         } catch (Exception $ex) {
-            // TODO: write some logic here
+            Log::critical('cannot send email. exception: ', ExceptionHelper::getExceptionData($ex));
         }
     }
 }
