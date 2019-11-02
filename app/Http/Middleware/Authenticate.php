@@ -8,12 +8,14 @@ use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 
 class Authenticate extends Middleware
 {
+    private const MESSAGE_UNAUTHENTICATED = 'Unauthenticated.';
+
     protected function unauthenticated($request, array $guards)
     {
         if ($request->expectsJson()) {
-            throw new UnauthorizedHttpException('Token');
+            throw new UnauthorizedHttpException('Token', self::MESSAGE_UNAUTHENTICATED);
         }
 
-        throw new AuthenticationException('Unauthenticated.', $guards);
+        throw new AuthenticationException(self::MESSAGE_UNAUTHENTICATED, $guards);
     }
 }
