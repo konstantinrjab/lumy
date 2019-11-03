@@ -8,7 +8,10 @@ class ExceptionHelper
 {
     public static function getExceptionData(\Exception $exception): array
     {
-        $url = $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+        $url = '';
+        if (isset($_SERVER['HTTP_HOST']) && isset($_SERVER['REQUEST_URI'])) {
+            $url = $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+        }
 
         return [
             'Message'    => $exception->getMessage(),
