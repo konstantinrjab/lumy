@@ -19,7 +19,7 @@ class UserRepository
             $user = User::create([
                 'name'      => $data['name'],
                 'email'     => $data['email'],
-                'google_id' => $data['google_id'],
+                'google_id' => $data['google_id'] ?? null,
                 'password'  => isset($data['password']) ? Hash::make($data['password']) : null,
                 'api_token' => Str::random(User::API_TOKEN_LENGTH)
             ]);
