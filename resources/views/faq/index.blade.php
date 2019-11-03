@@ -27,7 +27,7 @@
                                 <td>{{ Illuminate\Support\Str::limit(strip_tags($faq->text), 50) }}</td>
                                 <td>
                                     <a href="/faqs/{{$faq->id}}"><i class="fas fa-eye"></i></a>
-                                    <a href="/faqs/{{$faq->id}}"><i class="fas fa-pen"></i></a>
+                                    <a href="/faqs/{{$faq->id}}/edit"><i class="fas fa-pen"></i></a>
                                     <a href="#" data-toggle="modal" data-target="#confirmDeleteModal"
                                        onclick="confirmDelete('/faqs', {{$faq->id}})">
                                         <i class="fas fa-trash"></i>

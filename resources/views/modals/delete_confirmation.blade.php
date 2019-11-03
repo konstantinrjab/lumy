@@ -1,7 +1,7 @@
 <div class="modal" id="confirmDeleteModal" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <form action="" id="deleteForm" method="post">
+            <form action="" id="js-deleteForm" method="post">
                 {{ csrf_field() }}
                 {{ method_field('DELETE') }}
                 <div class="modal-header">
@@ -27,11 +27,11 @@
         function confirmDelete(url, id) {
             let deleteUrl = url + '/' + id;
             console.log(deleteUrl);
-            $("#deleteForm").attr('action', deleteUrl);
+            $("#js-deleteForm").attr('action', deleteUrl);
         }
 
         function formSubmit() {
-            $("#deleteForm").submit();
+            $("#js-deleteForm").submit();
         }
     </script>
 @endpush

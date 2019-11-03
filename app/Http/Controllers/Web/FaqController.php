@@ -35,7 +35,7 @@ class FaqController extends Controller
      */
     public function create()
     {
-        //
+        return view('faq.form');
     }
 
     /**
@@ -70,7 +70,9 @@ class FaqController extends Controller
      */
     public function edit($id)
     {
-        //
+        $faq = Faq::findOrFail($id);
+
+        return view('faq.form', compact('faq'));
     }
 
     /**
