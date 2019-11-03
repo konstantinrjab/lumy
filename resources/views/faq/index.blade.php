@@ -4,11 +4,13 @@
 
 @section('content')
 
+{{--    @include('parts/flash_messages')--}}
+
     <div class="row">
         <div class="col">
             <div class="card">
                 <div class="card-body">
-                    <table class="datatables">
+                    <table class="dataTable">
                         <thead>
                         <tr>
                             <th>Alias</th>
@@ -22,11 +24,12 @@
                             <tr>
                                 <td>{{ $faq->alias }}</td>
                                 <td>{{ Illuminate\Support\Str::limit($faq->title, 30) }}</td>
-                                <td>{{ Illuminate\Support\Str::limit($faq->text, 50) }}</td>
+                                <td>{{ Illuminate\Support\Str::limit(strip_tags($faq->text), 50) }}</td>
                                 <td>
-                                    <a href="/faq/{{$faq->id}}"><i class="fas fa-eye"></i></a>
-                                    <a href="/faq/{{$faq->id}}"><i class="fas fa-pen"></i></a>
-                                    <a href="#" data-toggle="modal" data-target="#confirm-delete">
+                                    <a href="/faqs/{{$faq->id}}"><i class="fas fa-eye"></i></a>
+                                    <a href="/faqs/{{$faq->id}}"><i class="fas fa-pen"></i></a>
+                                    <a href="#" data-toggle="modal" data-target="#confirmDeleteModal"
+                                       onclick="confirmDelete('/faqs', {{$faq->id}})">
                                         <i class="fas fa-trash"></i>
                                     </a>
                                 </td>
@@ -40,12 +43,14 @@
     </div>
 
     @include('modals/delete_confirmation')
+
 @endsection
 
-@section('js')
+@push('js')
     <script>
         $(document).ready(function () {
-            $('.datatables').DataTable();
+            console.log(1);
+            $('.dataTable').DataTable();
         });
     </script>
-@endsection
+@endpush

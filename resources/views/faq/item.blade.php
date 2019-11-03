@@ -28,7 +28,7 @@
                             <td>{{ $faq->title }}</td>
                         <tr>
                             <td>Text</td>
-                            <td>{{ $faq->text }}</td>
+                            <td>{!! $faq->text !!}</td>
                         </tr>
                         </tbody>
                     </table>

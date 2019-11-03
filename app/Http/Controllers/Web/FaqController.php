@@ -2,12 +2,20 @@
 
 namespace App\Http\Controllers\Web;
 
+use App\Database\Repositories\FaqRepository;
 use App\Faq;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 class FaqController extends Controller
 {
+    private $faqRepository;
+
+    public function __construct(FaqRepository $faqRepository)
+    {
+        $this->faqRepository = $faqRepository;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -85,6 +93,8 @@ class FaqController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $this->faqRepository->delete($id);
+
+        return redirect('/faqs')->with('success', 'Successfully deleted!');
     }
 }
