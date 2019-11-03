@@ -28,7 +28,6 @@ Route::namespace('Api')->group(function () {
 
     Route::middleware(['cors', 'api'])->group(function () {
         Route::post('users/authenticate/password', 'Auth\LoginController@login');
-        Route::post('users/authenticate/google', 'Auth\GoogleLoginController@login');
         Route::post('users/register/password', 'Auth\RegisterController@register');
 
         Route::options('clients/{any?}', 'OptionsController');

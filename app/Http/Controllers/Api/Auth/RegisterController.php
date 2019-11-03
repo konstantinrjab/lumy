@@ -59,6 +59,8 @@ class RegisterController extends Controller
      *
      * @param  array  $data
      * @return User
+     *
+     * @throws \Exception
      */
     protected function create(array $data): User
     {

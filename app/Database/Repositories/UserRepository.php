@@ -4,6 +4,7 @@ namespace App\Database\Repositories;
 
 use App\Database\Models\Profile;
 use App\Database\Models\User;
+use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
@@ -33,7 +34,7 @@ class UserRepository
             ]);
 
             DB::commit();
-        } catch (Exception $exception) {
+        } catch (QueryException $exception) {
             DB::rollback();
             throw $exception;
         }
