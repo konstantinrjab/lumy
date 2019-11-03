@@ -24,10 +24,10 @@ class ExpenseStoreRequest extends FormRequest
             'title'          => 'required|string|max:100',
             'price.nominal'  => 'required|numeric',
             'price.currency' => 'required|string|max:3|in:' . implode(',', CurrencyEnum::getValues()),
-            'startDate'      => 'required|date_format:' . config('app.apiDateFormat'),
-            'period'         => 'required|integer',
-            'isActive'       => 'required|boolean',
             'type'           => 'required|in:' . implode(',', ExpenseTypeEnum::getValues()),
+            'startDate'      => 'date_format:' . config('app.apiDateFormat'),
+            'period'         => 'integer',
+            'isActive'       => 'boolean',
         ];
     }
 }

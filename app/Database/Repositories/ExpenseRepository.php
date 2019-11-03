@@ -3,6 +3,7 @@
 namespace App\Database\Repositories;
 
 use App\Database\Models\Expense;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 
 class ExpenseRepository
@@ -19,22 +20,33 @@ class ExpenseRepository
 
     public function create(array $data): ?Expense
     {
-        $facility = new Expense($data);
+        $this->prepareData($data);
+        $expense = new Expense($data);
 
-        if (!$facility->save()) {
+        if (!$expense->save()) {
             return null;
         }
 
-        return $facility;
+        return $expense;
     }
 
     public function update(int $id, array $data, int $userId): bool
     {
+        $this->prepareData($data);
+
         return Expense::where(['id' => $id, 'user_id' => $userId])->firstOrFail()->update($data);
     }
 
     public function delete(int $id, int $userId): int
     {
         return Expense::where(['id' => $id, 'user_id' => $userId])->delete();
+    }
+
+    private function prepareData(array &$data): void
+    {
+        $data['start_date'] = $data['start_date']
+            ? Carbon::parse($data['start_date'])->format(config('app.mysqlDateFormat'))
+            : null;
+        $data['is_active'] = $data['is_active'] ?? false;
     }
 }

@@ -55,12 +55,13 @@ class ExpenseController extends Controller
     private function getRequestData(ExpenseStoreRequest $request)
     {
         return [
-            'title'     => $request->get('title'),
-            'price'     => $request->input('price.nominal'),
-            'currency'  => $request->input('price.currency'),
-            'type'      => $request->get('type'),
-            'is_active' => $request->get('isActive'),
-            'start_date' => Carbon::parse($request->get('startDate'))->format(config('app.mysqlDateFormat')),
+            'title'      => $request->get('title'),
+            'price'      => $request->input('price.nominal'),
+            'currency'   => $request->input('price.currency'),
+            'type'       => $request->get('type'),
+            'is_active'  => $request->get('isActive'),
+            'start_date' => $request->get('startDate'),
+            'period'     => $request->get('period'),
         ];
     }
 }
