@@ -51,8 +51,6 @@ class SocialAuthGoogleController extends Controller
                 'google_id' => $user->id,
             ];
             $databaseUser = $this->userRepository->create($userData);
-
-            Auth::loginUsingId($databaseUser->id);
         }
 
         return redirect()->away(env('AUTH_REDIRECT_URL') . '?api_token=' . $databaseUser->api_token);
