@@ -11,6 +11,11 @@ stages:
 dev_deploy:
   stage: development
   script:
-    - ssh $SSH_USERNAME_PROD@$SSH_HOST_PROD "cd /var/lumy && git reset --hard HEAD && git checkout master && git pull origin master && docker run --rm --interactive --volume /var/lumy:/app composer install --ignore-platform-reqs --no-scripts && docker exec lum_php php artisan migrate:fresh --seed && exit"
+    - ssh $SSH_USERNAME_PROD@$SSH_HOST_PROD "cd /var/lumy && \
+      git reset --hard HEAD && git checkout master && \
+      git pull origin master && \
+      docker run --rm --interactive --volume /var/lumy:/app composer install --ignore-platform-reqs --no-scripts \
+      && docker exec lum_php php artisan migrate:fresh --seed \
+      && exit"
   only:
     - master
