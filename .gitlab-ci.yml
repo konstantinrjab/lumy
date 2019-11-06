@@ -12,7 +12,7 @@ stages:
 prod_deploy:
   stage: production
   script:
-    - echo 'prod' && ssh $SSH_USERNAME_PROD@$SSH_HOST_PROD "cd /var/lumy
+    - ssh $SSH_USERNAME_PROD@$SSH_HOST_PROD "cd /var/lumy
       && git reset --hard HEAD && git checkout master
       && git pull origin master
       && docker run --rm --interactive --volume /var/lumy:/app composer install --ignore-platform-reqs --no-scripts
@@ -30,7 +30,7 @@ prod_deploy:
 dev_deploy:
   stage: development
   script:
-    - echo 'stg' && ssh $SSH_USERNAME_STAGE@$SSH_HOST_STAGE "cd /var/lumy
+    - ssh $SSH_USERNAME_STAGE@$SSH_HOST_STAGE "cd /var/lumy_stage
       && git reset --hard HEAD && git checkout master
       && git pull origin master
       && docker run --rm --interactive --volume /var/lumy_stage:/app composer install --ignore-platform-reqs --no-scripts
