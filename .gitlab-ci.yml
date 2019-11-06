@@ -31,8 +31,8 @@ dev_deploy:
   stage: development
   script:
     - ssh $SSH_USERNAME_STAGE@$SSH_HOST_STAGE "cd /var/lumy_stage
-      && git reset --hard HEAD && git checkout master
-      && git pull origin master
+      && git reset --hard HEAD && git checkout dev
+      && git pull origin dev
       && docker run --rm --interactive --volume /var/lumy_stage:/app composer install --ignore-platform-reqs --no-scripts
       && docker run --rm --interactive --volume /var/lumy_stage:/app composer dump-autoload -o
       && docker exec lum_php php artisan cache:clear
