@@ -6,22 +6,23 @@
 
     <div class="card">
         <div class="card-body">
-            <form action="">
+            <form action="/faqs/{{ $faq->id }}" method="post">
                 {{ csrf_field() }}
+                {{ method_field('PUT') }}
 
                 <div class="form-group">
                     <label for="alias">Alias</label>
-                    <input id="alias" class="form-control" type="text" value="{!! isset($faq) ? $faq->alias : '' !!}">
+                    <input id="alias" class="form-control" type="text" name="alias" value="{!! isset($faq) ? $faq->alias : '' !!}">
                 </div>
 
                 <div class="form-group">
                     <label for="title">Title</label>
-                    <input id="title" class="form-control" type="text" value="{!! isset($faq) ? $faq->title : '' !!}">
+                    <input id="title" class="form-control" type="text" name="title" value="{!! isset($faq) ? $faq->title : '' !!}">
                 </div>
 
                 <div id="editor">
                     <label for="js-froalaEditor">Text</label>
-                    <textarea id="js-froalaEditor">
+                    <textarea id="js-froalaEditor" name="text">
                         {!! isset($faq) ? $faq->text : '' !!}
                     </textarea>
                 </div>

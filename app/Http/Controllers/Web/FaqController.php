@@ -6,6 +6,7 @@ use App\Database\Repositories\FaqRepository;
 use App\Faq;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Requests\Web\FaqStoreRequest;
 
 class FaqController extends Controller
 {
@@ -78,13 +79,21 @@ class FaqController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  FaqStoreRequest  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(FaqStoreRequest $request, $id)
     {
-        //
+        if ($this->faqRepository->update($id, $request->toArray())) {
+            $message = 'Successfully deleted!';
+            $status = 'success';
+        } else {
+            $message = 'Your changes wasn\'s saved';
+            $status = 'error';
+        }
+
+        return redirect('/faqs/' . $id)->with($status, $message);
     }
 
     /**
