@@ -9,6 +9,9 @@
     <div class="row">
         <div class="col">
             <div class="card">
+                <div class="card-title p-4">
+                    <a href="/faqs/create" class="btn btn-primary float-right">Create</a>
+                </div>
                 <div class="card-body">
                     <table class="dataTable">
                         <thead>

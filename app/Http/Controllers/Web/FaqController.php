@@ -42,12 +42,18 @@ class FaqController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  FaqStoreRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(FaqStoreRequest $request)
     {
-        //
+        if ($faq = $this->faqRepository->create($request->toArray())) {
+
+            return redirect('/faqs/' . $faq->id)->with('success', 'Successfully deleted!');
+        } else {
+
+            return redirect('/faqs/')->with('error', 'Your changes wasn\'s saved');
+        }
     }
 
     /**

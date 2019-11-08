@@ -6,10 +6,11 @@
 
     <div class="card">
         <div class="card-body">
-            <form action="/faqs/{{ $faq->id }}" method="post">
+            <form action="/faqs/{{ isset($faq) ? $faq->id : '' }}" method="post">
                 {{ csrf_field() }}
-                {{ method_field('PUT') }}
-
+                @if (isset($faq))
+                    {{ method_field('PUT') }}
+                @endif
                 <div class="form-group">
                     <label for="alias">Alias</label>
                     <input id="alias" class="form-control" type="text" name="alias" value="{!! isset($faq) ? $faq->alias : '' !!}">
