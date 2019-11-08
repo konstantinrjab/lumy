@@ -24,6 +24,7 @@ Route::namespace('Api')->group(function () {
         ]);
         Route::put('profiles', 'ProfileController@update');
         Route::get('profiles', 'ProfileController@index');
+        Route::get('faqs', 'FaqController@index');
     });
 
     Route::middleware(['cors', 'api'])->group(function () {

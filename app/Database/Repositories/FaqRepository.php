@@ -2,10 +2,16 @@
 
 namespace App\Database\Repositories;
 
+use Illuminate\Database\Eloquent\Collection;
 use App\Faq;
 
 class FaqRepository
 {
+    public function getAll(): Collection
+    {
+        return Faq::all();
+    }
+
     public function create(array $data): ?Faq
     {
         $faq = new Faq();
