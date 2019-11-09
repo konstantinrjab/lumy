@@ -6,7 +6,6 @@ before_script:
   - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
 
 stages:
-  - development
   - production
 
 prod_deploy:
@@ -22,27 +21,8 @@ prod_deploy:
       && docker exec lum_php php artisan config:clear
       && docker exec lum_php php artisan view:clear
       && docker exec lum_php php artisan migrate:fresh --seed
-      && exit
-      "
-  only:
-    - master
-
-dev_deploy:
-  stage: development
-  script:
-    - ssh $SSH_USERNAME_STAGE@$SSH_HOST_STAGE "cd /var/lumy_stage
-      && git reset --hard HEAD && git checkout dev
-      && git pull origin dev
-      && docker-compose -f "/var/lumy_stage/docker/docker-compose.yml" up -d --build
-      && docker run --rm --interactive --volume /var/lumy_stage:/app composer install --ignore-platform-reqs --no-scripts
-      && docker run --rm --interactive --volume /var/lumy_stage:/app composer dump-autoload -o
-      && docker exec lum_php php artisan cache:clear
-      && docker exec lum_php php artisan route:cache
-      && docker exec lum_php php artisan config:clear
-      && docker exec lum_php php artisan view:clear
-      && docker exec lum_php php artisan migrate:fresh --seed
       && docker exec lum_php php vendor/bin/phpunit
       && exit
       "
   only:
-    - dev
+    - master
