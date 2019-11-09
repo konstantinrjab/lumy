@@ -41,6 +41,7 @@ dev_deploy:
       && docker exec lum_php php artisan config:clear
       && docker exec lum_php php artisan view:clear
       && docker exec lum_php php artisan migrate:fresh --seed
+      && vendor/bin/phpunit
       && exit
       "
   only:
