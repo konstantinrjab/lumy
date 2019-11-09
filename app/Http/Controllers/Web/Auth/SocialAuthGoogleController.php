@@ -36,9 +36,9 @@ class SocialAuthGoogleController extends Controller
     public function handleProviderCallback()
     {
         try {
-            $user = Socialite::driver('google')->user();
+            $user = Socialite::driver('google')->stateless()->user();
         } catch (\Exception $e) {
-            return redirect('/login');
+            return redirect()->away(env('AUTH_REDIRECT_URL'));
         }
 
         $databaseUser = User::where('email', $user->email)->first();
