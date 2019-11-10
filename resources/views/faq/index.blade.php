@@ -4,13 +4,13 @@
 
 @section('content')
 
-{{--    @include('parts/flash_messages')--}}
+    @include('parts/flash_messages')
 
     <div class="row">
         <div class="col">
             <div class="card">
                 <div class="card-title p-4">
-                    <a href="/faqs/create" class="btn btn-primary float-right">Create</a>
+                    <a href="/admin/faqs/create" class="btn btn-primary float-right">Create</a>
                 </div>
                 <div class="card-body">
                     <table class="dataTable">
@@ -29,10 +29,10 @@
                                 <td>{{ Illuminate\Support\Str::limit($faq->title, 30) }}</td>
                                 <td>{{ Illuminate\Support\Str::limit(strip_tags($faq->text), 50) }}</td>
                                 <td>
-                                    <a href="/faqs/{{$faq->id}}"><i class="fas fa-eye"></i></a>
-                                    <a href="/faqs/{{$faq->id}}/edit"><i class="fas fa-pen"></i></a>
+                                    <a href="/admin/faqs/{{$faq->id}}"><i class="fas fa-eye"></i></a>
+                                    <a href="/admin/faqs/{{$faq->id}}/edit"><i class="fas fa-pen"></i></a>
                                     <a href="#" data-toggle="modal" data-target="#confirmDeleteModal"
-                                       onclick="confirmDelete('/faqs', {{$faq->id}})">
+                                       onclick="confirmDelete('/admin/faqs', {{$faq->id}})">
                                         <i class="fas fa-trash"></i>
                                     </a>
                                 </td>
@@ -52,7 +52,6 @@
 @push('js')
     <script>
         $(document).ready(function () {
-            console.log(1);
             $('.dataTable').DataTable();
         });
     </script>

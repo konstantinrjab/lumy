@@ -8,7 +8,7 @@
         <div class="col">
             <div class="card">
                 <div class="card-header">
-                    <a href="/faqs/{{$faq->id}}/edit">Edit</a>
+                    <a href="/admin/faqs/{{$faq->id}}/edit">Edit</a>
                 </div>
                 <div class="card-body">
                     <table class="table table-bordered">

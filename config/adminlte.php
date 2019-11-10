@@ -175,7 +175,7 @@ return [
         ['header' => 'content'],
         [
             'text'        => 'FAQ',
-            'url'         => '/faqs',
+            'url'         => '/admin/faqs',
             'icon'        => 'fas fa-fw fa-question',
         ],
     ],

@@ -26,7 +26,6 @@
     <script type="text/javascript">
         function confirmDelete(url, id) {
             let deleteUrl = url + '/' + id;
-            console.log(deleteUrl);
             $("#js-deleteForm").attr('action', deleteUrl);
         }
 
