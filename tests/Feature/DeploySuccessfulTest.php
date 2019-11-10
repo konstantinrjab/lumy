@@ -8,14 +8,14 @@ class DeploySuccessfulTest extends TestCase
 {
     public function testAdminPageUnauthorized()
     {
-        $response = $this->get('/');
+        $response = $this->get('/admin');
 
         $response->assertStatus(302);
     }
 
     public function testAdminPageLogin()
     {
-        $response = $this->get('/login');
+        $response = $this->get('/admin/login');
 
         $response->assertStatus(200);
     }
