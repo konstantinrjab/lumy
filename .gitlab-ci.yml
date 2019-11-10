@@ -1,5 +1,5 @@
 default:
-  image: alpine
+  image: ubuntu
 
 before_script:
   - 'which ssh-agent || ( apt-get install -qq openssh-client )'
