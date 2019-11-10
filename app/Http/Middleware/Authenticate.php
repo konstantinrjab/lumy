@@ -15,7 +15,13 @@ class Authenticate extends Middleware
         if ($request->expectsJson()) {
             throw new UnauthorizedHttpException('Token', self::MESSAGE_UNAUTHENTICATED);
         }
+        throw new AuthenticationException(
+            self::MESSAGE_UNAUTHENTICATED, $guards, $this->redirectTo($request)
+        );
+    }
 
-        throw new AuthenticationException(self::MESSAGE_UNAUTHENTICATED, $guards);
+    protected function redirectTo($request)
+    {
+        return route('login');
     }
 }
