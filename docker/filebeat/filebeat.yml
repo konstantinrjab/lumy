@@ -1,0 +1,11 @@
+filebeat.inputs:
+  - type: log
+    paths:
+      - "/etc/logs/*"
+
+output.logstash:
+  enabled: true
+  hosts: ["elk:5044"]
+  tls:
+    certificate_authorities:
+      - /etc/pki/tls/certs/logstash-beats.crt

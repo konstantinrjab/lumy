@@ -50,8 +50,9 @@ services:
 #  elk:
 #    image: sebp/elk
 #    container_name: lum_elk
-##    volumes:
+#    volumes:
 ##      - ./elk/logstash/conf.d:/etc/logstash/conf.d
+#      - lum_filebeat_crt:/etc/pki/tls/certs
 #    ports:
 #      - "5601:5601"
 #      - "9200:9200"
@@ -61,11 +62,12 @@ services:
 #    container_name: lum_filebeat
 #    volumes:
 #      - ../storage/logs:/etc/logs
-##      - ./filebeat/:/usr/share/filebeat/
+#      - ./filebeat/filebeat.yml:/usr/share/filebeat/filebeat.yml
+#      - lum_filebeat_crt:/etc/pki/tls/certs
 #    links:
 #      - "elk"
 #    depends_on:
 #      - "elk"
-    #entrypoint: ./time-to-start.sh
 volumes:
+#  lum_filebeat_crt:
   lum_mysql:
