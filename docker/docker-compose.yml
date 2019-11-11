@@ -25,13 +25,13 @@ services:
     ports:
       - "80:80"
       - "443:443"
-  certbot:
-    container_name: lum_certbot
-    image: certbot/certbot
-    volumes:
-      - ./data/certbot/conf:/etc/letsencrypt
-      - ./data/certbot/www:/var/www/certbot
-      - ../storage/logs:/var/log/letsencrypt
+#  certbot:
+#    container_name: lum_certbot
+#    image: certbot/certbot
+#    volumes:
+#      - ./data/certbot/conf:/etc/letsencrypt
+#      - ./data/certbot/www:/var/www/certbot
+#      - ../storage/logs:/var/log/letsencrypt
   mysql:
     container_name: lum_mysql
     image: mysql:8
