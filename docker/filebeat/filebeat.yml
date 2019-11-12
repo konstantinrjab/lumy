@@ -6,6 +6,7 @@ filebeat.inputs:
 output.logstash:
   enabled: true
   hosts: ["elk:5044"]
-  tls:
+  ssl:
+    enabled: true
     certificate_authorities:
       - /etc/pki/tls/certs/logstash-beats.crt

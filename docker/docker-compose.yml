@@ -51,7 +51,6 @@ services:
 #    image: sebp/elk
 #    container_name: lum_elk
 #    volumes:
-##      - ./elk/logstash/conf.d:/etc/logstash/conf.d
 #      - lum_filebeat_crt:/etc/pki/tls/certs
 #    ports:
 #      - "5601:5601"
