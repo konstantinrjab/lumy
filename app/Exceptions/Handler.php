@@ -57,7 +57,7 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
-        if ($request->wantsJson()) {
+        if ($request->wantsJson() || $request->is('api/*')) {
             $response['data'] = [
                 'message' => $exception->getMessage()
             ];

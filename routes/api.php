@@ -15,7 +15,7 @@ use Illuminate\Http\Request;
 
 Route::namespace('Api')->group(function () {
 
-    Route::middleware(['cors', 'auth:api'])->group(function () {
+    Route::middleware(['auth:api'])->group(function () {
         Route::apiResources([
             'clients' => 'ClientController',
             'deals' => 'DealController',
@@ -27,7 +27,7 @@ Route::namespace('Api')->group(function () {
         Route::get('faqs', 'FaqController@index');
     });
 
-    Route::middleware(['cors', 'api'])->group(function () {
+    Route::middleware(['api'])->group(function () {
         Route::post('users/authenticate/password', 'Auth\LoginController@login');
         Route::post('users/register/password', 'Auth\RegisterController@register');
 
