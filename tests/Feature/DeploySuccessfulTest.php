@@ -15,7 +15,7 @@ class DeploySuccessfulTest extends TestCase
 
     public function testAdminPageLogin()
     {
-        $response = $this->get('/admin/login');
+        $response = $this->get('/login');
 
         $response->assertStatus(200);
     }

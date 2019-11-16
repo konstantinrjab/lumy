@@ -6,7 +6,7 @@
 
     <div class="card">
         <div class="card-body">
-            <form action="/admin/faqs/{{ isset($faq) ? $faq->id : '' }}" method="post">
+            <form action="/faqs/{{ isset($faq) ? $faq->id : '' }}" method="post">
                 {{ csrf_field() }}
                 @if (isset($faq))
                     {{ method_field('PUT') }}

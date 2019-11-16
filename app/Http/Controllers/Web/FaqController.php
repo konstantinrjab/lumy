@@ -49,10 +49,10 @@ class FaqController extends Controller
     {
         if ($faq = $this->faqRepository->create($request->toArray())) {
 
-            return redirect('/admin/faqs/' . $faq->id)->with('success', 'Successfully deleted!');
+            return redirect('/faqs/' . $faq->id)->with('success', 'Successfully deleted!');
         } else {
 
-            return redirect('/admin/faqs/')->with('error', 'Your changes wasn\'t saved');
+            return redirect('/faqs/')->with('error', 'Your changes wasn\'t saved');
         }
     }
 
@@ -99,7 +99,7 @@ class FaqController extends Controller
             $status = 'error';
         }
 
-        return redirect('/admin/faqs/' . $id)->with($status, $message);
+        return redirect('/faqs/' . $id)->with($status, $message);
     }
 
     /**
@@ -112,6 +112,6 @@ class FaqController extends Controller
     {
         $this->faqRepository->delete($id);
 
-        return redirect('/admin/faqs')->with('success', 'Successfully deleted!');
+        return redirect('/faqs')->with('success', 'Successfully deleted!');
     }
 }
