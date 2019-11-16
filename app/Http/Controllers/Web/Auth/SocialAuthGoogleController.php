@@ -42,9 +42,7 @@ class SocialAuthGoogleController extends Controller
         }
 
         $databaseUser = User::where('email', $user->email)->first();
-        if ($databaseUser) {
-            Auth::login($databaseUser, true);
-        } else {
+        if (!$databaseUser) {
             $userData = [
                 'name'      => $user->name,
                 'email'     => $user->email,
