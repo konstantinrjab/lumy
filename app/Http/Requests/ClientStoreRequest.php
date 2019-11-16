@@ -20,13 +20,13 @@ class ClientStoreRequest extends FormRequest
     {
         return [
             'name'       => 'required|string|max:100',
-            'surname'    => 'string|max:100',
-            'patronymic' => 'string|max:100',
-            'emails'     => 'array',
-            'phones'     => 'array',
+            'surname'    => 'present|string|max:100',
+            'patronymic' => 'present|string|max:100',
+            'emails'     => 'present|array',
+            'phones'     => 'present|array',
             'emails.*'   => 'string|email',
             'phones.*'   => 'string',
-            'comment'    => 'string|max:100',
+            'comment'    => 'present|string|max:100',
         ];
     }
 }

@@ -19,6 +19,7 @@ class FacilitiesTableSeeder extends Seeder
                 'user_id'        => rand(1, UsersTableSeeder::COUNT),
                 'title'          => $faker->words(3, true),
                 'price'          => $faker->randomFloat(2, 10, 100),
+                'is_active'      => $faker->boolean,
                 'currency'       => $faker->randomElement($currencies),
                 'working_time'   => $faker->numberBetween(600, 1800),
                 'transport_time' => $faker->numberBetween(0, 10800),
