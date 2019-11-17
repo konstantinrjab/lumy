@@ -17,16 +17,16 @@ class CreateDealsTable extends Migration
             $table->increments('id');
             $table->integer('user_id')->unsigned();
             $table->integer('client_id')->unsigned();
-            $table->string('status', 50);
+            $table->string('status', 50)->nullable();
             $table->string('title', 100);
-            $table->string('address', 100);
-            $table->decimal('price', 11, 2)->unsigned();
-            $table->char('currency', 5);
-            $table->decimal('prepay_price', 11, 2)->unsigned();
-            $table->char('prepay_currency', 5);
-            $table->dateTime('start');
-            $table->dateTime('end');
-            $table->dateTime('deadline');
+            $table->string('address', 100)->nullable();
+            $table->decimal('price', 11, 2)->nullable()->unsigned();
+            $table->char('currency', 5)->nullable();
+            $table->decimal('prepay_price', 11, 2)->nullable()->unsigned();
+            $table->char('prepay_currency', 5)->nullable();
+            $table->dateTime('start')->nullable();
+            $table->dateTime('end')->nullable();
+            $table->dateTime('deadline')->nullable();
             $table->text('comment')->nullable();
             $table->timestamps();
 

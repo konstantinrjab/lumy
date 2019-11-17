@@ -18,11 +18,11 @@ class CreateFacilitiesTable extends Migration
             $table->integer('user_id')->unsigned();
             $table->string('title', 100);
             $table->decimal('price', 11, 2)->unsigned();
-            $table->tinyInteger('is_active')->unsigned();
             $table->char('currency', 5);
+            $table->tinyInteger('is_active')->unsigned();
             $table->integer('working_time')->unsigned()->nullable();
             $table->integer('transport_time')->unsigned()->nullable();
-            $table->integer('deadline_time')->unsigned();
+            $table->integer('deadline_time')->unsigned()->nullable();
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users');

@@ -20,9 +20,9 @@ class CreateExpensesTable extends Migration
             $table->decimal('price', 11, 2)->unsigned();
             $table->char('currency', 5);
             $table->string('type', 30);
+            $table->tinyInteger('is_active')->unsigned();
             $table->dateTime('start_date')->nullable();
             $table->integer('period')->unsigned()->nullable();
-            $table->tinyInteger('is_active')->unsigned();
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users');

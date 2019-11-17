@@ -25,22 +25,22 @@ class DealStoreRequest extends FormRequest
     {
         return [
             'title'           => 'required|string|max:100',
-            'status'          => 'present|string|max:100|in:' . implode(',', DealStatusEnum::getValues()),
-            'clientId'        => 'present|integer|max:100',
-            'price.nominal'   => 'present|numeric',
-            'price.currency'  => 'present|string|in:' . implode(',', CurrencyEnum::getValues()),
-            'prepay.nominal'  => 'present|numeric',
-            'prepay.currency' => 'present|string|in:' . implode(',', CurrencyEnum::getValues()),
+            'status'          => 'nullable|string|max:100|in:' . implode(',', DealStatusEnum::getValues()),
+            'clientId'        => 'nullable|integer|max:100',
+            'price.nominal'   => 'nullable|numeric',
+            'price.currency'  => 'nullable|string|in:' . implode(',', CurrencyEnum::getValues()),
+            'prepay.nominal'  => 'nullable|numeric',
+            'prepay.currency' => 'nullable|string|in:' . implode(',', CurrencyEnum::getValues()),
             'facilities.*.id' => [
                 'required', 'integer', 'exists:facilities,id', Rule::exists('facilities')->where(function (Builder $query) {
                     $query->where('user_id', Auth::id());
                 }),
             ],
-            'start'           => 'present|date_format:' . config('app.apiDateFormat'),
-            'end'             => 'present|date_format:' . config('app.apiDateFormat') . '|after:now',
-            'deadline'        => 'present|date_format:' . config('app.apiDateFormat') . '|after:now',
-            'address'         => 'present|string|max:100',
-            'comment'         => 'present|string|max:100',
+            'start'           => 'nullable|date_format:' . config('app.apiDateFormat'),
+            'end'             => 'nullable|date_format:' . config('app.apiDateFormat') . '|after:now',
+            'deadline'        => 'nullable|date_format:' . config('app.apiDateFormat') . '|after:now',
+            'address'         => 'nullable|string|max:100',
+            'comment'         => 'nullable|string|max:100',
         ];
     }
 }

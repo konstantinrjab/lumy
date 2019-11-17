@@ -23,9 +23,9 @@ class DealResource extends JsonResource
             ],
             'facilities' => DealFacilityResource::collection($this->facilities),
             'address'    => $this->address,
-            'start'      => $this->start->format(config('app.apiDateFormat')),
-            'end'        => $this->end->format(config('app.apiDateFormat')),
-            'deadline'   => $this->deadline->format(config('app.apiDateFormat')),
+            'start'      => $this->start ? $this->start->format(config('app.apiDateFormat')) : null,
+            'end'        => $this->end ? $this->end->format(config('app.apiDateFormat')) : null,
+            'deadline'   => $this->deadline ? $this->deadline->format(config('app.apiDateFormat')) : null,
             'createdAt'  => $this->created_at->format(config('app.apiDateFormat')),
             'updatedAt'  => $this->updated_at->format(config('app.apiDateFormat'))
         ];

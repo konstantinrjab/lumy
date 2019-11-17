@@ -23,11 +23,11 @@ class FacilityStoreRequest extends FormRequest
             'title'          => 'required|string|max:100',
             'price.nominal'  => 'required|numeric',
             'price.currency' => 'required|string|in:' . implode(',', CurrencyEnum::getValues()),
-            'isActive'       => 'present|boolean',
-            'expenses'       => 'present|present|array',
-            'workingTime'    => 'present|integer',
-            'transportTime'  => 'present|integer',
-            'deadlineTime'   => 'present|integer',
+            'isActive'       => 'required|boolean',
+            'expenses'       => 'nullable|present|array',
+            'workingTime'    => 'nullable|integer',
+            'transportTime'  => 'nullable|integer',
+            'deadlineTime'   => 'nullable|integer',
         ];
     }
 }
