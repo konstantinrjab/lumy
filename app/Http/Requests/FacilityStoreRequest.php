@@ -20,14 +20,18 @@ class FacilityStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'title'          => 'required|string|max:100',
-            'price.nominal'  => 'required|numeric',
-            'price.currency' => 'required|string|in:' . implode(',', CurrencyEnum::getValues()),
-            'isActive'       => 'required|boolean',
-            'expenses'       => 'nullable|present|array',
-            'workingTime'    => 'nullable|integer',
-            'transportTime'  => 'nullable|integer',
-            'deadlineTime'   => 'nullable|integer',
+            'title'                     => 'required|string|max:100',
+            'price.nominal'             => 'required|numeric',
+            'price.currency'            => 'required|string|in:' . implode(',', CurrencyEnum::getValues()),
+            'isActive'                  => 'required|boolean',
+            'expenses'                  => 'nullable|present|array',
+            'expenses.*.title'          => 'required|string',
+            'expenses.*.price.currency' => 'required|string',
+            'expenses.*.price.nominal'  => 'required|string',
+            'expenses.*.number'         => 'required|integer',
+            'workingTime'               => 'nullable|integer',
+            'transportTime'             => 'nullable|integer',
+            'deadlineTime'              => 'nullable|integer',
         ];
     }
 }
