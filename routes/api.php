@@ -36,6 +36,7 @@ Route::namespace('Api')->group(function () {
         Route::options('facilities/{any?}', 'OptionsController');
         Route::options('expenses/{any?}', 'OptionsController');
         Route::options('profiles/{any?}', 'OptionsController');
+        Route::options('faqs/{any?}', 'OptionsController');
 
         Route::options('users/authenticate/{any?}', 'OptionsController');
         Route::options('users/register/{any?}', 'OptionsController');
