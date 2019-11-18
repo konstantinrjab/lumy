@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Api\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ResetsPasswords;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 
 class ResetPasswordController extends Controller
 {
@@ -34,5 +36,15 @@ class ResetPasswordController extends Controller
             'email' => 'required|email',
             'password' => 'required|min:6',
         ];
+    }
+
+    protected function sendResetResponse(Request $request, $response)
+    {
+        return JsonResponse::create(['data' => ['status' => 'success']]);
+    }
+
+    protected function sendResetFailedResponse(Request $request, $response)
+    {
+        return  JsonResponse::create(['data' => ['status' => 'error', 'message' => trans($response)]], 400);
     }
 }
