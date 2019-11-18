@@ -22,8 +22,10 @@ Route::namespace('Api')->group(function () {
             'facilities' => 'FacilityController',
             'expenses' => 'ExpenseController',
         ]);
-        Route::put('profiles', 'ProfileController@update');
         Route::get('profiles', 'ProfileController@index');
+        Route::put('profiles', 'ProfileController@update');
+        Route::get('users', 'UserController@index');
+        Route::put('users', 'UserController@update');
         Route::get('faqs', 'FaqController@index');
     });
 
@@ -37,6 +39,7 @@ Route::namespace('Api')->group(function () {
         Route::options('expenses/{any?}', 'OptionsController');
         Route::options('profiles/{any?}', 'OptionsController');
         Route::options('faqs/{any?}', 'OptionsController');
+        Route::options('users/{any?}', 'OptionsController');
 
         Route::options('users/authenticate/{any?}', 'OptionsController');
         Route::options('users/register/{any?}', 'OptionsController');

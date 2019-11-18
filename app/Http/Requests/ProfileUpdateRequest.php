@@ -7,7 +7,7 @@ use App\Entities\Enum\LanguageEnum;
 use App\Entities\Enum\ProfileThemeEnum;
 use Illuminate\Foundation\Http\FormRequest;
 
-class ProfileStoreRequest extends FormRequest
+class ProfileUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.

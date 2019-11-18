@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Database\Repositories\ProfileRepository;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\ProfileStoreRequest;
+use App\Http\Requests\ProfileUpdateRequest;
 use App\Http\Resources\ProfileResource;
 use Illuminate\Support\Facades\Auth;
 
@@ -22,7 +22,7 @@ class ProfileController extends Controller
         return new ProfileResource($this->profileRepository->getByUserId(Auth::id()));
     }
 
-    public function update(ProfileStoreRequest $request): ProfileResource
+    public function update(ProfileUpdateRequest $request): ProfileResource
     {
         $data = [
             'work_hours_in_month' => $request->get('workHoursInMonth'),
