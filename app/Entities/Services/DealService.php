@@ -21,8 +21,8 @@ class DealService
     {
         $data = array_merge(
             [
-                'user_id'    => Auth::id(),
-                'client_id'  => $request->get('clientId'),
+                'user_id'   => Auth::id(),
+                'client_id' => $request->get('clientId'),
             ],
             $this->getUpdatableDataFromRequest($request)
         );
@@ -40,16 +40,22 @@ class DealService
     private function getUpdatableDataFromRequest(DealStoreRequest $request): array
     {
         return [
-            'status'           => $request->get('status'),
+            'status'          => $request->get('status'),
             'title'           => $request->get('title'),
             'price'           => $request->input('price.nominal'),
             'currency'        => $request->input('price.currency'),
             'prepay_price'    => $request->input('prepay.nominal'),
             'prepay_currency' => $request->input('prepay.currency'),
             'address'         => $request->get('address'),
-            'deadline'        => Carbon::parse($request->get('deadline'))->format(config('app.mysqlDateFormat')),
-            'start'           => Carbon::parse($request->get('start'))->format(config('app.mysqlDateFormat')),
-            'end'             => Carbon::parse($request->get('end'))->format(config('app.mysqlDateFormat')),
+            'deadline'        => $request->get('deadline')
+                ? Carbon::parse($request->get('deadline'))->format(config('app.mysqlDateFormat'))
+                : null,
+            'start'           => $request->get('start')
+                ? Carbon::parse($request->get('start'))->format(config('app.mysqlDateFormat'))
+                : null,
+            'end'             => $request->get('end')
+                ? Carbon::parse($request->get('end'))->format(config('app.mysqlDateFormat'))
+                : null,
             'facilities'      => $request->input('facilities'),
         ];
     }
