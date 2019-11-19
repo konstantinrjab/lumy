@@ -40,11 +40,11 @@ class ResetPasswordController extends Controller
 
     protected function sendResetResponse(Request $request, $response)
     {
-        return JsonResponse::create(['data' => ['status' => 'success']]);
+        return JsonResponse::create(['data' => ['success' => true]]);
     }
 
     protected function sendResetFailedResponse(Request $request, $response)
     {
-        return  JsonResponse::create(['data' => ['status' => 'error', 'message' => trans($response)]], 400);
+        return  JsonResponse::create(['data' => ['success' => false, 'message' => trans($response)]], 400);
     }
 }
