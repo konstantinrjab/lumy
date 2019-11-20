@@ -44,6 +44,8 @@ Route::namespace('Api')->group(function () {
         Route::options('profiles/{any?}', 'OptionsController');
         Route::options('faqs/{any?}', 'OptionsController');
         Route::options('users/{any?}', 'OptionsController');
+        Route::options('users/password/reset/{any?}', 'OptionsController');
+        Route::options('users/password/reset/email/{any?}', 'OptionsController');
 
         Route::options('users/authenticate/{any?}', 'OptionsController');
         Route::options('users/register/{any?}', 'OptionsController');
