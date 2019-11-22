@@ -17,6 +17,7 @@ prod_deploy:
       && docker run --rm --interactive --volume /var/lumy:/app composer install --ignore-platform-reqs --no-scripts
       && docker run --rm --interactive --volume /var/lumy:/app composer dump-autoload -o
       && docker-compose -f "docker/prod/docker-compose-prod.yml" up -d --build
+      && docker ps
       && docker exec lum_php php artisan cache:clear
       && docker exec lum_php php artisan route:cache
       && docker exec lum_php php artisan config:clear
