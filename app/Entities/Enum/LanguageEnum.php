@@ -6,5 +6,5 @@ class LanguageEnum extends Enum
 {
     private const EN = 'en';
     private const RU = 'ru';
-    private const UA = 'ua';
+    private const UK = 'uk';
 }

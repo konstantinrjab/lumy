@@ -42,6 +42,7 @@ class Kernel extends HttpKernel
             \App\Http\Middleware\ApiDataLogger::class,
             'throttle:60,1',
             'bindings',
+            'localization'
         ],
     ];
 
@@ -64,6 +65,7 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'cors' => \App\Http\Middleware\Cors::class,
+        'localization' => \App\Http\Middleware\Localization::class,
     ];
 
     /**
