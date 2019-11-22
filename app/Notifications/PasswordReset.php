@@ -41,10 +41,9 @@ class PasswordReset extends Notification
             ->line(Lang::get('emails.reset_password_line_1'))
             ->action(
                 Lang::get('emails.reset_password_action_1'),
-                url(
-                    config('app.url') . route('password.reset',
-                        ['token' => $this->token, 'email' => $notifiable->getEmailForPasswordReset()], false)
-                )
+                env('FRONTEND_URL')
+                . env('FRONTEND_RECOVER_PASSWORD_URL')
+                . "?token={$this->token}&email={$notifiable->getEmailForPasswordReset()}"
             )
             ->line(
                 Lang::get('emails.reset_password_line_2',
