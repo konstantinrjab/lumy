@@ -26,8 +26,7 @@ services:
     container_name: lum_mysql
     image: mysql:8
     command: --default-authentication-plugin=mysql_native_password
-    environment:
-      env_file: ./mysql.env
+    env_file: ./mysql.env
     volumes:
       - ../../storage/logs:/var/log/mysql
       - ./mysql/conf.d:/etc/mysql/conf.d
