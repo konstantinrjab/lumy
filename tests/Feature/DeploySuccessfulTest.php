@@ -31,20 +31,6 @@ class DeploySuccessfulTest extends TestCase
         $response->assertStatus(401);
     }
 
-    public function testApiClients()
-    {
-        if (!defined('LARAVEL_START')) {
-            define('LARAVEL_START', microtime(true));
-        }
-
-        $response = $this->get('/api/clients', [
-            'Authorization' => 'Bearer Oa8cduFPjvzG4LYcWAVCHhlB8gfDlWZvROQ10qoODq0eTLEkFq518rDwCc5R',
-            'Accept' => 'application/json'
-        ]);
-
-        $response->assertStatus(200);
-    }
-
     public function testAdminExists()
     {
         $this->assertDatabaseHas('users', ['email' => 'admin@mail.com']);
