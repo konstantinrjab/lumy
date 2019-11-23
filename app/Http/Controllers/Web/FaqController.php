@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Web;
 use App\Database\Repositories\FaqRepository;
 use App\Faq;
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Http\Requests\Web\FaqStoreRequest;
 
 class FaqController extends Controller

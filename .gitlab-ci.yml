@@ -22,7 +22,7 @@ prod_deploy:
       && docker exec lum_php php artisan route:cache
       && docker exec lum_php php artisan config:clear
       && docker exec lum_php php artisan view:clear
-      && docker exec lum_php php artisan migrate:fresh --seed
+      && docker exec lum_php php artisan migrate
       && docker exec lum_php php vendor/bin/phpunit
       && exit
       "
