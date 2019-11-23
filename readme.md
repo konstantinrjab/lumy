@@ -19,3 +19,8 @@ docker exec lum_php bash -c "php artisan cache:clear && php artisan route:cache 
 docker-compose -f ".\docker\dev\docker-compose.yml" up -d --build
 docker-compose -f ".\docker\dev\docker-compose.yml" down
 ```
+
+####Seeders
+```shell script
+docker exec lum_php php artisan db:seed --class=FaqsTableSeeder
+```
