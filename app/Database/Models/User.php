@@ -2,6 +2,7 @@
 
 namespace App\Database\Models;
 
+use App\Database\Traits\HasRoles;
 use App\Notifications\PasswordReset;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -11,6 +12,7 @@ class User extends Authenticatable
     public const API_TOKEN_LENGTH = 60;
 
     use Notifiable;
+    use HasRoles;
 
     /**
      * The attributes that are mass assignable.
@@ -47,5 +49,10 @@ class User extends Authenticatable
     public function sendPasswordResetNotification($token)
     {
         $this->notify(new PasswordReset($token, $this->profile->language));
+    }
+
+    public function isAdmin(): bool
+    {
+        return $this->hasRole('admin');
     }
 }
