@@ -174,6 +174,8 @@ return [
         'minute'                => 'Хвилина',
         'second'                => 'Секунда',
         'title'                 => 'Назва',
+        'text'                  => 'Текст',
+        'alias'                 => 'Псевдонім',
         'content'               => 'Контент',
         'description'           => 'Опис',
         'excerpt'               => 'Уривок',
