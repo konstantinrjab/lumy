@@ -27,7 +27,7 @@ class FacilityStoreRequest extends FormRequest
             'expenses'                  => 'nullable|present|array',
             'expenses.*.title'          => 'required|string',
             'expenses.*.price.currency' => 'required|string',
-            'expenses.*.price.nominal'  => 'required|string',
+            'expenses.*.price.nominal'  => 'required|numeric',
             'expenses.*.number'         => 'required|integer',
             'workingTime'               => 'nullable|integer',
             'transportTime'             => 'nullable|integer',
