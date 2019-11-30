@@ -1,7 +1,12 @@
-filebeat.inputs:
+filebeat:
+  inputs:
   - type: log
+    enabled: true
     paths:
-      - "/etc/logs/*"
+      - "/etc/logs/api_datalogger_*.log"
+    multiline.pattern: '^$'
+    multiline.negate: true
+    multiline.match: before
 
 output.logstash:
   enabled: true
@@ -10,3 +15,7 @@ output.logstash:
     enabled: true
     certificate_authorities:
       - /etc/pki/tls/certs/logstash-beats.crt
+
+# Debug logging config.
+#logging.level: debug
+#logging.selectors: ['*']

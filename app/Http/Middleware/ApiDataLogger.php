@@ -22,13 +22,15 @@ class ApiDataLogger
     {
         $endTime = microtime(true);
         $filename = 'api_datalogger_' . date('d-m-y') . '.log';
-        $dataToLog = 'Time: ' . gmdate("F j, Y, g:i a") . "\n";
+        $dataToLog = 'Time: ' . gmdate(\DateTimeInterface::ISO8601) . "\n";
         $dataToLog .= 'Duration: ' . number_format($endTime - LARAVEL_START, 3) . "\n";
+        $dataToLog .= 'Status code: ' . $response->getStatusCode() . "\n";
+        $dataToLog .= 'Headers: ' . json_encode($response->headers->all(), JSON_PRETTY_PRINT) . "\n";
         $dataToLog .= 'IP Address: ' . $request->ip() . "\n";
         $dataToLog .= 'URL: ' . $request->fullUrl() . "\n";
         $dataToLog .= 'Method: ' . $request->method() . "\n";
         $dataToLog .= 'Input: ' . $request->getContent() . "\n";
-        $dataToLog .= 'Output: ' . $response->getContent() . "\n";
-        File::append(storage_path('logs' . DIRECTORY_SEPARATOR . $filename), $dataToLog . "\n" . str_repeat("=", 20) . "\n\n");
+        $dataToLog .= 'Output: ' . json_encode($response->getData(), JSON_PRETTY_PRINT) . "\n";
+        File::append(storage_path('logs' . DIRECTORY_SEPARATOR . $filename), $dataToLog . "\n");
     }
 }
