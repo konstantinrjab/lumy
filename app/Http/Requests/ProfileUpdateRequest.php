@@ -25,7 +25,7 @@ class ProfileUpdateRequest extends FormRequest
             'desiredIncome.nominal'  => 'required|numeric',
             'desiredIncome.currency' => 'required|string|in:' . implode(',', CurrencyEnum::getValues()),
             'language'               => 'required|string|in:' . implode(',', LanguageEnum::getValues()),
-            'workHoursInMonth'       => 'required|integer',
+            'workHoursInMonth'       => 'required|integer|max:672',
             'theme'                  => 'required|string|in:' . implode(',', ProfileThemeEnum::getValues()),
         ];
     }

@@ -22,5 +22,5 @@ docker-compose -f ".\docker\dev\docker-compose.yml" down
 
 ####Seeders
 ```shell script
-docker exec lum_php php artisan db:seed --class=FaqsTableSeeder
+docker exec lum_php php artisan db:seed --class=FaqTableSeeder
 ```
