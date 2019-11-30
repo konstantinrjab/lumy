@@ -22,7 +22,7 @@ class ProfileUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'desiredIncome.nominal'  => 'required|numeric',
+            'desiredIncome.nominal'  => 'required|numeric|between:0,999999999.99',
             'desiredIncome.currency' => 'required|string|in:' . implode(',', CurrencyEnum::getValues()),
             'language'               => 'required|string|in:' . implode(',', LanguageEnum::getValues()),
             'workHoursInMonth'       => 'required|integer|max:672',
