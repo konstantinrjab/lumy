@@ -30,7 +30,7 @@ class ApiDataLogger
         $dataToLog .= 'URL: ' . $request->fullUrl() . "\n";
         $dataToLog .= 'Method: ' . $request->method() . "\n";
         $dataToLog .= 'Input: ' . $request->getContent() . "\n";
-        $dataToLog .= 'Output: ' . json_encode($response->getData(), JSON_PRETTY_PRINT) . "\n";
+        $dataToLog .= 'Output: ' . json_encode(json_decode($response->getContent()), JSON_PRETTY_PRINT) . "\n";
         File::append(storage_path('logs' . DIRECTORY_SEPARATOR . $filename), $dataToLog . "\n");
     }
 }
