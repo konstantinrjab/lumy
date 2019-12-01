@@ -45,6 +45,9 @@ services:
 #    container_name: lum_elk
 #    volumes:
 #      - lum_filebeat_crt:/etc/pki/tls/certs
+#      - ./elk/elasticsearch/config/elasticsearch.yml:/etc/elasticsearch/elasticsearch.yml
+#      - ./elk/logstash/conf.d/30-output.conf:/etc/logstash/conf.d/30-output.conf
+#      - ./elk/kibana/config/kibana.yml:/opt/kibana/config/kibana.yml
 #    ports:
 #      - "5601:5601"
 #      - "9200:9200"
