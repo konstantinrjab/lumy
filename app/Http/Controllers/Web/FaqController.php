@@ -6,6 +6,8 @@ use App\Database\Repositories\FaqRepository;
 use App\Faq;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Web\FaqStoreRequest;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\View\View;
 
 class FaqController extends Controller
 {
@@ -16,35 +18,19 @@ class FaqController extends Controller
         $this->faqRepository = $faqRepository;
     }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public function index(): View
     {
         $faqs = Faq::all();
 
         return view('faq.index', compact('faqs'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         return view('faq.form');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  FaqStoreRequest  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(FaqStoreRequest $request)
+    public function store(FaqStoreRequest $request): RedirectResponse
     {
         if ($faq = $this->faqRepository->create($request->toArray())) {
 
@@ -55,40 +41,21 @@ class FaqController extends Controller
         }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+    public function show($id): View
     {
         $faq = Faq::findOrFail($id);
 
         return view('faq.item', compact('faq'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+    public function edit($id): View
     {
         $faq = Faq::findOrFail($id);
 
         return view('faq.form', compact('faq'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  FaqStoreRequest  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(FaqStoreRequest $request, $id)
+    public function update(FaqStoreRequest $request, $id): RedirectResponse
     {
         if ($this->faqRepository->update($id, $request->toArray())) {
             $message = 'Successfully deleted!';
@@ -101,13 +68,7 @@ class FaqController extends Controller
         return redirect('/faqs/' . $id)->with($status, $message);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
+    public function destroy($id): RedirectResponse
     {
         $this->faqRepository->delete($id);
 

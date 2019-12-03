@@ -94,3 +94,4 @@ cluster.initial_master_nodes: ["elk"]
 
 xpack.security.enabled: true
 xpack.security.transport.ssl.enabled: true
+xpack.security.authc.accept_default_password: true
