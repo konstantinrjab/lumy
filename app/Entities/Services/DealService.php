@@ -10,11 +10,13 @@ use Illuminate\Support\Facades\Auth;
 
 class DealService
 {
-    private $dealRepository;
+    private DealRepository $dealRepository;
+    private GoogleCalendarService $calendarService;
 
-    public function __construct(DealRepository $dealRepository)
+    public function __construct(DealRepository $dealRepository, GoogleCalendarService $calendarService)
     {
         $this->dealRepository = $dealRepository;
+        $this->calendarService = $calendarService;
     }
 
     public function store(DealStoreRequest $request): ?Deal
@@ -27,7 +29,13 @@ class DealService
             $this->getUpdatableDataFromRequest($request)
         );
 
-        return $this->dealRepository->create($data);
+        $deal = $this->dealRepository->create($data);
+
+        if ($request->input('googleCalendar.save')) {
+            $this->calendarService->createEventByDeal($deal);
+        }
+
+        return $deal;
     }
 
     public function update(DealStoreRequest $request, int $dealId, int $userId): bool

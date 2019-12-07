@@ -24,24 +24,26 @@ class DealStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'title'               => 'required|string|max:100',
-            'status'              => 'nullable|string|max:100|in:' . implode(',', DealStatusEnum::getValues()),
-            'clientId'            => 'nullable|integer', 'exists:clients,id',
-            'price.nominal'       => 'nullable|numeric|required_with:price.currency|between:0,999999999.99',
-            'price.currency'      => 'nullable|string|required_with:price.nominal|in:' . implode(',', CurrencyEnum::getValues()),
-            'prepay.nominal'      => 'nullable|numeric|between:0,999999999.99',
-            'prepay.currency'     => 'nullable|string|in:' . implode(',', CurrencyEnum::getValues()),
-            'facilities.*.number' => 'required|integer',
-            'facilities.*.id'     => [
+            'title'                     => 'required|string|max:100',
+            'status'                    => 'nullable|string|max:100|in:' . implode(',', DealStatusEnum::getValues()),
+            'clientId'                  => 'nullable|integer', 'exists:clients,id',
+            'price.nominal'             => 'nullable|numeric|required_with:price.currency|between:0,999999999.99',
+            'price.currency'            => 'nullable|string|required_with:price.nominal|in:' . implode(',', CurrencyEnum::getValues()),
+            'prepay.nominal'            => 'nullable|numeric|between:0,999999999.99',
+            'prepay.currency'           => 'nullable|string|in:' . implode(',', CurrencyEnum::getValues()),
+            'facilities.*.number'       => 'required|integer',
+            'facilities.*.id'           => [
                 'required', 'integer', 'exists:facilities,id', Rule::exists('facilities')->where(function (Builder $query) {
                     $query->where('user_id', Auth::id());
                 }),
             ],
-            'start'               => 'nullable|date_format:' . config('app.apiDateFormat'),
-            'end'                 => 'nullable|date_format:' . config('app.apiDateFormat') . '|after:now',
-            'deadline'            => 'nullable|date_format:' . config('app.apiDateFormat') . '|after:now',
-            'address'             => 'nullable|string|max:100',
-            'comment'             => 'nullable|string|max:100',
+            'start'                     => 'nullable|required_with:googleCalendar.save|date_format:' . config('app.apiDateFormat'),
+            'end'                       => 'nullable|required_with:googleCalendar.save|date_format:' . config('app.apiDateFormat') . '|after:now',
+            'deadline'                  => 'nullable|date_format:' . config('app.apiDateFormat') . '|after:now',
+            'address'                   => 'nullable|string|max:100',
+            'comment'                   => 'nullable|string|max:100',
+            'googleCalendar.save'       => 'nullable|boolean',
+            'googleCalendar.calendarId' => 'nullable|string',
         ];
     }
 }

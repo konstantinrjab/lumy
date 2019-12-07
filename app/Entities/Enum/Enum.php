@@ -5,7 +5,7 @@ use ReflectionClass;
 
 abstract class Enum
 {
-    private array $values;
+    private array $values = [];
 
     public static function getValues(): array
     {
