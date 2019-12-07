@@ -5,9 +5,15 @@ namespace App\Http\Middleware;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Symfony\Component\HttpFoundation\Response;
+use Closure;
 
 class ApiDataLogger
 {
+    public function handle(Request $request, Closure $next, $guard = null)
+    {
+        return $next($request);
+    }
+
     public function terminate(Request $request, Response $response): void
     {
         $currentTime = microtime(true);
