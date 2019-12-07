@@ -9,7 +9,7 @@ use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 class FaqController extends Controller
 {
-    private $faqRepository;
+    private FaqRepository $faqRepository;
 
     public function __construct(FaqRepository $faqRepository)
     {

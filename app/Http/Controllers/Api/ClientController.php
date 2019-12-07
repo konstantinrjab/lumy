@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Auth;
 
 class ClientController extends Controller
 {
-    private $clientRepository;
+    private ClientRepository $clientRepository;
 
     public function __construct(ClientRepository $clientRepository)
     {

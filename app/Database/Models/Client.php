@@ -3,6 +3,7 @@
 namespace App\Database\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Client extends Model
 {
@@ -13,12 +14,12 @@ class Client extends Model
         'user_id', 'name', 'surname', 'patronymic', 'comment', 'visibility'
     ];
 
-    public function emails()
+    public function emails(): HasMany
     {
         return $this->hasMany(ClientEmail::class);
     }
 
-    public function phones()
+    public function phones(): HasMany
     {
         return $this->hasMany(ClientPhone::class);
     }

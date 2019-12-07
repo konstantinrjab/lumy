@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Auth;
 
 class FacilityController extends Controller
 {
-    private $facilityRepository;
+    private FacilityRepository $facilityRepository;
 
     public function __construct(FacilityRepository $facilityRepository)
     {

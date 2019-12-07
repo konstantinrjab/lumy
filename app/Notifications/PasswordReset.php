@@ -8,8 +8,7 @@ use Illuminate\Support\Facades\Lang;
 
 class PasswordReset extends Notification
 {
-    /** @var string $token */
-    private $token;
+    private string $token;
 
     public function __construct(string $token, string $locale)
     {
@@ -23,7 +22,7 @@ class PasswordReset extends Notification
      * @param mixed $notifiable
      * @return array
      */
-    public function via($notifiable)
+    public function via($notifiable): array
     {
         return ['mail'];
     }
@@ -34,7 +33,7 @@ class PasswordReset extends Notification
      * @param mixed $notifiable
      * @return \Illuminate\Notifications\Messages\MailMessage
      */
-    public function toMail($notifiable)
+    public function toMail($notifiable): MailMessage
     {
         return (new MailMessage)
             ->subject(Lang::get('emails.reset_password_subject'))

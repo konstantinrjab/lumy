@@ -24,10 +24,8 @@ class ResetPasswordController extends Controller
 
     /**
      * Where to redirect users after resetting their password.
-     *
-     * @var string
      */
-    protected $redirectTo = '/home';
+    protected string $redirectTo = '/home';
 
     protected function rules()
     {
@@ -38,12 +36,12 @@ class ResetPasswordController extends Controller
         ];
     }
 
-    protected function sendResetResponse(Request $request, $response)
+    protected function sendResetResponse(Request $request, $response): JsonResponse
     {
         return JsonResponse::create(['data' => ['success' => true]]);
     }
 
-    protected function sendResetFailedResponse(Request $request, $response)
+    protected function sendResetFailedResponse(Request $request, $response): JsonResponse
     {
         return  JsonResponse::create(['data' => ['success' => false, 'message' => trans($response)]], 400);
     }

@@ -1,6 +1,5 @@
 <?php
 
-use App\Database\Models\Client;
 use App\Database\Models\ClientEmail;
 use Illuminate\Database\Seeder;
 
@@ -8,7 +7,7 @@ class ClientEmailsTableSeeder extends Seeder
 {
     public const COUNT = 50;
 
-    public function run()
+    public function run(): void
     {
         $faker = Faker\Factory::create();
 

@@ -20,7 +20,7 @@ class Authenticate extends Middleware
         );
     }
 
-    protected function redirectTo($request)
+    protected function redirectTo($request): string
     {
         return route('login');
     }

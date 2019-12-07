@@ -6,13 +6,12 @@ use App\Database\Repositories\ExpenseRepository;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ExpenseStoreRequest;
 use App\Http\Resources\ExpenseResource;
-use Carbon\Carbon;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Support\Facades\Auth;
 
 class ExpenseController extends Controller
 {
-    private $expenseRepository;
+    private ExpenseRepository $expenseRepository;
 
     public function __construct(ExpenseRepository $expenseRepository)
     {

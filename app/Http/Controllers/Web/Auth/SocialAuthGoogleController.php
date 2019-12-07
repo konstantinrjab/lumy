@@ -5,12 +5,12 @@ namespace App\Http\Controllers\Web\Auth;
 use App\Database\Models\User;
 use App\Database\Repositories\UserRepository;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\RedirectResponse;
 use Laravel\Socialite\Facades\Socialite;
 
 class SocialAuthGoogleController extends Controller
 {
-    private $userRepository;
+    private UserRepository $userRepository;
 
     public function __construct(UserRepository $userRepository)
     {
@@ -20,20 +20,16 @@ class SocialAuthGoogleController extends Controller
 
     /**
      * Redirect the user to the Google authentication page.
-     *
-     * @return \Illuminate\Http\Response
      */
-    public function redirectToProvider()
+    public function redirectToProvider(): \Symfony\Component\HttpFoundation\RedirectResponse
     {
         return Socialite::driver('google')->redirect();
     }
 
     /**
      * Obtain the user information from Google.
-     *
-     * @return \Illuminate\Http\Response
      */
-    public function handleProviderCallback()
+    public function handleProviderCallback(): RedirectResponse
     {
         try {
             $user = Socialite::driver('google')->stateless()->user();

@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Auth;
 
 class ProfileController extends Controller
 {
-    private $profileRepository;
+    private ProfileRepository $profileRepository;
 
     public function __construct(ProfileRepository $profileRepository)
     {

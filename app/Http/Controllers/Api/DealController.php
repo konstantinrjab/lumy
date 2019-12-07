@@ -7,14 +7,13 @@ use App\Entities\Services\DealService;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\DealStoreRequest;
 use App\Http\Resources\DealResource;
-use Carbon\Carbon;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Support\Facades\Auth;
 
 class DealController extends Controller
 {
-    private $dealRepository;
-    private $dealService;
+    private DealRepository $dealRepository;
+    private DealService $dealService;
 
     public function __construct(DealRepository $dealRepository, DealService $dealService)
     {

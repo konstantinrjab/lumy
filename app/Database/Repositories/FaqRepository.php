@@ -3,7 +3,7 @@
 namespace App\Database\Repositories;
 
 use Illuminate\Database\Eloquent\Collection;
-use App\Faq;
+use App\Database\Models\Faq;
 
 class FaqRepository
 {

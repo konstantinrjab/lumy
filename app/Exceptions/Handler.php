@@ -2,7 +2,7 @@
 
 namespace App\Exceptions;
 
-use App\Mail\ExceptionOccured;
+use App\Mail\ExceptionOccurred;
 use Exception;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
@@ -53,7 +53,7 @@ class Handler extends ExceptionHandler
      *
      * @param \Illuminate\Http\Request $request
      * @param \Exception $exception
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Response|\Symfony\Component\HttpFoundation\Response
      */
     public function render($request, Exception $exception)
     {
@@ -91,7 +91,7 @@ class Handler extends ExceptionHandler
         try {
             $emails = explode(',', env('EXCEPTION_EMAILS'));
 
-            Mail::to($emails)->send(new ExceptionOccured($exception));
+            Mail::to($emails)->send(new ExceptionOccurred($exception));
         } catch (Exception $ex) {
             Log::critical('cannot send email. exception: ', ExceptionHelper::getExceptionData($ex));
         }

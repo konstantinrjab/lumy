@@ -12,17 +12,15 @@ class LoginController extends Controller
 
     /**
      * Where to redirect users after login.
-     *
-     * @var string
      */
-    protected $redirectTo = '/home';
+    protected string $redirectTo = '/home';
 
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
     }
 
-    protected function sendLoginResponse(Request $request)
+    protected function sendLoginResponse(Request $request): array
     {
         $this->clearLoginAttempts($request);
 

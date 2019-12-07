@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Web;
 
 use App\Database\Repositories\FaqRepository;
-use App\Faq;
+use App\Database\Models\Faq;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Web\FaqStoreRequest;
 use Illuminate\Http\RedirectResponse;
@@ -11,7 +11,7 @@ use Illuminate\View\View;
 
 class FaqController extends Controller
 {
-    private $faqRepository;
+    private FaqRepository $faqRepository;
 
     public function __construct(FaqRepository $faqRepository)
     {
@@ -25,7 +25,7 @@ class FaqController extends Controller
         return view('faq.index', compact('faqs'));
     }
 
-    public function create()
+    public function create(): View
     {
         return view('faq.form');
     }
@@ -61,7 +61,7 @@ class FaqController extends Controller
             $message = 'Successfully deleted!';
             $status = 'success';
         } else {
-            $message = 'Your changes wasn\'s saved';
+            $message = 'Your changes wasn\'t saved';
             $status = 'error';
         }
 

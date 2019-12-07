@@ -11,7 +11,7 @@ class UsersTableSeeder extends Seeder
 {
     public const COUNT = 5;
 
-    public function run()
+    public function run(): void
     {
         $languages = LanguageEnum::getValues();
 

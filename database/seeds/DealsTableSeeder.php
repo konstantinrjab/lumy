@@ -10,7 +10,7 @@ class DealsTableSeeder extends Seeder
 {
     public const COUNT = 20;
 
-    public function run()
+    public function run(): void
     {
         $faker = Faker\Factory::create();
         $currencies = CurrencyEnum::getValues();

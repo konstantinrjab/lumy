@@ -6,14 +6,15 @@ use App\Exceptions\ExceptionHelper;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
+use Exception;
 
-class ExceptionOccured extends Mailable
+class ExceptionOccurred extends Mailable
 {
     use Queueable, SerializesModels;
 
-    private $exception;
+    private Exception $exception;
 
-    public function __construct(\Exception $exception)
+    public function __construct(Exception $exception)
     {
         $this->exception = $exception;
     }

@@ -22,12 +22,12 @@ class ForgotPasswordController extends Controller
 
     use SendsPasswordResetEmails;
 
-    protected function sendResetLinkResponse(Request $request, $response)
+    protected function sendResetLinkResponse(Request $request, $response): JsonResponse
     {
         return JsonResponse::create(['data' => ['success' => true]]);
     }
 
-    protected function sendResetLinkFailedResponse(Request $request, $response)
+    protected function sendResetLinkFailedResponse(Request $request, $response): JsonResponse
     {
         return  JsonResponse::create(['data' => ['success' => false, 'message' => trans($response)]], 400);
     }

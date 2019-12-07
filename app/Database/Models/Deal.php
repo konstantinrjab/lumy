@@ -3,6 +3,7 @@
 namespace App\Database\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Deal extends Model
 {
@@ -25,7 +26,7 @@ class Deal extends Model
         'start', 'end', 'deadline'
     ];
 
-    public function facilities()
+    public function facilities(): HasMany
     {
         return $this->hasMany(DealFacility::class);
     }
