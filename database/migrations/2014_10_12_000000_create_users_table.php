@@ -21,7 +21,9 @@ class CreateUsersTable extends Migration
             $table->string('password')->nullable();
             $table->rememberToken();
             $table->string('api_token', 80)->unique()->nullable()->default(null);
+            // TODO: move it to separate table
             $table->string('google_id')->unique()->nullable()->default(null);
+            $table->text('google_token')->nullable()->default(null);
             $table->timestamps();
         });
     }

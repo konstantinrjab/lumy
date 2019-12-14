@@ -23,7 +23,9 @@ class SocialAuthGoogleController extends Controller
      */
     public function redirectToProvider(): \Symfony\Component\HttpFoundation\RedirectResponse
     {
-        return Socialite::driver('google')->redirect();
+        return Socialite::driver('google')
+            ->scopes(\Google_Service_Calendar::CALENDAR)
+            ->redirect();
     }
 
     /**
@@ -43,6 +45,8 @@ class SocialAuthGoogleController extends Controller
                 'name'      => $user->name,
                 'email'     => $user->email,
                 'google_id' => $user->id,
+                // TODO: move it to separate database
+                'google_token' => $user->token,
             ];
             $databaseUser = $this->userRepository->create($userData);
         }
