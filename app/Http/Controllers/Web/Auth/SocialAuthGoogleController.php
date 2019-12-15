@@ -39,13 +39,23 @@ class SocialAuthGoogleController extends Controller
             return redirect()->away(env('AUTH_REDIRECT_URL'));
         }
 
+        $credentials = json_encode([
+            'access_token' => $user->token,
+            'expires_in' => $user->expiresIn,
+            'refresh_token' => $user->refreshToken,
+            'created' => time(),
+        ]);
         $databaseUser = User::where('email', $user->email)->first();
         if (!$databaseUser) {
             $userData = [
                 'name'      => $user->name,
                 'email'     => $user->email,
             ];
-            $databaseUser = $this->userRepository->createFromGoogle($userData, $user->id, $user->token);
+            $databaseUser = $this->userRepository->createFromGoogle($userData, $user->id, $credentials);
+        } else {
+            $databaseUser->social()->update([
+                'google_token' => $credentials
+            ]);
         }
 
         return redirect()->away(env('AUTH_REDIRECT_URL') . '?token=' . $databaseUser->api_token);

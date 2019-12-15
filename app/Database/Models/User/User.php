@@ -45,7 +45,7 @@ class User extends Authenticatable
 
     public function social(): HasOne
     {
-        return $this->hasOne(UsersProfile::class);
+        return $this->hasOne(UsersSocial::class);
     }
 
     public function sendPasswordResetNotification($token): void

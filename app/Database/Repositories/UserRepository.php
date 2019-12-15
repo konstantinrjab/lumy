@@ -41,7 +41,7 @@ class UserRepository
         return $user;
     }
 
-    public function createFromGoogle(array $userData, string $googleId, string $googleToken)
+    public function createFromGoogle(array $userData, string $googleId, string $credentials)
     {
         DB::beginTransaction();
 
@@ -54,7 +54,7 @@ class UserRepository
             UsersSocial::create([
                 'user_id' => $user->id,
                 'google_id' => $googleId,
-                'google_token' => $googleToken,
+                'google_token' => $credentials,
             ]);
 
             UsersProfile::create([
