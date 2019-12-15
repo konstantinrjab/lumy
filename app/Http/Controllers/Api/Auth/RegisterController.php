@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Api\Auth;
 
 use App\Database\Repositories\UserRepository;
 use App\Http\Controllers\Controller;
-use App\Database\Models\User;
+use App\Database\Models\User\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;

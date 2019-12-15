@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Database\Models\User;
+use App\Database\Models\User\User;
 use App\Database\Repositories\UserRepository;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserUpdateRequest;

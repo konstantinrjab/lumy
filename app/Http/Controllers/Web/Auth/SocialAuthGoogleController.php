@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Web\Auth;
 
-use App\Database\Models\User;
+use App\Database\Models\User\User;
 use App\Database\Repositories\UserRepository;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
@@ -44,11 +44,8 @@ class SocialAuthGoogleController extends Controller
             $userData = [
                 'name'      => $user->name,
                 'email'     => $user->email,
-                'google_id' => $user->id,
-                // TODO: move it to separate database
-                'google_token' => $user->token,
             ];
-            $databaseUser = $this->userRepository->create($userData);
+            $databaseUser = $this->userRepository->createFromGoogle($userData, $user->id, $user->token);
         }
 
         return redirect()->away(env('AUTH_REDIRECT_URL') . '?token=' . $databaseUser->api_token);

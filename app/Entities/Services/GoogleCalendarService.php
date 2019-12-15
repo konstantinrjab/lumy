@@ -10,7 +10,43 @@ use Google_Service_Calendar;
 
 class GoogleCalendarService
 {
+    /**
+     * @param Deal $deal
+     * @return Google_Service_Calendar_Event
+     * @throws \Google_Exception
+     */
     public function createEventByDeal(Deal $deal)
+    {
+        $client = $this->getClient();
+        $service = new Google_Service_Calendar($client);
+        $event = new Google_Service_Calendar_Event([
+            'summary' => $deal->title,
+            // TODO: add this field as optional on frontend
+            'location' => '',
+            'description' => $deal->comment,
+            'start' => [
+                'dateTime' => $deal->start,
+                // TODO: set it dynamically
+                'timeZone' => 'Europe/Kiev',
+            ],
+            'end' => [
+                'dateTime' => $deal->end,
+                // TODO: set it dynamically
+                'timeZone' => 'Europe/Kiev',
+            ],
+        ]);
+
+        // TODO: add ability to choice calendar
+        $calendarId = 'primary';
+
+        return $service->events->insert($calendarId, $event);
+    }
+
+    /**
+     * @return Google_Client
+     * @throws \Google_Exception
+     */
+    private function getClient(): Google_Client
     {
         $client = new Google_Client();
         $client->setApplicationName(config('app.name'));
@@ -20,45 +56,9 @@ class GoogleCalendarService
         $client->setPrompt('select_account consent');
 
         $client->setAccessToken([
-            'access_token'=> Auth::user()->google_token
-        ]);
-        $this->addEvent($deal, $client);
-    }
-
-    // TODO: refactor this
-    private function addEvent(Deal $deal, $client)
-    {
-        $service = new Google_Service_Calendar($client);
-        $event = new Google_Service_Calendar_Event([
-            'summary' => $deal->title,
-            'location' => '800 Howard St., San Francisco, CA 94103',
-            'description' => $deal->comment,
-            'start' => [
-                'dateTime' => $deal->start,
-                'timeZone' => 'America/Los_Angeles',
-            ],
-            'end' => [
-                'dateTime' => $deal->end,
-                'timeZone' => 'America/Los_Angeles',
-            ],
-//            'recurrence' => [
-//                'RRULE:FREQ=DAILY;COUNT=2'
-//            ],
-//            'attendees' => [
-//                ['email' => 'lpage@example.com'],
-//                ['email' => 'sbrin@example.com'],
-//            ],
-//            'reminders' => [
-//                'useDefault' => false,
-//                'overrides' => [
-//                    ['method' => 'email', 'minutes' => 24 * 60],
-//                    ['method' => 'popup', 'minutes' => 10],
-//                ],
-//            ],
+            'access_token' => Auth::user()->google_token
         ]);
 
-        $calendarId = 'primary';
-
-        return $service->events->insert($calendarId, $event);
+        return $client;
     }
 }

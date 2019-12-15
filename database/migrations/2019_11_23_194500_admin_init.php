@@ -1,8 +1,5 @@
 <?php
 
-use App\Database\Models\Profile;
-use App\Database\Models\Role;
-use App\Database\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -13,6 +10,7 @@ class AdminInit extends Migration
     private const ADMIN_NAME = 'Admin';
     private const ADMIN_PASSWORD = 'LumyAdm!n';
     private const ADMIN_API_TOKEN = 'SdOyZRAUq6C7kRwGWBOMLivUoTmdiATMFP53Bdf5FUWC3m3i7XtUXT0I6aF3';
+    private const ROLE_ADMIN = 'admin';
 
     /**
      * Run the migrations.
@@ -21,20 +19,34 @@ class AdminInit extends Migration
      */
     public function up()
     {
-        $role = Role::create([
-            'name' => 'admin',
-            'slug' => 'admin',
+        DB::table('roles')->insert([
+            'slug' => self::ROLE_ADMIN,
+            'name' => self::ROLE_ADMIN,
         ]);
 
-        $user = User::create([
+        DB::table('users')->insert([
             'name'      => self::ADMIN_NAME,
             'email'     => self::ADMIN_EMAIL,
             'password'  => Hash::make(self::ADMIN_PASSWORD),
             'api_token' => self::ADMIN_API_TOKEN
         ]);
 
-        Profile::create([
-            'user_id'                 => $user->id,
+        $userId = DB::table('users')
+            ->select('id')
+            ->where(['email' => self::ADMIN_EMAIL])
+            ->first()
+            ->id;
+        $roleId = DB::table('roles')
+            ->select('id')
+            ->where([
+                ['name', '=', self::ROLE_ADMIN],
+                ['slug', '=', self::ROLE_ADMIN]
+            ])
+            ->first()
+            ->id;
+
+        DB::table('profiles')->insert([
+            'user_id'                 => $userId,
             'work_hours_in_month'     => 10,
             'desired_income_nominal'  => 100,
             'desired_income_currency' => 'uah',
@@ -43,8 +55,8 @@ class AdminInit extends Migration
         ]);
 
         DB::table('users_roles')->insert([
-            'user_id' => $user->id,
-            'role_id' => $role->id
+            'user_id' => $userId,
+            'role_id' => $roleId
         ]);
     }
 
@@ -58,7 +70,7 @@ class AdminInit extends Migration
         DB::table('users_roles')
             ->leftJoin('users', 'users_roles.user_id', '=', 'users.id')
             ->leftJoin('roles', 'users_roles.role_id', '=', 'roles.id')
-            ->where(['roles.name' => 'admin', 'users.email' => self::ADMIN_EMAIL])
+            ->where(['roles.name' => self::ROLE_ADMIN, 'users.email' => self::ADMIN_EMAIL])
             ->delete();
 
         DB::table('profiles')

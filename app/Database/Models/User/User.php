@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Database\Models;
+namespace App\Database\Models\User;
 
 use App\Database\Traits\HasRoles;
 use App\Notifications\PasswordReset;
@@ -20,18 +20,14 @@ class User extends Authenticatable
      *
      * @var array
      */
-    protected $fillable = [
-        'name', 'email', 'password', 'api_token', 'google_id', 'google_token'
-    ];
+    protected $fillable = ['name', 'email', 'password', 'api_token'];
 
     /**
      * The attributes that should be hidden for arrays.
      *
      * @var array
      */
-    protected $hidden = [
-        'password', 'remember_token', 'api_token', 'google_token'
-    ];
+    protected $hidden = ['password', 'remember_token', 'api_token'];
 
     /**
      * The attributes that should be cast to native types.
@@ -44,7 +40,12 @@ class User extends Authenticatable
 
     public function profile(): HasOne
     {
-        return $this->hasOne(Profile::class);
+        return $this->hasOne(UsersProfile::class);
+    }
+
+    public function social(): HasOne
+    {
+        return $this->hasOne(UsersProfile::class);
     }
 
     public function sendPasswordResetNotification($token): void

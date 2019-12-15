@@ -5,7 +5,8 @@ services:
     container_name: lum_php
     image: konstantinrjab/lumy:dev
     environment:
-      XDEBUG_CONFIG: "remote_host=host.docker.internal"
+      # host.docker.internal 172.17.0.1
+      XDEBUG_CONFIG: "remote_host=172.17.0.1"
       PHP_IDE_CONFIG: "serverName=Docker"
     volumes:
       - ../../:/var/www
