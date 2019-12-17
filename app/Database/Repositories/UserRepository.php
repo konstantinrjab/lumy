@@ -2,7 +2,7 @@
 
 namespace App\Database\Repositories;
 
-use App\Database\Models\User\UsersProfile;
+use App\Database\Models\User\Profile;
 use App\Database\Models\User\User;
 use App\Database\Models\User\UsersSocial;
 use Illuminate\Database\QueryException;
@@ -23,13 +23,13 @@ class UserRepository
                 'password'  => isset($userData['password']) ? Hash::make($userData['password']) : null,
                 'api_token' => Str::random(User::API_TOKEN_LENGTH)
             ]);
-            UsersProfile::create([
+            Profile::create([
                 'user_id'                 => $user->id,
-                'work_hours_in_month'     => UsersProfile::DEFAULT_WORK_HOURS_IN_MONTH,
-                'desired_income_nominal'  => UsersProfile::DEFAULT_DESIRED_INCOME_NOMINAL,
-                'desired_income_currency' => UsersProfile::DEFAULT_DESIRED_INCOME_CURRENCY,
-                'language'                => UsersProfile::DEFAULT_LANGUAGE,
-                'theme'                   => UsersProfile::DEFAULT_THEME,
+                'work_hours_in_month'     => Profile::DEFAULT_WORK_HOURS_IN_MONTH,
+                'desired_income_nominal'  => Profile::DEFAULT_DESIRED_INCOME_NOMINAL,
+                'desired_income_currency' => Profile::DEFAULT_DESIRED_INCOME_CURRENCY,
+                'language'                => Profile::DEFAULT_LANGUAGE,
+                'theme'                   => Profile::DEFAULT_THEME,
             ]);
 
             DB::commit();
@@ -54,16 +54,16 @@ class UserRepository
             UsersSocial::create([
                 'user_id' => $user->id,
                 'google_id' => $googleId,
-                'google_token' => $credentials,
+                'google_credentials' => $credentials,
             ]);
 
-            UsersProfile::create([
+            Profile::create([
                 'user_id'                 => $user->id,
-                'work_hours_in_month'     => UsersProfile::DEFAULT_WORK_HOURS_IN_MONTH,
-                'desired_income_nominal'  => UsersProfile::DEFAULT_DESIRED_INCOME_NOMINAL,
-                'desired_income_currency' => UsersProfile::DEFAULT_DESIRED_INCOME_CURRENCY,
-                'language'                => UsersProfile::DEFAULT_LANGUAGE,
-                'theme'                   => UsersProfile::DEFAULT_THEME,
+                'work_hours_in_month'     => Profile::DEFAULT_WORK_HOURS_IN_MONTH,
+                'desired_income_nominal'  => Profile::DEFAULT_DESIRED_INCOME_NOMINAL,
+                'desired_income_currency' => Profile::DEFAULT_DESIRED_INCOME_CURRENCY,
+                'language'                => Profile::DEFAULT_LANGUAGE,
+                'theme'                   => Profile::DEFAULT_THEME,
             ]);
 
             DB::commit();

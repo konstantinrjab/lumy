@@ -62,22 +62,11 @@ class GoogleCalendarService
             if ($client->getRefreshToken()) {
                 $client->fetchAccessTokenWithRefreshToken($client->getRefreshToken());
             } else {
-                // Request authorization from the user.
-                $authUrl = $client->createAuthUrl();
-                printf("Open the following link in your browser:\n%s\n", $authUrl);
-                print 'Enter verification code: ';
-                $authCode = trim(fgets(STDIN));
-
-                // Exchange authorization code for an access token.
-                $accessToken = $client->fetchAccessTokenWithAuthCode($authCode);
-                $client->setAccessToken($accessToken);
-
-                // Check to see if there was an error.
-                if (array_key_exists('error', $accessToken)) {
-                    throw new \Exception(join(', ', $accessToken));
-                }
+                // TODO: logout
             }
-            file_put_contents($tokenPath, json_encode($client->getAccessToken()));
+            Auth::user()->social()->update([
+                'google_credentials' => $client->getAccessToken()
+            ]);
         }
 
         return $client;

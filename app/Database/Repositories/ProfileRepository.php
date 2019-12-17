@@ -2,17 +2,17 @@
 
 namespace App\Database\Repositories;
 
-use App\Database\Models\User\UsersProfile;
+use App\Database\Models\User\Profile;
 
 class ProfileRepository
 {
-    public function getByUserId(int $userId): UsersProfile
+    public function getByUserId(int $userId): Profile
     {
-        return UsersProfile::where('user_id', $userId)->first();
+        return Profile::where('user_id', $userId)->first();
     }
 
     public function updateByUserId(int $userId, array $data): bool
     {
-        return UsersProfile::where(['user_id' => $userId])->firstOrFail()->update($data);
+        return Profile::where(['user_id' => $userId])->firstOrFail()->update($data);
     }
 }

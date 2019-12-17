@@ -17,7 +17,7 @@ class CreateUsersSocialTable extends Migration
             $table->increments('id');
             $table->integer('user_id')->unsigned();
             $table->string('google_id')->unique()->nullable()->default(null);
-            $table->text('google_token')->nullable()->default(null);
+            $table->text('google_credentials')->nullable()->default(null);
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users');

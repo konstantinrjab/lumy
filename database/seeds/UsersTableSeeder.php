@@ -1,6 +1,6 @@
 <?php
 
-use App\Database\Models\User\UsersProfile;
+use App\Database\Models\User\Profile;
 use App\Database\Models\User\User;
 use App\Entities\Enum\LanguageEnum;
 use Illuminate\Database\Seeder;
@@ -23,13 +23,13 @@ class UsersTableSeeder extends Seeder
                 'password'  => Hash::make(Str::random()),
                 'api_token' => Str::random(User::API_TOKEN_LENGTH)
             ]);
-            UsersProfile::create([
+            Profile::create([
                 'user_id'                 => $user->id,
-                'work_hours_in_month'     => UsersProfile::DEFAULT_WORK_HOURS_IN_MONTH,
-                'desired_income_nominal'  => UsersProfile::DEFAULT_DESIRED_INCOME_NOMINAL,
-                'desired_income_currency' => UsersProfile::DEFAULT_DESIRED_INCOME_CURRENCY,
+                'work_hours_in_month'     => Profile::DEFAULT_WORK_HOURS_IN_MONTH,
+                'desired_income_nominal'  => Profile::DEFAULT_DESIRED_INCOME_NOMINAL,
+                'desired_income_currency' => Profile::DEFAULT_DESIRED_INCOME_CURRENCY,
                 'language'                => $faker->randomElement($languages),
-                'theme'                   => UsersProfile::DEFAULT_THEME,
+                'theme'                   => Profile::DEFAULT_THEME,
             ]);
         }
     }

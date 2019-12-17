@@ -32,7 +32,7 @@ class GoogleAuthService
             $this->userRepository->createFromGoogle($userData, $user->id, $credentials);
         } else {
             $databaseUser->social()->update([
-                'google_token' => $credentials
+                'google_credentials' => $credentials
             ]);
         }
 
