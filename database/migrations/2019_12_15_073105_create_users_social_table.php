@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
 
 class CreateUsersSocialTable extends Migration
 {
@@ -22,6 +23,8 @@ class CreateUsersSocialTable extends Migration
 
             $table->foreign('user_id')->references('id')->on('users');
         });
+
+        DB::statement('INSERT INTO users_socials (user_id, google_id) SELECT id, google_id FROM users');
 
         Schema::table('users', function (Blueprint $table) {
             $table->dropColumn('google_id');
