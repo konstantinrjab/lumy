@@ -62,6 +62,10 @@ class DealRepository
 
     private function saveRelations(Deal $deal, array $data): void
     {
+        if (empty($data['facilities'])) {
+            return;
+        }
+
         foreach ($data['facilities'] as $facility) {
             $dealFacilities[] = [
                 'dela_id'     => $deal->id,

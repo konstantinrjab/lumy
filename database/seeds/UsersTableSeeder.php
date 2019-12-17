@@ -1,7 +1,7 @@
 <?php
 
-use App\Database\Models\Profile;
-use App\Database\Models\User;
+use App\Database\Models\User\Profile;
+use App\Database\Models\User\User;
 use App\Entities\Enum\LanguageEnum;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
