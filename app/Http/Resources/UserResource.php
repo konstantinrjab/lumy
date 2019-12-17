@@ -12,6 +12,7 @@ class UserResource extends JsonResource
             'id'        => $this->id,
             'name'      => $this->name,
             'email'     => $this->email,
+            'social'    => $this->social->only('google_id'),
             'createdAt' => $this->created_at->format(config('app.apiDateFormat')),
             'updatedAt' => $this->updated_at->format(config('app.apiDateFormat'))
         ];
