@@ -3,20 +3,77 @@
 namespace App\Entities\Services;
 
 use App\Database\Models\Deal;
-use Spatie\GoogleCalendar\Event;
+use Illuminate\Support\Facades\Auth;
+use Google_Service_Calendar_Event;
+use Google_Client;
+use Google_Service_Calendar;
+use Google_Exception;
+use Google_Service_Exception;
 
 class GoogleCalendarService
 {
-    public function createEventByDeal(Deal $deal)
+    public function createEventByDeal(Deal $deal): bool
     {
-        $event = new Event();
+        $client = $this->getClient();
+        if (!$client) {
+            return null;
+        }
+        $service = new Google_Service_Calendar($client);
+        $event = new Google_Service_Calendar_Event([
+            'summary' => $deal->title,
+            'location' => $deal->address,
+            'description' => $deal->comment,
+            'start' => [
+                'dateTime' => $deal->start,
+                'timeZone' => 'Etc/UTC',
+            ],
+            'end' => [
+                'dateTime' => $deal->end,
+                'timeZone' => 'Etc/UTC',
+            ],
+        ]);
 
-        $event->name = $deal->title;
-        $event->startDateTime = $deal->start;
-        $event->endDateTime = $deal->end;
-        $event->addAttendee(['email' => 'krforgames@gmail.com']);
-        $event->sendNotifications = true;
+        // TODO: add ability to choice calendar
+        $calendarId = 'primary';
+        try {
+            $service->events->insert($calendarId, $event);
+        } catch (Google_Service_Exception $exception) {
+            return false;
+        }
 
-        $event->save();
+        return true;
+    }
+
+    private function getClient(): ?Google_Client
+    {
+        if (!Auth::user()->social->google_credentials) {
+            return null;
+        }
+        try {
+            $client = new Google_Client();
+            $client->setApplicationName(config('app.name'));
+            $client->setScopes(Google_Service_Calendar::CALENDAR);
+            $client->setAuthConfig(storage_path('app/google-calendar/client_secret_web.json'));
+            $client->setAccessType('offline');
+            $client->setPrompt('select_account consent');
+
+            $client->setAccessToken(Auth::user()->social->google_credentials);
+
+            if ($client->isAccessTokenExpired()) {
+                // Refresh the token if possible, else fetch a new one.
+                if ($client->getRefreshToken()) {
+                    $client->fetchAccessTokenWithRefreshToken($client->getRefreshToken());
+                } else {
+                    // TODO: logout
+                }
+                Auth::user()->social()->update([
+                    'google_credentials' => $client->getAccessToken()
+                ]);
+            }
+        } catch (Google_Exception $exception) {
+            return null;
+        }
+
+        return $client;
     }
 }

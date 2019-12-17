@@ -2,6 +2,7 @@
 
 namespace App\Database\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
@@ -16,9 +17,9 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property string $currency
  * @property float $prepay_price
  * @property string $prepay_currency
- * @property string $start
- * @property string $end
- * @property string $deadline
+ * @property Carbon $start
+ * @property Carbon $end
+ * @property Carbon $deadline
  * @property string $comment
  */
 class Deal extends Model

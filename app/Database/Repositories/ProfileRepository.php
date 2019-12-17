@@ -2,7 +2,7 @@
 
 namespace App\Database\Repositories;
 
-use App\Database\Models\Profile;
+use App\Database\Models\User\Profile;
 
 class ProfileRepository
 {
