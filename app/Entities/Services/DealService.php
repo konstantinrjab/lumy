@@ -42,7 +42,27 @@ class DealService
     {
         $data = $this->getUpdatableDataFromRequest($request);
 
-        return $this->dealRepository->update($dealId, $data, $userId);
+        $deal = $this->dealRepository->getByIdAndUserIdOrFail($dealId, $userId);
+
+        if ($deal->google_calendar_id) {
+            $this->calendarService->updateEventByDeal($deal);
+        }
+
+        return $this->dealRepository->update($deal, $data);
+    }
+
+    public function delete(int $dealId, int $userId): bool
+    {
+        $deal = $this->dealRepository->getByIdAndUserId($dealId, $userId);
+        if (!$deal) {
+            return true;
+        }
+
+        if ($deal->google_calendar_id) {
+            return $this->calendarService->deleteEventByDeal($deal);
+        }
+
+        return true;
     }
 
     private function getUpdatableDataFromRequest(DealStoreRequest $request): array

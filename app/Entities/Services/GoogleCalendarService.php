@@ -3,6 +3,7 @@
 namespace App\Entities\Services;
 
 use App\Database\Models\Deal;
+use Google_Service_Calendar_EventDateTime;
 use Illuminate\Support\Facades\Auth;
 use Google_Service_Calendar_Event;
 use Google_Client;
@@ -16,27 +17,55 @@ class GoogleCalendarService
     {
         $client = $this->getClient();
         if (!$client) {
-            return null;
+            return true;
         }
         $service = new Google_Service_Calendar($client);
-        $event = new Google_Service_Calendar_Event([
-            'summary' => $deal->title,
-            'location' => $deal->address,
-            'description' => $deal->comment,
-            'start' => [
-                'dateTime' => $deal->start,
-                'timeZone' => 'Etc/UTC',
-            ],
-            'end' => [
-                'dateTime' => $deal->end,
-                'timeZone' => 'Etc/UTC',
-            ],
-        ]);
+        $event = new Google_Service_Calendar_Event();
+        $this->fillEventByDeal($deal, $event);
 
         // TODO: add ability to choice calendar
         $calendarId = 'primary';
         try {
-            $service->events->insert($calendarId, $event);
+            $calendarEvent = $service->events->insert($calendarId, $event);
+        } catch (Google_Service_Exception $exception) {
+            return false;
+        }
+        $deal->google_calendar_id = $calendarEvent->id;
+        $deal->save();
+
+        return true;
+    }
+
+    public function updateEventByDeal(Deal $deal): bool
+    {
+        $client = $this->getClient();
+        if (!$client) {
+            return true;
+        }
+        $service = new Google_Service_Calendar($client);
+        try {
+            // TODO: add ability to choice calendar
+            $event = $service->events->get('primary', $deal->google_calendar_id);
+            $this->fillEventByDeal($deal, $event);
+
+            $service->events->update('primary', $event->getId(), $event);
+        } catch (Google_Service_Exception $exception) {
+            return false;
+        }
+
+        return true;
+    }
+
+    public function deleteEventByDeal(Deal $deal): bool
+    {
+        $client = $this->getClient();
+        if (!$client) {
+            return true;
+        }
+        $service = new Google_Service_Calendar($client);
+        try {
+            // TODO: add ability to choice calendar
+            $service->events->delete('primary', $deal->google_calendar_id);
         } catch (Google_Service_Exception $exception) {
             return false;
         }
@@ -75,5 +104,22 @@ class GoogleCalendarService
         }
 
         return $client;
+    }
+
+    private function fillEventByDeal(Deal $deal, Google_Service_Calendar_Event $event): void
+    {
+        $event->setSummary($deal->title);
+        $event->setLocation($deal->address);
+        $event->setDescription($deal->comment);
+        $start = new Google_Service_Calendar_EventDateTime([
+            'dateTime' => $deal->start,
+            'timeZone' => 'Etc/UTC'
+        ]);
+        $end = new Google_Service_Calendar_EventDateTime([
+            'dateTime' => $deal->end,
+            'timeZone' => 'Etc/UTC'
+        ]);
+        $event->setStart($start);
+        $event->setEnd($end);
     }
 }

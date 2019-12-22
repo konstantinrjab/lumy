@@ -49,6 +49,6 @@ class DealController extends Controller
 
     public function destroy(int $dealId)
     {
-        $this->dealRepository->delete($dealId, Auth::id());
+        $this->dealService->delete($dealId, Auth::id());
     }
 }

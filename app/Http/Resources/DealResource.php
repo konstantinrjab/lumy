@@ -26,6 +26,10 @@ class DealResource extends JsonResource
             'start'      => $this->start ? $this->start->format(config('app.apiDateFormat')) : null,
             'end'        => $this->end ? $this->end->format(config('app.apiDateFormat')) : null,
             'deadline'   => $this->deadline ? $this->deadline->format(config('app.apiDateFormat')) : null,
+            'googleCalendar'   => [
+                'save' => (bool) $this->google_calendar_id,
+                'google_calendar_id' => $this->google_calendar_id ?? null,
+            ],
             'createdAt'  => $this->created_at->format(config('app.apiDateFormat')),
             'updatedAt'  => $this->updated_at->format(config('app.apiDateFormat'))
         ];

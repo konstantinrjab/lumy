@@ -14,6 +14,11 @@ class DealRepository
         return Deal::where(['id' => $id, 'user_id' => $userId])->firstOrFail();
     }
 
+    public function getByIdAndUserId(int $id, int $userId): ?Deal
+    {
+        return Deal::where(['id' => $id, 'user_id' => $userId])->first();
+    }
+
     public function getAllByUserId(int $userId): Collection
     {
         return Deal::where('user_id', $userId)->get();
@@ -32,10 +37,8 @@ class DealRepository
         return $deal;
     }
 
-    public function update(int $id, array $data, int $userId): bool
+    public function update(Deal $deal, array $data): bool
     {
-        $deal = $this->getByIdAndUserIdOrFail($id, $userId);
-
         DB::beginTransaction();
 
         try {
