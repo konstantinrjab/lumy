@@ -59,7 +59,8 @@ class DealService
         }
 
         if ($deal->google_calendar_id) {
-            return $this->calendarService->deleteEventByDeal($deal);
+            $this->calendarService->deleteEventByDeal($deal);
+            $deal->delete();
         }
 
         return true;
