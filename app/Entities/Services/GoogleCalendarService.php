@@ -13,23 +13,20 @@ use Google_Service_Exception;
 
 class GoogleCalendarService
 {
+    private const CALENDAR_ID_PRIMARY = 'primary';
+
     public function createEventByDeal(Deal $deal): bool
     {
         $client = $this->getClient();
         if (!$client) {
             return true;
         }
-        $endTime = $deal->end;
-        if (!$endTime) {
-            $endTime = clone $deal->start;
-            $endTime->add(\DateInterval::createFromDateString('+1 hours'));
-        }
         $service = new Google_Service_Calendar($client);
         $event = new Google_Service_Calendar_Event();
         $this->fillEventByDeal($deal, $event);
 
         // TODO: add ability to choice calendar
-        $calendarId = 'primary';
+        $calendarId = self::CALENDAR_ID_PRIMARY;
         try {
             $calendarEvent = $service->events->insert($calendarId, $event);
         } catch (Google_Service_Exception $exception) {
@@ -50,10 +47,10 @@ class GoogleCalendarService
         $service = new Google_Service_Calendar($client);
         try {
             // TODO: add ability to choice calendar
-            $event = $service->events->get('primary', $deal->google_calendar_id);
+            $event = $service->events->get(self::CALENDAR_ID_PRIMARY, $deal->google_calendar_id);
             $this->fillEventByDeal($deal, $event);
 
-            $service->events->update('primary', $event->getId(), $event);
+            $service->events->update(self::CALENDAR_ID_PRIMARY, $event->getId(), $event);
         } catch (Google_Service_Exception $exception) {
             return false;
         }
@@ -70,7 +67,7 @@ class GoogleCalendarService
         $service = new Google_Service_Calendar($client);
         try {
             // TODO: add ability to choice calendar
-            $service->events->delete('primary', $deal->google_calendar_id);
+            $service->events->delete(self::CALENDAR_ID_PRIMARY, $deal->google_calendar_id);
         } catch (Google_Service_Exception $exception) {
             return false;
         }
