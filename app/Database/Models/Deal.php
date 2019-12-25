@@ -21,6 +21,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property Carbon $end
  * @property Carbon $deadline
  * @property string $comment
+ * @property string|null $google_calendar_id
  */
 class Deal extends Model
 {
@@ -37,7 +38,8 @@ class Deal extends Model
         'start',
         'end',
         'deadline',
-        'comment'
+        'comment',
+        'google_calendar_id',
     ];
 
     protected $dates = [

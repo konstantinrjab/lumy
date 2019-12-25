@@ -6,6 +6,8 @@ use App\Entities\Services\GoogleAuthService;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
 use Laravel\Socialite\Facades\Socialite;
+use Google_Service_Calendar;
+use Exception;
 
 class SocialAuthGoogleController extends Controller
 {
@@ -17,10 +19,10 @@ class SocialAuthGoogleController extends Controller
         $this->googleAuthService = $googleAuthService;
     }
 
-    public function redirectToProvider(): \Symfony\Component\HttpFoundation\RedirectResponse
+    public function redirectToProvider(): RedirectResponse
     {
         return Socialite::driver('google')
-            ->scopes(\Google_Service_Calendar::CALENDAR_EVENTS)
+            ->scopes(Google_Service_Calendar::CALENDAR_EVENTS)
             ->with(['access_type' => 'offline', 'prompt' => 'consent select_account'])
             ->redirect();
     }
@@ -29,7 +31,7 @@ class SocialAuthGoogleController extends Controller
     {
         try {
             $user = Socialite::driver('google')->stateless()->user();
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             return redirect()->away(env('AUTH_REDIRECT_URL'));
         }
         $apiToken = $this->googleAuthService->handleLogin($user);
