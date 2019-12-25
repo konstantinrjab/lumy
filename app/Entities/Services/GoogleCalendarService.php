@@ -116,12 +116,19 @@ class GoogleCalendarService
         $event->setSummary($deal->title);
         $event->setLocation($deal->address);
         $event->setDescription($deal->comment);
+
+        $endTime = $deal->end;
+        if (!$endTime) {
+            $endTime = clone $deal->start;
+            $endTime->add(\DateInterval::createFromDateString('+1 hours'));
+        }
+
         $start = new Google_Service_Calendar_EventDateTime([
             'dateTime' => $deal->start,
             'timeZone' => 'Etc/UTC'
         ]);
         $end = new Google_Service_Calendar_EventDateTime([
-            'dateTime' => $deal->end,
+            'dateTime' => $endTime,
             'timeZone' => 'Etc/UTC'
         ]);
         $event->setStart($start);

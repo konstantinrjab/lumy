@@ -60,8 +60,8 @@ class DealService
 
         if ($deal->google_calendar_id) {
             $this->calendarService->deleteEventByDeal($deal);
-            $deal->delete();
         }
+        $deal->delete();
 
         return true;
     }
