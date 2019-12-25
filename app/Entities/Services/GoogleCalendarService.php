@@ -18,6 +18,11 @@ class GoogleCalendarService
         if (!$client) {
             return null;
         }
+        $endTime = $deal->end;
+        if (!$endTime) {
+            $endTime = clone $deal->start;
+            $endTime->add(\DateInterval::createFromDateString('+1 hours'));
+        }
         $service = new Google_Service_Calendar($client);
         $event = new Google_Service_Calendar_Event([
             'summary' => $deal->title,
@@ -28,7 +33,7 @@ class GoogleCalendarService
                 'timeZone' => 'Etc/UTC',
             ],
             'end' => [
-                'dateTime' => $deal->end,
+                'dateTime' => $endTime,
                 'timeZone' => 'Etc/UTC',
             ],
         ]);

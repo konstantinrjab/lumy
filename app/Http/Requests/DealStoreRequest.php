@@ -37,8 +37,8 @@ class DealStoreRequest extends FormRequest
                     $query->where('user_id', Auth::id());
                 }),
             ],
-            'start'                     => 'nullable|required_with:googleCalendar.save|date_format:' . config('app.apiDateFormat'),
-            'end'                       => 'nullable|required_with:googleCalendar.save|date_format:' . config('app.apiDateFormat') . '|after:now',
+            'start'                     => 'nullable|required_if:googleCalendar.save,true|date_format:' . config('app.apiDateFormat'),
+            'end'                       => 'nullable|date_format:' . config('app.apiDateFormat') . '|after:now',
             'deadline'                  => 'nullable|date_format:' . config('app.apiDateFormat') . '|after:now',
             'address'                   => 'nullable|string|max:100',
             'comment'                   => 'nullable|string|max:100',
