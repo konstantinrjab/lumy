@@ -76,6 +76,7 @@ class DealService
             'prepay_price'    => $request->input('prepay.nominal'),
             'prepay_currency' => $request->input('prepay.currency'),
             'address'         => $request->get('address'),
+            'comment'         => $request->get('comment'),
             'deadline'        => $request->get('deadline')
                 ? Carbon::parse($request->get('deadline'))->format(config('app.mysqlDateFormat'))
                 : null,

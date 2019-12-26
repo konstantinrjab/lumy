@@ -23,6 +23,7 @@ class DealResource extends JsonResource
             ],
             'facilities' => DealFacilityResource::collection($this->facilities),
             'address'    => $this->address,
+            'comment'    => $this->comment,
             'start'      => $this->start ? $this->start->format(config('app.apiDateFormat')) : null,
             'end'        => $this->end ? $this->end->format(config('app.apiDateFormat')) : null,
             'deadline'   => $this->deadline ? $this->deadline->format(config('app.apiDateFormat')) : null,
