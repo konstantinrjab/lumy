@@ -44,13 +44,16 @@ class DealService
 
         $deal = $this->dealRepository->getByIdAndUserIdOrFail($dealId, $userId);
 
+        if (!$this->dealRepository->update($deal, $data)) {
+            return false;
+        }
         if ($deal->google_calendar_id) {
             $this->calendarService->updateEventByDeal($deal);
         } elseif (!$deal->google_calendar_id && $request->input('googleCalendar.save')) {
             $this->calendarService->createEventByDeal($deal);
         }
 
-        return $this->dealRepository->update($deal, $data);
+        return true;
     }
 
     public function delete(int $dealId, int $userId): bool
