@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\UserUpdateRequest;
 use App\Http\Resources\UserResource;
 use Illuminate\Support\Facades\Auth;
+use Exception;
 
 class UserController extends Controller
 {
@@ -28,7 +29,7 @@ class UserController extends Controller
         $user = Auth::user();
         $user->name = $request->get('name');
         if (!$user->save()) {
-            throw new \Exception('Something went wrong');
+            throw new Exception('Something went wrong');
         }
 
         return new UserResource(Auth::user());

@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Exceptions;
+namespace App\Helpers;
 
 use Illuminate\Support\Facades\Auth;
+use Exception;
 
 class ExceptionHelper
 {
-    public static function getExceptionData(\Exception $exception): array
+    public static function getExceptionData(Exception $exception): array
     {
         $url = '';
         if (isset($_SERVER['HTTP_HOST']) && isset($_SERVER['REQUEST_URI'])) {

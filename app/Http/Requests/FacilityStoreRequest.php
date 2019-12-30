@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests;
 
-use App\Entities\Enum\CurrencyEnum;
+use App\Enum\CurrencyEnum;
 use Illuminate\Foundation\Http\FormRequest;
 
 class FacilityStoreRequest extends FormRequest

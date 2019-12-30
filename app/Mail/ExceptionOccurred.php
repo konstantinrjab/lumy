@@ -2,7 +2,7 @@
 
 namespace App\Mail;
 
-use App\Exceptions\ExceptionHelper;
+use App\Helpers\ExceptionHelper;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
