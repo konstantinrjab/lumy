@@ -10,6 +10,7 @@ services:
       PHP_IDE_CONFIG: "serverName=Docker"
     volumes:
       - ../../:/var/www
+    user: ${DOCKER_USER}
   nginx:
     container_name: lum_nginx
     build:

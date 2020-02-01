@@ -18,6 +18,8 @@ docker exec lum_php bash -c "php artisan cache:clear && php artisan route:cache 
 ```shell script
 docker-compose -f ".\docker\dev\docker-compose.yml" up -d --build
 docker-compose -f ".\docker\dev\docker-compose.yml" down
+
+DOCKER_USER=$(id -u):$(id -g) docker-compose up -d
 ```
 
 ####Seeders

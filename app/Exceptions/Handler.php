@@ -33,7 +33,15 @@ class Handler extends ExceptionHandler
         'password_confirmation',
     ];
 
-    public function report(Exception $exception): void
+    /**
+     * Report or log an exception.
+     *
+     * @param \Exception $exception
+     * @return void (not for cli)
+     *
+     * @throws Exception
+     */
+    public function report(Exception $exception)
     {
         if ($this->shouldReport($exception)) {
             $this->sendEmail($exception);
