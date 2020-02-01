@@ -28,7 +28,9 @@ class AdminInit extends Migration
             'name'      => self::ADMIN_NAME,
             'email'     => self::ADMIN_EMAIL,
             'password'  => Hash::make(self::ADMIN_PASSWORD),
-            'api_token' => self::ADMIN_API_TOKEN
+            'api_token' => self::ADMIN_API_TOKEN,
+            'created_at'              => '2000-01-01 12:00:00',
+            'updated_at'              => '2000-01-01 12:00:00'
         ]);
 
         $userId = DB::table('users')
@@ -52,6 +54,8 @@ class AdminInit extends Migration
             'desired_income_currency' => 'uah',
             'language'                => 'ru',
             'theme'                   => 'dark',
+            'created_at'              => '2000-01-01 12:00:00',
+            'updated_at'              => '2000-01-01 12:00:00'
         ]);
 
         DB::table('users_roles')->insert([

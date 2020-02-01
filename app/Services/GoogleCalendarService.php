@@ -10,6 +10,7 @@ use Google_Client;
 use Google_Service_Calendar;
 use Google_Exception;
 use Google_Service_Exception;
+use DateInterval;
 
 class GoogleCalendarService
 {
@@ -117,7 +118,7 @@ class GoogleCalendarService
         $endTime = $deal->end;
         if (!$endTime) {
             $endTime = clone $deal->start;
-            $endTime->add(\DateInterval::createFromDateString('+1 hours'));
+            $endTime->add(DateInterval::createFromDateString('+1 hours'));
         }
 
         $start = new Google_Service_Calendar_EventDateTime([

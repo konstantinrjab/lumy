@@ -2,8 +2,8 @@
 
 namespace App\Http\Requests;
 
-use App\Entities\Enum\CurrencyEnum;
-use App\Entities\Enum\DealStatusEnum;
+use App\Enum\CurrencyEnum;
+use App\Enum\DealStatusEnum;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;

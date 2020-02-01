@@ -2,6 +2,7 @@
 
 namespace App\Exceptions;
 
+use App\Helpers\ExceptionHelper;
 use App\Mail\ExceptionOccurred;
 use Exception;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -9,6 +10,7 @@ use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Validation\ValidationException;
+use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
 
 class Handler extends ExceptionHandler
 {
@@ -35,7 +37,7 @@ class Handler extends ExceptionHandler
      * Report or log an exception.
      *
      * @param \Exception $exception
-     * @return void
+     * @return void (not for cli)
      *
      * @throws Exception
      */
@@ -52,7 +54,7 @@ class Handler extends ExceptionHandler
      * Render an exception into an HTTP response.
      *
      * @param \Illuminate\Http\Request $request
-     * @param \Exception $exception
+     * @param Exception $exception
      * @return \Illuminate\Http\Response|\Symfony\Component\HttpFoundation\Response
      */
     public function render($request, Exception $exception)
@@ -77,6 +79,7 @@ class Handler extends ExceptionHandler
             $status = 400;
 
             if ($this->isHttpException($exception)) {
+                /** @var HttpExceptionInterface $exception */
                 $status = $exception->getStatusCode();
             }
 
@@ -86,7 +89,7 @@ class Handler extends ExceptionHandler
         return parent::render($request, $exception);
     }
 
-    private function sendEmail(\Exception $exception)
+    private function sendEmail(Exception $exception)
     {
         try {
             $emails = explode(',', env('EXCEPTION_EMAILS'));

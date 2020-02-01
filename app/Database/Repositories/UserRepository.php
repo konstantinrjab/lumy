@@ -41,7 +41,7 @@ class UserRepository
         return $user;
     }
 
-    public function createFromGoogle(array $userData, string $googleId, string $credentials)
+    public function createFromGoogle(array $userData, string $googleId, string $credentials): User
     {
         DB::beginTransaction();
 

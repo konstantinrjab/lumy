@@ -1,6 +1,7 @@
 <?php
 
-namespace App\Entities\Enum;
+namespace App\Entities\Enum\Abstracts;
+
 use ReflectionClass;
 
 abstract class Enum

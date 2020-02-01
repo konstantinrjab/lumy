@@ -2,9 +2,9 @@
 
 namespace App\Http\Requests;
 
-use App\Entities\Enum\CurrencyEnum;
-use App\Entities\Enum\LanguageEnum;
-use App\Entities\Enum\ProfileThemeEnum;
+use App\Enum\CurrencyEnum;
+use App\Enum\LanguageEnum;
+use App\Enum\ProfileThemeEnum;
 use Illuminate\Foundation\Http\FormRequest;
 
 class ProfileUpdateRequest extends FormRequest

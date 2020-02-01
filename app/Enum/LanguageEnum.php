@@ -1,6 +1,8 @@
 <?php
 
-namespace App\Entities\Enum;
+namespace App\Enum;
+
+use App\Entities\Enum\Abstracts\Enum;
 
 class LanguageEnum extends Enum
 {
