@@ -29,7 +29,7 @@ class GoogleAuthService
                 'name'      => $user->name,
                 'email'     => $user->email,
             ];
-            $this->userRepository->createFromGoogle($userData, $user->id, $credentials);
+            $databaseUser = $this->userRepository->createFromGoogle($userData, $user->id, $credentials);
         } else {
             $databaseUser->social()->update([
                 'google_credentials' => $credentials
