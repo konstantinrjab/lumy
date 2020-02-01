@@ -2,7 +2,7 @@
 
 use App\Database\Models\Facility;
 use App\Database\Models\FacilityExpense;
-use App\Entities\Enum\CurrencyEnum;
+use App\Enum\CurrencyEnum;
 use Illuminate\Database\Seeder;
 
 class FacilitiesTableSeeder extends Seeder

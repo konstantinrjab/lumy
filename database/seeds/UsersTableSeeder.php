@@ -2,10 +2,11 @@
 
 use App\Database\Models\User\Profile;
 use App\Database\Models\User\User;
-use App\Entities\Enum\LanguageEnum;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
+use App\Enum\LanguageEnum;
+use Carbon\Carbon;
 
 class UsersTableSeeder extends Seeder
 {
@@ -30,6 +31,7 @@ class UsersTableSeeder extends Seeder
                 'desired_income_currency' => Profile::DEFAULT_DESIRED_INCOME_CURRENCY,
                 'language'                => $faker->randomElement($languages),
                 'theme'                   => Profile::DEFAULT_THEME,
+                'created_at'              => Carbon::now()->toDateTimeString()
             ]);
         }
     }

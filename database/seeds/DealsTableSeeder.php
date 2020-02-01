@@ -2,8 +2,8 @@
 
 use App\Database\Models\Deal;
 use App\Database\Models\DealFacility;
-use App\Entities\Enum\CurrencyEnum;
-use App\Entities\Enum\DealStatusEnum;
+use App\Enum\CurrencyEnum;
+use App\Enum\DealStatusEnum;
 use Illuminate\Database\Seeder;
 
 class DealsTableSeeder extends Seeder

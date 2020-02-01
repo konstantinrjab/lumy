@@ -2,7 +2,7 @@
 
 namespace App\Database\Models\User;
 
-use App\Database\Traits\HasRoles;
+use App\Database\Models\Traits\HasRoles;
 use App\Notifications\PasswordReset;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
