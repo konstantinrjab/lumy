@@ -14,7 +14,6 @@ use \Illuminate\Support\Facades\Route;
 */
 
 Route::namespace('Web')->group(function () {
-
     Route::middleware(['web'])->group(function () {
         Route::middleware(['auth:web', 'admin'])->group(function () {
             Route::get('/', 'HomeController@index');
@@ -32,3 +31,5 @@ Route::namespace('Web')->group(function () {
         Route::get('/google-callback', 'Auth\SocialAuthGoogleController@handleProviderCallback');
     });
 });
+
+Route::view('privacy-policy', 'privacy_policy/privacy_policy');
