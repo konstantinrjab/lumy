@@ -2,11 +2,13 @@
 
 namespace App\Http\Middleware;
 
+use App\Helpers\ExceptionHelper;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Symfony\Component\HttpFoundation\Response;
 use Closure;
+use Exception;
 use DateTimeInterface;
 
 class ApiDataLogger
@@ -32,6 +34,10 @@ class ApiDataLogger
         $dataToLog .= 'Input: ' . $request->getContent() . "\n";
         $dataToLog .= 'Output: ' . json_encode(json_decode($response->getContent()), JSON_PRETTY_PRINT) . "\n";
 
-        File::append(storage_path('logs' . DIRECTORY_SEPARATOR . $filename), $dataToLog . "\n");
+        try {
+            File::append(storage_path('logs' . DIRECTORY_SEPARATOR . $filename), $dataToLog . "\n");
+        } catch (Exception $e) {
+            ExceptionHelper::sendExceptionEmail($e);
+        }
     }
 }

@@ -44,7 +44,7 @@ class Handler extends ExceptionHandler
     public function report(Exception $exception)
     {
         if ($this->shouldReport($exception)) {
-            $this->sendEmail($exception);
+            ExceptionHelper::sendExceptionEmail($exception);
         }
 
         return parent::report($exception);
@@ -87,16 +87,5 @@ class Handler extends ExceptionHandler
         }
 
         return parent::render($request, $exception);
-    }
-
-    private function sendEmail(Exception $exception)
-    {
-        try {
-            $emails = explode(',', env('EXCEPTION_EMAILS'));
-
-            Mail::to($emails)->send(new ExceptionOccurred($exception));
-        } catch (Exception $ex) {
-            Log::critical('cannot send email. exception: ', ExceptionHelper::getExceptionData($ex));
-        }
     }
 }

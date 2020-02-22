@@ -2,11 +2,25 @@
 
 namespace App\Helpers;
 
+use App\Mail\ExceptionOccurred;
 use Illuminate\Support\Facades\Auth;
 use Exception;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 
 class ExceptionHelper
 {
+    public static function sendExceptionEmail(Exception $exception): void
+    {
+        try {
+            $emails = explode(',', env('EXCEPTION_EMAILS'));
+
+            Mail::to($emails)->send(new ExceptionOccurred($exception));
+        } catch (Exception $ex) {
+            Log::critical('cannot send email. exception: ', ExceptionHelper::getExceptionData($ex));
+        }
+    }
+
     public static function getExceptionData(Exception $exception): array
     {
         $url = '';
