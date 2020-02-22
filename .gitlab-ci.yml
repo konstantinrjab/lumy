@@ -14,7 +14,6 @@ prod_deploy:
     - ssh $SSH_USERNAME_PROD@$SSH_HOST_PROD "cd /var/lumy
       && git reset --hard HEAD && git checkout master
       && git pull origin master
-      && docker exec lum_php php artisan cache:clear
       && docker run --rm --interactive --volume /var/lumy:/app composer install --ignore-platform-reqs --no-scripts
       && docker-compose -f "docker/prod/docker-compose-prod.yml" pull
       && docker-compose -f "docker/prod/docker-compose-prod.yml" up -d --build
@@ -22,9 +21,9 @@ prod_deploy:
       && docker exec lum_php php artisan route:cache
       && docker exec lum_php php artisan config:cache
       && docker exec lum_php php artisan view:cache
-      && docker ps
       && docker exec lum_php php artisan migrate
       && docker exec lum_php php vendor/bin/phpunit
+      && echo -e "\e[32mJob is done."
       && exit
       "
   only:
