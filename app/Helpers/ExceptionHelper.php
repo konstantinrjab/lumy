@@ -17,7 +17,7 @@ class ExceptionHelper
 
             Mail::to($emails)->send(new ExceptionOccurred($exception));
         } catch (Exception $ex) {
-            Log::critical('cannot send email. exception: ', ExceptionHelper::getExceptionData($ex));
+            Log::critical('Cannot send email. Exception: ', ExceptionHelper::getExceptionData($ex));
         }
     }
 

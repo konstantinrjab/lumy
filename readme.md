@@ -16,17 +16,9 @@ docker exec lum_php bash -c "php artisan cache:clear && php artisan route:cache 
 
 ###Docker compose
 ```shell script
-docker-compose -f ".\docker\dev\docker-compose.yml" up -d --build
-docker-compose -f ".\docker\dev\docker-compose.yml" down
-
-DOCKER_USER=$(id -u):$(id -g) docker-compose up -d
+DOCKER_USER=$(id -u):$(id -g) docker-compose -f ".\docker\dev\docker-compose.yml" up -d --build
+DOCKER_USER=$(id -u):$(id -g) docker-compose -f ".\docker\dev\docker-compose.yml" down
 ```
-
-####Seeders
-```shell script
-docker exec lum_php php artisan db:seed --class=FaqTableSeeder
-```
-
 
 ####Certbot certificate renewal
 docker run -it --rm --name certbot -v "prod_lum_certs:/etc/letsencrypt" -v "prod_lum_certs_data:/var/www/certbot" certbot/certbot:v0.30.0 certonly --webroot --webroot-path /var/www/certbot --email krforgames@gmail.com -d lumy.photo -d backend.lumy.photo
