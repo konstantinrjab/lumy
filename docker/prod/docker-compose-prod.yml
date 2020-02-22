@@ -6,6 +6,7 @@ services:
     image: konstantinrjab/lumy:prod
     volumes:
       - ../../:/var/www
+    user: www-data
   nginx:
     container_name: lum_nginx
     build:
