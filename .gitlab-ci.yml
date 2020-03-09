@@ -23,7 +23,6 @@ prod_deploy:
       && docker exec lum_php php artisan view:cache
       && docker exec lum_php php artisan migrate
       && docker exec lum_php php vendor/bin/phpunit
-      && echo -e "\e[32mJob is done."
       && exit
       "
   only:
