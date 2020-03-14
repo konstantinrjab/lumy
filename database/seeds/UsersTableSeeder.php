@@ -1,7 +1,7 @@
 <?php
 
-use App\Database\Models\User\Profile;
-use App\Database\Models\User\User;
+use App\Modules\User\Models\Profile;
+use App\Modules\User\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
@@ -12,6 +12,8 @@ class UsersTableSeeder extends Seeder
 {
     public const COUNT = 5;
 
+    private const DEFAULT_PASSWORD = '123';
+
     public function run(): void
     {
         $languages = LanguageEnum::getValues();
@@ -21,7 +23,7 @@ class UsersTableSeeder extends Seeder
             $user = User::create([
                 'name'      => $faker->name,
                 'email'     => $faker->email,
-                'password'  => Hash::make(Str::random()),
+                'password'  => Hash::make(self::DEFAULT_PASSWORD),
                 'api_token' => Str::random(User::API_TOKEN_LENGTH)
             ]);
             Profile::create([

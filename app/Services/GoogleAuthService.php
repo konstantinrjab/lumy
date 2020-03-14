@@ -2,7 +2,7 @@
 
 namespace App\Entities\Services;
 
-use App\Database\Models\User\User;
+use App\Modules\User\Models\User;
 use App\Database\Repositories\UserRepository;
 use Laravel\Socialite\Two\User as OAuthTwoUser;
 

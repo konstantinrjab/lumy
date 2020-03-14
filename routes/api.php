@@ -13,30 +13,38 @@ use \Illuminate\Support\Facades\Route;
 |
 */
 
-Route::namespace('Api')->group(function () {
 
-    Route::middleware(['auth:api'])->group(function () {
+Route::middleware(['auth:api'])->group(function () {
+    Route::namespace('Http\Controllers\Api')->group(function () {
+
         Route::apiResources([
             'clients'    => 'ClientController',
             'deals'      => 'DealController',
             'facilities' => 'FacilityController',
             'expenses'   => 'ExpenseController',
         ]);
+    });
+
+    Route::namespace('Modules\User\Controllers')->group(function () {
         Route::get('profiles', 'ProfileController@index');
         Route::put('profiles', 'ProfileController@update');
 
         Route::get('users', 'UserController@index');
         Route::put('users', 'UserController@update');
-
-        Route::get('faqs', 'FaqController@index');
     });
 
-    Route::middleware(['api'])->group(function () {
-        Route::post('users/authenticate/password', 'Auth\LoginController@login');
-        Route::post('users/register/password', 'Auth\RegisterController@register');
-        Route::post('users/password/reset', 'Auth\ResetPasswordController@reset')->name('password.reset');
-        Route::post('users/password/reset/email', 'Auth\ForgotPasswordController@sendResetLinkEmail');
+    Route::get('faqs', 'Modules\Faq\Controllers\FaqController@index');
+});
 
+Route::middleware(['api'])->group(function () {
+    Route::namespace('Modules\Auth\Controllers\Api')->group(function () {
+        Route::post('users/authenticate/password', 'LoginController@login');
+        Route::post('users/register/password', 'RegisterController@register');
+        Route::post('users/password/reset', 'ResetPasswordController@reset')->name('password.reset');
+        Route::post('users/password/reset/email', 'ForgotPasswordController@sendResetLinkEmail');
+    });
+
+    Route::namespace('Http\Controllers\Api')->group(function () {
         Route::options('clients/{any?}', 'OptionsController');
         Route::options('deals/{any?}', 'OptionsController');
         Route::options('facilities/{any?}', 'OptionsController');
@@ -46,7 +54,6 @@ Route::namespace('Api')->group(function () {
         Route::options('users/{any?}', 'OptionsController');
         Route::options('users/password/reset/{any?}', 'OptionsController');
         Route::options('users/password/reset/email/{any?}', 'OptionsController');
-
         Route::options('users/authenticate/{any?}', 'OptionsController');
         Route::options('users/register/{any?}', 'OptionsController');
     });

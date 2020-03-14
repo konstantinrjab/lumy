@@ -13,22 +13,22 @@ use \Illuminate\Support\Facades\Route;
 |
 */
 
-Route::namespace('Web')->group(function () {
-    Route::middleware(['web'])->group(function () {
-        Route::middleware(['auth:web', 'admin'])->group(function () {
-            Route::get('/', 'HomeController@index');
-            Route::get('/home', 'HomeController@index')->name('home');
-            Route::resources([
-                'faqs' => 'FaqController',
-            ]);
-        });
+Route::middleware(['web'])->group(function () {
+    Route::middleware(['auth:web', 'admin'])->group(function () {
+        Route::get('/', 'Http\Controllers\Web\HomeController@index');
+        Route::get('/home', 'Http\Controllers\Web\HomeController@index')->name('home');
+        Route::resources([
+            'faqs' => 'Modules\Faq\Controllers\FaqWebController',
+        ]);
+    });
 
-        Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
-        Route::post('login', 'Auth\LoginController@login');
-        Route::post('logout', 'Auth\LoginController@logout')->name('logout');
+    Route::namespace('Modules\Auth\Controllers\Web')->group(function () {
+        Route::get('login', 'LoginController@showLoginForm')->name('login');
+        Route::post('login', 'LoginController@login');
+        Route::post('logout', 'LoginController@logout')->name('logout');
 
-        Route::get('/google-redirect', 'Auth\SocialAuthGoogleController@redirectToProvider');
-        Route::get('/google-callback', 'Auth\SocialAuthGoogleController@handleProviderCallback');
+        Route::get('/google-redirect', 'SocialAuthGoogleController@redirectToProvider');
+        Route::get('/google-callback', 'SocialAuthGoogleController@handleProviderCallback');
     });
 });
 

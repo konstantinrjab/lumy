@@ -1,6 +1,6 @@
 <?php
 
-use App\Database\Models\Faq;
+use App\Modules\Faq\Models\Faq;
 use Illuminate\Database\Seeder;
 
 class FaqTableSeeder extends Seeder

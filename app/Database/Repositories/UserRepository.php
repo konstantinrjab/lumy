@@ -2,9 +2,9 @@
 
 namespace App\Database\Repositories;
 
-use App\Database\Models\User\Profile;
-use App\Database\Models\User\User;
-use App\Database\Models\User\UsersSocial;
+use App\Modules\User\Models\Profile;
+use App\Modules\User\Models\User;
+use App\Modules\User\Models\UsersSocial;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
