@@ -33,7 +33,7 @@ Route::middleware(['auth:api'])->group(function () {
         Route::put('users', 'UserController@update');
     });
 
-    Route::get('faqs', 'Modules\Faq\Controllers\FaqController@index');
+    Route::get('faqs', 'Modules\Faq\Controllers\FaqApiController@index');
 });
 
 Route::middleware(['api'])->group(function () {

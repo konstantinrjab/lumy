@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Modules\Faq\Controllers;
 
 use App\Modules\Faq\Models\Faq;
 use App\Modules\Faq\Repositories\FaqRepository;
