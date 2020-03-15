@@ -21,6 +21,7 @@ Route::middleware(['auth:api'])->group(function () {
             'deals'   => 'Deal\Controllers\DealController',
             'clients' => 'Client\Controllers\ClientController',
             'expenses'   => 'Expense\Controllers\ExpenseController',
+            'facilities' => 'Facility\Controllers\FacilityController',
         ]);
 
         Route::namespace('User\Controllers')->group(function () {
@@ -30,12 +31,6 @@ Route::middleware(['auth:api'])->group(function () {
             Route::get('users', 'UserController@index');
             Route::put('users', 'UserController@update');
         });
-    });
-
-    Route::namespace('Http\Controllers\Api')->group(function () {
-        Route::apiResources([
-            'facilities' => 'FacilityController',
-        ]);
     });
 
     Route::get('faqs', 'Modules\Faq\Controllers\FaqApiController@index');
@@ -49,7 +44,7 @@ Route::middleware(['api'])->group(function () {
         Route::post('users/password/reset/email', 'ForgotPasswordController@sendResetLinkEmail');
     });
 
-    Route::namespace('Http\Controllers\Api')->group(function () {
+    Route::namespace('Http\Controllers')->group(function () {
         Route::options('clients/{any?}', 'OptionsController');
         Route::options('deals/{any?}', 'OptionsController');
         Route::options('facilities/{any?}', 'OptionsController');

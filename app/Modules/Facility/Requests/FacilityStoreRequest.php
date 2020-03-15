@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Modules\Facility\Requests;
 
 use App\Enum\CurrencyEnum;
 use Illuminate\Foundation\Http\FormRequest;

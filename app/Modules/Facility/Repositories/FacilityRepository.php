@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Database\Repositories;
+namespace App\Modules\Facility\Repositories;
 
-use App\Database\Models\Facility;
+use App\Modules\Facility\Models\Facility;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\DB;
 use Exception;

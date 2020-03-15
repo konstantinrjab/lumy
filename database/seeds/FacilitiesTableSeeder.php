@@ -1,7 +1,7 @@
 <?php
 
-use App\Database\Models\Facility;
-use App\Database\Models\FacilityExpense;
+use App\Modules\Facility\Models\Facility;
+use App\Modules\Facility\Models\FacilityExpense;
 use App\Enum\CurrencyEnum;
 use Illuminate\Database\Seeder;
 

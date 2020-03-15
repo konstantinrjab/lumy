@@ -3,7 +3,7 @@
 use App\Modules\Deal\Models\Deal;
 use App\Modules\Deal\Models\DealFacility;
 use App\Enum\CurrencyEnum;
-use App\Enum\DealStatusEnum;
+use App\Modules\Deal\Enum\DealStatusEnum;
 use Illuminate\Database\Seeder;
 
 class DealsTableSeeder extends Seeder

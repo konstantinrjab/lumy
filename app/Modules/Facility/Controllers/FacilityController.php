@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Models\Facility\Controllers;
 
-use App\Database\Repositories\FacilityRepository;
+use App\Modules\Facility\Repositories\FacilityRepository;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\FacilityStoreRequest;
-use App\Http\Resources\FacilityResource;
+use App\Modules\Facility\Requests\FacilityStoreRequest;
+use App\Modules\Facility\Resources\FacilityResource;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Support\Facades\Auth;
 

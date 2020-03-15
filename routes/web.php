@@ -15,8 +15,8 @@ use \Illuminate\Support\Facades\Route;
 
 Route::middleware(['web'])->group(function () {
     Route::middleware(['auth:web', 'admin'])->group(function () {
-        Route::get('/', 'Http\Controllers\Web\HomeController@index');
-        Route::get('/home', 'Http\Controllers\Web\HomeController@index')->name('home');
+        Route::get('/', 'Http\Controllers\HomeController@index');
+        Route::get('/home', 'Http\Controllers\HomeController@index')->name('home');
         Route::resources([
             'faqs' => 'Modules\Faq\Controllers\FaqWebController',
         ]);
