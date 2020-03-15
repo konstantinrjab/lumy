@@ -5,7 +5,7 @@ namespace App\Modules\Client\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class ClientEmail extends Model
+class ClientEmail extends \Eloquent
 {
     protected $fillable = ['client_id', 'email'];
 

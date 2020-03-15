@@ -5,7 +5,7 @@ namespace App\Modules\Client\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class Client extends Model
+class Client extends \Eloquent
 {
     public const VISIBILITY_VISIBLE = 1;
     public const VISIBILITY_HIDDEN = 0;

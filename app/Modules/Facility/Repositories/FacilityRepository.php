@@ -39,7 +39,7 @@ class FacilityRepository
 
         try {
             if (!$facility->update($data)) {
-                throw new Exception();
+                throw new Exception('Facility update fails');
             }
 
             $facility->expenses()->delete();
@@ -48,7 +48,7 @@ class FacilityRepository
             DB::commit();
         } catch (Exception $e) {
             DB::rollback();
-            throw new Exception('Update fails');
+            throw new Exception('Facility update fails');
         }
 
         return true;

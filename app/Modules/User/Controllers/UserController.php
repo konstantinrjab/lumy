@@ -29,7 +29,7 @@ class UserController extends Controller
         $user = Auth::user();
         $user->name = $request->get('name');
         if (!$user->save()) {
-            throw new Exception('Something went wrong');
+            throw new Exception('User update fails');
         }
 
         return new UserResource(Auth::user());

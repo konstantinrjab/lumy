@@ -50,7 +50,7 @@ class ClientRepository
             DB::commit();
         } catch (Exception $e) {
             DB::rollback();
-            throw new Exception('Update fails');
+            throw new Exception('Client update fails');
         }
 
         return true;

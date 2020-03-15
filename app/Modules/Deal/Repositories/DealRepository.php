@@ -43,7 +43,7 @@ class DealRepository
 
         try {
             if (!$deal->update($data)) {
-                throw new Exception();
+                throw new Exception('Deal update fails');
             }
 
             $deal->facilities()->delete();
@@ -52,7 +52,7 @@ class DealRepository
             DB::commit();
         } catch (Exception $e) {
             DB::rollback();
-            throw new Exception('Update fails');
+            throw new Exception('Deal update fails');
         }
 
         return true;

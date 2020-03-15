@@ -4,7 +4,7 @@ namespace App\Modules\User\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Profile extends Model
+class Profile extends \Eloquent
 {
     public const DEFAULT_WORK_HOURS_IN_MONTH = 160;
     public const DEFAULT_DESIRED_INCOME_NOMINAL = 20000;

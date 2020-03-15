@@ -23,7 +23,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property string $comment
  * @property string|null $google_calendar_id
  */
-class Deal extends Model
+class Deal extends \Eloquent
 {
     protected $fillable = [
         'user_id',
