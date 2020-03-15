@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Modules\Expense\Requests;
 
 use App\Enum\CurrencyEnum;
 use App\Modules\Expense\Enum\ExpenseTypeEnum;

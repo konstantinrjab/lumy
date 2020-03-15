@@ -4,8 +4,8 @@ namespace App\Modules\Expense\Controllers;
 
 use App\Modules\Expense\Repositories\ExpenseRepository;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\ExpenseStoreRequest;
-use App\Http\Resources\ExpenseResource;
+use App\Modules\Expense\Requests\ExpenseStoreRequest;
+use App\Modules\Expense\Resources\ExpenseResource;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Support\Facades\Auth;
 
