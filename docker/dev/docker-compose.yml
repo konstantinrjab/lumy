@@ -21,7 +21,6 @@ services:
       - ./nginx/sites/:/etc/nginx/sites-available
       - ./nginx/conf.d/:/etc/nginx/conf.d
       - lum_certs:/etc/letsencrypt
-      - lum_certs_data:/var/www/certbot
     depends_on:
       - php-fpm
     ports:
@@ -67,4 +66,3 @@ volumes:
   lum_filebeat_crt:
   lum_mysql:
   lum_certs:
-  lum_certs_data:

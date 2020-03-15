@@ -1,8 +1,8 @@
 <?php
 
-use App\Database\Models\Expense;
+use App\Modules\Expense\Models\Expense;
 use App\Enum\CurrencyEnum;
-use App\Enum\ExpenseTypeEnum;
+use App\Modules\Expense\Enum\ExpenseTypeEnum;
 use Illuminate\Database\Seeder;
 
 class ExpensesTableSeeder extends Seeder

@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Database\Repositories;
+namespace App\Modules\Expense\Repositories;
 
-use App\Database\Models\Expense;
+use App\Modules\Expense\Models\Expense;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 

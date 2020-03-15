@@ -3,7 +3,7 @@
 namespace App\Http\Requests;
 
 use App\Enum\CurrencyEnum;
-use App\Enum\ExpenseTypeEnum;
+use App\Modules\Expense\Enum\ExpenseTypeEnum;
 use Illuminate\Foundation\Http\FormRequest;
 
 class ExpenseStoreRequest extends FormRequest
