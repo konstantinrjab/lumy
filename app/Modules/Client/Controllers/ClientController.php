@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Modules\Client\Controllers;
 
-use App\Database\Models\Client;
-use App\Database\Repositories\ClientRepository;
+use App\Modules\Client\Models\Client;
+use App\Modules\Client\Repositories\ClientRepository;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\ClientStoreRequest;
-use App\Http\Resources\ClientResource;
+use App\Modules\Client\Requests\ClientStoreRequest;
+use App\Modules\Client\Resources\ClientResource;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Support\Facades\Auth;
 

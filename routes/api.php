@@ -18,7 +18,8 @@ Route::middleware(['auth:api'])->group(function () {
 
     Route::namespace('Modules')->group(function () {
         Route::apiResources([
-            'deals'      => 'Deal\Controllers\DealController',
+            'deals'   => 'Deal\Controllers\DealController',
+            'clients' => 'Client\Controllers\ClientController',
         ]);
 
         Route::namespace('User\Controllers')->group(function () {
@@ -32,7 +33,6 @@ Route::middleware(['auth:api'])->group(function () {
 
     Route::namespace('Http\Controllers\Api')->group(function () {
         Route::apiResources([
-            'clients'    => 'ClientController',
             'facilities' => 'FacilityController',
             'expenses'   => 'ExpenseController',
         ]);

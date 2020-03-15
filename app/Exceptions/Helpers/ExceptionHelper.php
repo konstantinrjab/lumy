@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Helpers;
+namespace App\Exceptions\Helpers;
 
 use App\Mail\ExceptionOccurred;
 use Illuminate\Support\Facades\Auth;

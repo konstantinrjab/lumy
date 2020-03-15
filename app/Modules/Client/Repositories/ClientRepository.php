@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Database\Repositories;
+namespace App\Modules\Client\Repositories;
 
-use App\Database\Models\Client;
+use App\Modules\Client\Models\Client;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\DB;

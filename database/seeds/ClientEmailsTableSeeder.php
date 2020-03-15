@@ -1,6 +1,6 @@
 <?php
 
-use App\Database\Models\ClientEmail;
+use App\Modules\Client\Models\ClientEmail;
 use Illuminate\Database\Seeder;
 
 class ClientEmailsTableSeeder extends Seeder
