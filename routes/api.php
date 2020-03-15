@@ -16,8 +16,8 @@ Route::middleware(['auth:api'])->group(function () {
 
     Route::namespace('Modules')->group(function () {
         Route::apiResources([
-            'deals'   => 'Deal\Controllers\DealController',
-            'clients' => 'Client\Controllers\ClientController',
+            'deals'      => 'Deal\Controllers\DealController',
+            'clients'    => 'Client\Controllers\ClientController',
             'expenses'   => 'Expense\Controllers\ExpenseController',
             'facilities' => 'Facility\Controllers\FacilityController',
         ]);

@@ -2,7 +2,7 @@
 
 namespace App\Modules\Deal\Enum;
 
-use App\Entities\Enum\Abstracts\Enum;
+use App\Common\Enums\Abstracts\Enum;
 
 class DealStatusEnum extends Enum
 {

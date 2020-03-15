@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\Facility\Controllers;
+namespace App\Modules\Facility\Controllers;
 
 use App\Modules\Facility\Repositories\FacilityRepository;
 use App\Http\Controllers\Controller;

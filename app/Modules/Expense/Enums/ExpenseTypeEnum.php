@@ -2,7 +2,7 @@
 
 namespace App\Modules\Expense\Enum;
 
-use App\Entities\Enum\Abstracts\Enum;
+use App\Common\Enums\Abstracts\Enum;
 
 class ExpenseTypeEnum extends Enum
 {
