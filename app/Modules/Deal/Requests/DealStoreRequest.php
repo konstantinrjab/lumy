@@ -2,7 +2,7 @@
 
 namespace App\Modules\Deal\Requests;
 
-use App\Enum\CurrencyEnum;
+use App\Common\Enums\CurrencyEnum;
 use App\Modules\Deal\Enum\DealStatusEnum;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Foundation\Http\FormRequest;

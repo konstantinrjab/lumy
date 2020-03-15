@@ -2,7 +2,7 @@
 
 use App\Modules\Deal\Models\Deal;
 use App\Modules\Deal\Models\DealFacility;
-use App\Enum\CurrencyEnum;
+use App\Common\Enums\CurrencyEnum;
 use App\Modules\Deal\Enum\DealStatusEnum;
 use Illuminate\Database\Seeder;
 

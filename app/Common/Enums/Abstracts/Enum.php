@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Entities\Enum\Abstracts;
+namespace App\Common\Enums\Abstracts;
 
 use ReflectionClass;
 

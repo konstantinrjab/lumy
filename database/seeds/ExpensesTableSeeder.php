@@ -1,7 +1,7 @@
 <?php
 
 use App\Modules\Expense\Models\Expense;
-use App\Enum\CurrencyEnum;
+use App\Common\Enums\CurrencyEnum;
 use App\Modules\Expense\Enum\ExpenseTypeEnum;
 use Illuminate\Database\Seeder;
 

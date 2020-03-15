@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Enum;
+namespace App\Common\Enums;
 
-use App\Entities\Enum\Abstracts\Enum;
+use App\Common\Enums\Abstracts\Enum;
 
 class CurrencyEnum extends Enum
 {

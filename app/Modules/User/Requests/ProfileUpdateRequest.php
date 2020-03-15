@@ -2,7 +2,7 @@
 
 namespace App\Modules\User\Requests;
 
-use App\Enum\CurrencyEnum;
+use App\Common\Enums\CurrencyEnum;
 use App\Modules\User\Enum\LanguageEnum;
 use App\Modules\User\Enum\ProfileThemeEnum;
 use Illuminate\Foundation\Http\FormRequest;
