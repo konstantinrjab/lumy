@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Database\Repositories;
+namespace App\Modules\User\Repositories;
 
 use App\Modules\User\Models\Profile;
 

@@ -3,7 +3,7 @@
 namespace App\Modules\User\Controllers;
 
 use App\Modules\User\Models\User;
-use App\Database\Repositories\UserRepository;
+use App\Modules\User\Repositories\UserRepository;
 use App\Http\Controllers\Controller;
 use App\Modules\User\Requests\UserUpdateRequest;
 use App\Modules\User\Resources\UserResource;

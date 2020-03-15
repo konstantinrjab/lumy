@@ -1,7 +1,7 @@
 <?php
 
-use App\Database\Models\Deal;
-use App\Database\Models\DealFacility;
+use App\Modules\Deal\Models\Deal;
+use App\Modules\Deal\Models\DealFacility;
 use App\Enum\CurrencyEnum;
 use App\Enum\DealStatusEnum;
 use Illuminate\Database\Seeder;

@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Entities\Services;
+namespace App\Modules\Deal\Services;
 
-use App\Database\Models\Deal;
-use App\Database\Repositories\DealRepository;
-use App\Http\Requests\DealStoreRequest;
+use App\Modules\Deal\Models\Deal;
+use App\Modules\Deal\Repositories\DealRepository;
+use App\Modules\Deal\Requests\DealStoreRequest;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 

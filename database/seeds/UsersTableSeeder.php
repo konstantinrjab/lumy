@@ -5,7 +5,7 @@ use App\Modules\User\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
-use App\Enum\LanguageEnum;
+use App\Modules\User\Enum\LanguageEnum;
 use Carbon\Carbon;
 
 class UsersTableSeeder extends Seeder

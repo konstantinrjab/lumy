@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Enum;
+namespace App\Modules\User\Enum;
 
 use App\Entities\Enum\Abstracts\Enum;
 

@@ -2,7 +2,7 @@
 
 namespace App\Modules\Auth\Controllers\Api;
 
-use App\Database\Repositories\UserRepository;
+use App\Modules\User\Repositories\UserRepository;
 use App\Http\Controllers\Controller;
 use App\Modules\User\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;

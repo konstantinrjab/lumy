@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Modules\Deal\Controllers;
 
-use App\Database\Repositories\DealRepository;
-use App\Entities\Services\DealService;
+use App\Modules\Deal\Repositories\DealRepository;
+use App\Modules\Deal\Services\DealService;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\DealStoreRequest;
-use App\Http\Resources\DealResource;
+use App\Modules\Deal\Requests\DealStoreRequest;
+use App\Modules\Deal\Resources\DealResource;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Support\Facades\Auth;
 

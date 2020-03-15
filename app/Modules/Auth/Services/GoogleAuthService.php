@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Entities\Services;
+namespace App\Modules\Auth\Services;
 
 use App\Modules\User\Models\User;
-use App\Database\Repositories\UserRepository;
+use App\Modules\User\Repositories\UserRepository;
 use Laravel\Socialite\Two\User as OAuthTwoUser;
 
 class GoogleAuthService

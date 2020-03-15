@@ -2,7 +2,7 @@
 
 namespace App\Modules\Auth\Controllers\Web;
 
-use App\Entities\Services\GoogleAuthService;
+use App\Modules\Auth\Services\GoogleAuthService;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
 use Laravel\Socialite\Facades\Socialite;

@@ -3,8 +3,8 @@
 namespace App\Modules\User\Requests;
 
 use App\Enum\CurrencyEnum;
-use App\Enum\LanguageEnum;
-use App\Enum\ProfileThemeEnum;
+use App\Modules\User\Enum\LanguageEnum;
+use App\Modules\User\Enum\ProfileThemeEnum;
 use Illuminate\Foundation\Http\FormRequest;
 
 class ProfileUpdateRequest extends FormRequest

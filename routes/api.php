@@ -15,22 +15,27 @@ use \Illuminate\Support\Facades\Route;
 
 
 Route::middleware(['auth:api'])->group(function () {
-    Route::namespace('Http\Controllers\Api')->group(function () {
 
+    Route::namespace('Modules')->group(function () {
+        Route::apiResources([
+            'deals'      => 'Deal\Controllers\DealController',
+        ]);
+
+        Route::namespace('User\Controllers')->group(function () {
+            Route::get('profiles', 'ProfileController@index');
+            Route::put('profiles', 'ProfileController@update');
+
+            Route::get('users', 'UserController@index');
+            Route::put('users', 'UserController@update');
+        });
+    });
+
+    Route::namespace('Http\Controllers\Api')->group(function () {
         Route::apiResources([
             'clients'    => 'ClientController',
-            'deals'      => 'DealController',
             'facilities' => 'FacilityController',
             'expenses'   => 'ExpenseController',
         ]);
-    });
-
-    Route::namespace('Modules\User\Controllers')->group(function () {
-        Route::get('profiles', 'ProfileController@index');
-        Route::put('profiles', 'ProfileController@update');
-
-        Route::get('users', 'UserController@index');
-        Route::put('users', 'UserController@update');
     });
 
     Route::get('faqs', 'Modules\Faq\Controllers\FaqApiController@index');

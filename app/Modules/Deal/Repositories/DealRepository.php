@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Database\Repositories;
+namespace App\Modules\Deal\Repositories;
 
-use App\Database\Models\Deal;
+use App\Modules\Deal\Models\Deal;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\DB;
 use Exception;

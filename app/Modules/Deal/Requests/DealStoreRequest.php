@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Modules\Deal\Requests;
 
 use App\Enum\CurrencyEnum;
-use App\Enum\DealStatusEnum;
+use App\Modules\Deal\Enum\DealStatusEnum;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;

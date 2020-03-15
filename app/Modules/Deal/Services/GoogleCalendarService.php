@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Entities\Services;
+namespace App\Modules\Deal\Services;
 
-use App\Database\Models\Deal;
+use App\Modules\Deal\Models\Deal;
 use Google_Service_Calendar_EventDateTime;
 use Illuminate\Support\Facades\Auth;
 use Google_Service_Calendar_Event;
